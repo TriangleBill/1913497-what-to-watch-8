@@ -8,19 +8,18 @@ import Player from './../player/player';
 import Page404 from '../404/page404';
 import PrivateRoute from './../privateRoute';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { FilmsDescription } from '../../types/films';
 
-type appProps = {
-  filmName: string,
-  genre: string,
-  releasedYear: number
+type AppProps = {
+  films: FilmsDescription[]
 }
 
-function App({ filmName, genre, releasedYear }: appProps): JSX.Element {
+function App( {films} : AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <Main filmName={filmName} genre={genre} releasedYear={releasedYear} />
+          <Main films={films}/>
         </Route>
 
         <Route path={AppRoute.SignIn} exact>

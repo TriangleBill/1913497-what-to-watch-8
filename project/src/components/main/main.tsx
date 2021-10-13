@@ -1,12 +1,12 @@
-import Card from './card';
+import FilmsList from './filmsList';
+import { FilmsDescription } from '../../types/films';
 
-type mainProps = {
-    filmName: string,
-    genre: string,
-    releasedYear: number
+type MainProps = {
+  films: FilmsDescription[]
 }
 
-export default function Main({filmName, genre, releasedYear}:mainProps): JSX.Element {
+
+export default function Main({ films }: MainProps): JSX.Element {
   return (
     <html lang="en">
       <head>
@@ -52,7 +52,7 @@ export default function Main({filmName, genre, releasedYear}:mainProps): JSX.Ele
 
         <section className="film-card">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={filmName} />
+            <img src="img/bg-the-grand-budapest-hotel.jpg" alt='' />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -81,14 +81,14 @@ export default function Main({filmName, genre, releasedYear}:mainProps): JSX.Ele
           <div className="film-card__wrap">
             <div className="film-card__info">
               <div className="film-card__poster">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt={filmName} width="218" height="327" />
+                <img src="img/the-grand-budapest-hotel-poster.jpg" alt='' width="218" height="327" />
               </div>
 
               <div className="film-card__desc">
-                <h2 className="film-card__title">{filmName}</h2>
+                <h2 className="film-card__title">The Grand Budapest Hotel</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">{genre}</span>
-                  <span className="film-card__year">{releasedYear}</span>
+                  <span className="film-card__genre">Drama</span>
+                  <span className="film-card__year">2014</span>
                 </p>
 
                 <div className="film-card__buttons">
@@ -116,62 +116,39 @@ export default function Main({filmName, genre, releasedYear}:mainProps): JSX.Ele
 
             <ul className="catalog__genres-list">
               <li className="catalog__genres-item catalog__genres-item--active">
-                <a href="#"  className="catalog__genres-link">All genres</a>
+                <a href="#" className="catalog__genres-link">All genres</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Comedies</a>
+                <a href="#" className="catalog__genres-link">Comedies</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Crime</a>
+                <a href="#" className="catalog__genres-link">Crime</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Documentary</a>
+                <a href="#" className="catalog__genres-link">Documentary</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Dramas</a>
+                <a href="#" className="catalog__genres-link">Dramas</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Horror</a>
+                <a href="#" className="catalog__genres-link">Horror</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Kids & Family</a>
+                <a href="#" className="catalog__genres-link">Kids & Family</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Romance</a>
+                <a href="#" className="catalog__genres-link">Romance</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Sci-Fi</a>
+                <a href="#" className="catalog__genres-link">Sci-Fi</a>
               </li>
               <li className="catalog__genres-item">
-                <a href="#"  className="catalog__genres-link">Thrillers</a>
+                <a href="#" className="catalog__genres-link">Thrillers</a>
               </li>
             </ul>
 
             <div className="catalog__films-list">
-              <Card filmName="Fantastic Beasts: The Crimes of Grindelwald" previewImage="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" />
-              <Card filmName="Bohemian Rhapsody" previewImage="img/bohemian-rhapsody.jpg" />
-              <Card filmName="Macbeth" previewImage="img/macbeth.jpg" />
-              <Card filmName="Aviator" previewImage="img/aviator.jpg" />
-
-              <Card filmName="We need to talk about Kevin" previewImage="img/we-need-to-talk-about-kevin.jpg" />
-              <Card filmName="What We Do in the Shadows" previewImage="img/what-we-do-in-the-shadows.jpg" />
-              <Card filmName="Revenant" previewImage="img/revenant.jpg" />
-              <Card filmName="Johnny English" previewImage="img/johnny-english.jpg" />
-
-              <Card filmName="Shutter Island" previewImage="img/shutter-island.jpg" />
-              <Card filmName="Pulp Fiction" previewImage="img/pulp-fiction.jpg" />
-              <Card filmName="No Country for Old Men" previewImage="img/no-country-for-old-men.jpg" />
-              <Card filmName="Snatch" previewImage="img/snatch.jpg" />
-
-              <Card filmName="Moonrise Kingdom" previewImage="img/moonrise-kingdom.jpg" />
-              <Card filmName="Seven Years in Tibet" previewImage="img/seven-years-in-tibet.jpg" />
-              <Card filmName="Midnight Special" previewImage="img/midnight-special.jpg" />
-              <Card filmName="War of the Worlds" previewImage="img/war-of-the-worlds.jpg" />
-
-              <Card filmName="Dardjeeling Limited" previewImage="img/dardjeeling-limited.jpg" />
-              <Card filmName="Orlando" previewImage="img/orlando.jpg" />
-              <Card filmName="Mindhunter" previewImage="img/mindhunter.jpg" />
-              <Card filmName="Midnight Special" previewImage="img/midnight-special.jpg" />
+              <FilmsList films={films} />
             </div>
 
             <div className="catalog__more">
