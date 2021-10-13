@@ -1,5 +1,13 @@
+import { Link } from "react-router-dom";
+import { FilmsDescription } from "../../types/films";
 
-export default function AddReview(): JSX.Element {
+type AddReviewProps = {
+  films: FilmsDescription[]
+}
+
+export default function AddReview({films}: AddReviewProps): JSX.Element {
+  const reviewFilm = films[7]
+
   return (
     <html lang="en">
       <head>
@@ -44,24 +52,24 @@ export default function AddReview(): JSX.Element {
         <section className="film-card film-card--full">
           <div className="film-card__header">
             <div className="film-card__bg">
-              <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+              <img src="img/bg-the-grand-budapest-hotel.jpg" alt={reviewFilm.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header">
               <div className="logo">
-                <a href="main.html" className="logo__link">
+                <Link to="/" className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
-                </a>
+                </Link>
               </div>
 
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                    <a href="film-page.html" className="breadcrumbs__link">{reviewFilm.name}</a>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>
@@ -82,7 +90,7 @@ export default function AddReview(): JSX.Element {
             </header>
 
             <div className="film-card__poster film-card__poster--small">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={reviewFilm.poster} alt={reviewFilm.name} width="218" height="327" />
             </div>
           </div>
 

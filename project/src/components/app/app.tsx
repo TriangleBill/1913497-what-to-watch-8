@@ -40,7 +40,7 @@ function App( {films} : AppProps): JSX.Element {
         </Route>
 
         <Route path={AppRoute.AddReview} exact>
-          <AddReview />
+          <AddReview films={films} />
         </Route>
 
         <Route path={AppRoute.Player} exact>
