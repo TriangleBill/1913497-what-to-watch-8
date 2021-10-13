@@ -1,6 +1,26 @@
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { FilmsDescription } from "../../types/films";
+import Page404 from "../404/page404";
+import Card from "../main/card";
+import AddReviewBtn from './../addReview/addReviewBtn';
 
-export default function Film():JSX.Element {
+type FilmProps = {
+  films: FilmsDescription[]
+}
+
+export default function Film({ films }: FilmProps): JSX.Element {
+  const params = useParams<{ id?: string }>()
+  const film = films.find(el => el.id === params.id)
+
+
+
+  if (!film) {
+    return <Page404 />
+  }
+
   return (
+
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
@@ -53,11 +73,11 @@ export default function Film():JSX.Element {
 
             <header className="page-header film-card__head">
               <div className="logo">
-                <a href="main.html" className="logo__link">
+                <Link to="/" className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
-                </a>
+                </Link>
               </div>
 
               <ul className="user-block">
@@ -74,10 +94,10 @@ export default function Film():JSX.Element {
 
             <div className="film-card__wrap">
               <div className="film-card__desc">
-                <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+                <h2 className="film-card__title">{film.name}</h2>
                 <p className="film-card__meta">
-                  <span className="film-card__genre">Drama</span>
-                  <span className="film-card__year">2014</span>
+                  <span className="film-card__genre">{film.genre.join(' ')}</span>
+                  <span className="film-card__year">{film.releaseDate}</span>
                 </p>
 
                 <div className="film-card__buttons">
@@ -93,7 +113,7 @@ export default function Film():JSX.Element {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn film-card__button">Add review</a>
+                  <AddReviewBtn id={film.id} />
                 </div>
               </div>
             </div>
@@ -102,7 +122,7 @@ export default function Film():JSX.Element {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+                <img src={film.poster} alt={film.name} width="218" height="327" />
               </div>
 
               <div className="film-card__desc">
@@ -121,7 +141,7 @@ export default function Film():JSX.Element {
                 </nav>
 
                 <div className="film-rating">
-                  <div className="film-rating__score">8,9</div>
+                  <div className="film-rating__score">{film.rating}</div>
                   <p className="film-rating__meta">
                     <span className="film-rating__level">Very good</span>
                     <span className="film-rating__count">240 ratings</span>
@@ -129,13 +149,7 @@ export default function Film():JSX.Element {
                 </div>
 
                 <div className="film-card__text">
-                  <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`&apos;`s friend and protege.</p>
-
-                  <p>Gustave prides himself on providing first-className service to the hotel`&apos;`s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave`&apos;`s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                  <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-
-                  <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                  {film.description}
                 </div>
               </div>
             </div>
@@ -146,8 +160,18 @@ export default function Film():JSX.Element {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
+
+
+
             <div className="catalog__films-list">
-              <article className="small-film-card catalog__films-card">
+
+            {films.map((el)=> {
+              if (el.genre.includes(film.genre[0])) {
+                return (<Card filmName={el.name} previewImage={el.poster} id={el.id}/>
+                )}
+            })}
+
+              {/* <article className="small-film-card catalog__films-card">
                 <div className="small-film-card__image">
                   <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
                 </div>
@@ -181,7 +205,7 @@ export default function Film():JSX.Element {
                 <h3 className="small-film-card__title">
                   <a className="small-film-card__link" href="film-page.html">Aviator</a>
                 </h3>
-              </article>
+              </article> */}
             </div>
           </section>
 

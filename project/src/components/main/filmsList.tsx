@@ -13,7 +13,7 @@ export default function FilmsList({films}: FilmsListProps): JSX.Element {
         <>
             {films.map((film, id) => {
                 return (
-                    <Card filmName={film.name} previewImage={film.poster} />
+                    <Card filmName={film.name} previewImage={film.poster} id={film.id}/>
                 )
             })}
         </>

@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import { FilmsDescription } from "../../types/films";
+import { useParams } from 'react-router';
+import Page404 from './../404/page404';
 
 type AddReviewProps = {
   films: FilmsDescription[]
 }
 
 export default function AddReview({films}: AddReviewProps): JSX.Element {
-  const reviewFilm = films[7]
+  const params = useParams<{ id?: string }>()
+  const reviewFilm = films.find(el => el.id === params.id)
+
+
+  if (!reviewFilm) {
+    return <Page404 />
+  }
 
   return (
     <html lang="en">
@@ -69,7 +77,7 @@ export default function AddReview({films}: AddReviewProps): JSX.Element {
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="film-page.html" className="breadcrumbs__link">{reviewFilm.name}</a>
+                    <Link to={`/films/${reviewFilm.id}`} className="breadcrumbs__link">{reviewFilm.name}</Link>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>

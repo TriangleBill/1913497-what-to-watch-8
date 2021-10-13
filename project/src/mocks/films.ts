@@ -2,7 +2,7 @@ import { FilmsDescription } from "../types/films";
 
 export const films: FilmsDescription[] = [
     {
-        id:5849,
+        id:'5849',
         name: 'Bohemian Rhapsody',
         genre: ['Drama', 'Documentary'],
         releaseDate: 2018,
@@ -12,7 +12,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/bohemian-rhapsody.jpg'
     },
     {
-        id:5692,
+        id:'5692',
         name: 'Fantastic Beasts: The Crimes of Grindelwald',
         genre: ['Kids & Family'],
         releaseDate: 2018,
@@ -22,7 +22,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'
     },
     {
-        id:7894,
+        id:'7894',
         name: 'Revenant',
         genre: ['Drama', 'Thriller'],
         releaseDate: 2015,
@@ -32,7 +32,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/revenant.jpg'
     },
     {
-        id:1635,
+        id:'1635',
         name: 'Pulp Fiction',
         genre: ['Drama', 'Crime'],
         releaseDate: 1994,
@@ -42,7 +42,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/pulp-fiction.jpg'
     },
     {
-        id:4692,
+        id:'4692',
         name: 'War of the Worlds',
         genre: ['Sci-Fi', 'Thriller', 'Horror'],
         releaseDate: 2005,
@@ -52,7 +52,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/war-of-the-worlds.jpg'
     },
     {
-        id: 1216,
+        id: '1216',
         name: 'Aviator',
         genre: ['Drama', 'Documentary'],
         releaseDate: 2004,
@@ -62,7 +62,7 @@ export const films: FilmsDescription[] = [
         poster: 'img/aviator.jpg'
     },
     {
-        id: 3469,
+        id: '3469',
         name: 'Shutter Island',
         genre: ['Drama', 'Thriller'],
         releaseDate: 2010,
@@ -72,13 +72,12 @@ export const films: FilmsDescription[] = [
         poster: 'img/shutter-island.jpg'
     },
     {
-        id: 3469,
+        id: '4873',
         name: 'The Grand Budapest Hotel',
         genre: ['Drama'],
         releaseDate: 2014,
         rating: 8.9,
         description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
-
         Gustave prides himself on providing first-className service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
         trailer: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
         poster: 'img/the-grand-budapest-hotel-poster.jpg'

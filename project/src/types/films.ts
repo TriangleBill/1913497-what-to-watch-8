@@ -1,5 +1,5 @@
 export type FilmsDescription = {
-    id: number;
+    id: string;
     name: string;
     genre: string[];
     releaseDate: number;
