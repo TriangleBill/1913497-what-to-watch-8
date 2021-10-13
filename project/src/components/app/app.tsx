@@ -29,8 +29,8 @@ function App( {films} : AppProps): JSX.Element {
         <PrivateRoute
           path={AppRoute.MyList}
           exact
-          render={() => <MyList />}
-          autorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => <MyList films={films} />}
+          autorizationStatus={AuthorizationStatus.Auth}
         >
 
         </PrivateRoute>

@@ -1,5 +1,6 @@
 import FilmsList from './filmsList';
 import { FilmsDescription } from '../../types/films';
+import { Link } from 'react-router-dom';
 
 type MainProps = {
   films: FilmsDescription[]
@@ -61,11 +62,11 @@ export default function Main({ films }: MainProps): JSX.Element {
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <a href="#" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <ul className="user-block">
