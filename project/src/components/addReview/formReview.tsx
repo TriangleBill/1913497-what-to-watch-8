@@ -1,50 +1,72 @@
-import { useState } from 'react'
+import { createRef, RefObject, useRef, useState, useLayoutEffect } from 'react'
 import RatingStar from './ratingStar';
 
-export default function FormReview() {
-    
-    const [starRating, setStarRating] = useState('7')
-    const [textReview, setTextReview] = useState('')
+export default function FormReview():JSX.Element {
 
-    function toggleRating (star:string) {
-        setStarRating(star)
+  const [starRating, setStarRating] = useState('1');
+  const [textReview, setTextReview] = useState('');
+
+  const textReviewValue= useRef<HTMLTextAreaElement>(null)
+
+  let inputValue: string = starRating
+
+  function handleChange(e:any) {
+    inputValue = e.target.value    
+  }
+
+  function handleSubmit() {
+    setStarRating(inputValue)
+    if (null !== textReviewValue.current) {
+      setTextReview(textReviewValue.current.innerText)
     }
+  }
 
-    return (
-        <>
-            <form action="#" className="add-review__form">
-              <div className="rating">
-                <div className="rating__stars">
-                 <RatingStar starNumber='10' starState={starRating}/>
+  return (
+    <>
+      <form action="" className="add-review__form" onSubmit={(e)=>{e.preventDefault();handleSubmit() }}>
+        <div className="rating">
+          <div className="rating__stars">
 
-                 <RatingStar starNumber='9' starState={starRating}/>
+            <input className="rating__input" id={`star-10`} type="radio" name="rating" value='10' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-10`}>Rating 10</label>
 
-                 <RatingStar starNumber='8' starState={starRating} />
+            <input className="rating__input" id={`star-9`} type="radio" name="rating" value='9' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-9`}>Rating 9</label>
 
-                 <RatingStar starNumber='7' starState={starRating}/>
+            <input className="rating__input" id={`star-8`} type="radio" name="rating" value='8' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-8`}>Rating 8</label>
 
-                 <RatingStar starNumber='6' starState={starRating}/>
+            <input className="rating__input" id={`star-7`} type="radio" name="rating" value='7' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-7`}>Rating 7</label>
 
-                 <RatingStar starNumber='5' starState={starRating}/>
+            <input className="rating__input" id={`star-6`} type="radio" name="rating" value='6' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-6`}>Rating 6</label>
 
-                 <RatingStar starNumber='4' starState={starRating}/>
+            <input className="rating__input" id={`star-5`} type="radio" name="rating" value='5' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-5`}>Rating 5</label>
 
-                 <RatingStar starNumber='3' starState={starRating}/>
+            <input className="rating__input" id={`star-4`} type="radio" name="rating" value='4' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-4`}>Rating 4</label>
 
-                 <RatingStar starNumber='2' starState={starRating}/>
+            <input className="rating__input" id={`star-3`} type="radio" name="rating" value='3' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-3`}>Rating 3</label>
 
-                 <RatingStar starNumber='1' starState={starRating}/>
-                </div>
-              </div>
+            <input className="rating__input" id={`star-2`} type="radio" name="rating" value='2' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-2`}>Rating 1</label>
 
-              <div className="add-review__text">
-                <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-                <div className="add-review__submit">
-                  <button className="add-review__btn" type="submit">Post</button>
-                </div>
+            <input className="rating__input" id={`star-1`} type="radio" name="rating" value='1' onChange={handleChange}/>
+            <label className="rating__label" htmlFor={`star-1`}>Rating 1</label>
+          </div>
+        </div>
 
-              </div>
-            </form>
-        </>
-    )
+        <div className="add-review__text">
+          <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" ref={textReviewValue}></textarea>
+          <div className="add-review__submit">
+            <button className="add-review__btn" type="submit">Post</button>
+          </div>
+
+        </div>
+      </form>
+    </>
+  )
 }

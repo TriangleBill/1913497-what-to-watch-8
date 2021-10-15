@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 type RatingStarProps = {
-    starNumber:string,
-    starState:string
+    starNumber: string
 }
 
-export default function RatingStar({starNumber, starState}:RatingStarProps):JSX.Element {
+export default function RatingStar({ starNumber }: RatingStarProps): JSX.Element {
 
 
-
+    const inputRef=useRef()
 
     return (
         <>
-            <input className="rating__input" id={`star-${starNumber}`} type="radio" name="rating" value={starNumber} checked={starNumber === starState}/>
+            <input className="rating__input" id={`star-${starNumber}`} type="radio" name="rating" value={starNumber} ref={useRef}/>
             <label className="rating__label" htmlFor={`star-${starNumber}`}>Rating {starNumber}</label>
         </>
     )
