@@ -81,7 +81,7 @@ export default function AddReview({films}: AddReviewProps): JSX.Element {
                     <Link to={`/films/${reviewFilm.id}`} className="breadcrumbs__link">{reviewFilm.name}</Link>
                   </li>
                   <li className="breadcrumbs__item">
-                    <a className="breadcrumbs__link">Add review</a>
+                    <a href='#' className="breadcrumbs__link">Add review</a>
                   </li>
                 </ul>
               </nav>
