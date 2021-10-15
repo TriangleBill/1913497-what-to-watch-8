@@ -44,7 +44,7 @@ function App( {films} : AppProps): JSX.Element {
         </Route>
 
         <Route path={AppRoute.Player} exact>
-          <Player />
+          <Player films={films}/>
         </Route>
 
         <Route exact>

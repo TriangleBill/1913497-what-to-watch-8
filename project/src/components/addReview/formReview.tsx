@@ -1,5 +1,5 @@
-import { createRef, RefObject, useRef, useState, useLayoutEffect } from 'react'
-import RatingStar from './ratingStar';
+import {useRef, useState} from 'react'
+
 
 export default function FormReview():JSX.Element {
 
@@ -16,8 +16,9 @@ export default function FormReview():JSX.Element {
 
   function handleSubmit() {
     setStarRating(inputValue)
+    
     if (null !== textReviewValue.current) {
-      setTextReview(textReviewValue.current.innerText)
+      setTextReview(textReviewValue.current.value)
     }
   }
 

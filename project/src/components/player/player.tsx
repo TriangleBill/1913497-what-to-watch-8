@@ -1,6 +1,10 @@
+import { FilmsDescription } from "../../types/films";
 
+type PlayerProps = {
+  films: FilmsDescription[]
+}
 
-export default function Player():JSX.Element {
+export default function Player({films}:PlayerProps):JSX.Element {
   return (
     <html lang="en">
       <head>
