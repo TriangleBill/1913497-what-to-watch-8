@@ -1,4 +1,4 @@
-import { FilmsDescription } from "../../types/films";
+import { FilmsDescription } from '../../types/films';
 
 type PlayerProps = {
   films: FilmsDescription[]

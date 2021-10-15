@@ -8,7 +8,7 @@ type MainProps = {
 
 
 export default function Main({ films }: MainProps): JSX.Element {
-  const headerFilm = films[7]
+  const headerFilm = films[7];
 
   return (
     <html lang="en">

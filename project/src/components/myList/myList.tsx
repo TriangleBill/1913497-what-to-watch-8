@@ -1,6 +1,5 @@
-import { FilmsDescription } from "../../types/films";
-import FilmsList from "../main/filmsList";
-import { films } from './../../mocks/films';
+import { FilmsDescription } from '../../types/films';
+import FilmsList from '../main/filmsList';
 
 type MyListProps = {
   films: FilmsDescription[]

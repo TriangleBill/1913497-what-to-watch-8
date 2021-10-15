@@ -1,8 +1,8 @@
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { FilmsDescription } from "../../types/films";
-import Page404 from "../404/page404";
-import Card from "../main/card";
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { FilmsDescription } from '../../types/films';
+import Page404 from '../404/page404';
+import Card from '../main/card';
 import AddReviewBtn from './../addReview/addReviewBtn';
 
 type FilmProps = {
@@ -10,13 +10,12 @@ type FilmProps = {
 }
 
 export default function Film({ films }: FilmProps): JSX.Element {
-  const params = useParams<{ id?: string }>()
-  const film = films.find(el => el.id === params.id)
-
+  const params = useParams<{ id?: string }>();
+  const film = films.find((el) => el.id === params.id);
 
 
   if (!film) {
-    return <Page404 />
+    return <Page404 />;
   }
 
   return (
@@ -161,15 +160,13 @@ export default function Film({ films }: FilmProps): JSX.Element {
             <h2 className="catalog__title">More like this</h2>
 
 
-
-
             <div className="catalog__films-list">
 
-            {films.map((el)=> {
-              if (el.genre.includes(film.genre[0])) {
-                return (<Card filmName={el.name} previewImage={el.poster} id={el.id}/>
-                )}
-            })}
+              {films.map((el)=> {
+                if (el.genre.includes(film.genre[0])) {
+                  return (<Card filmName={el.name} previewImage={el.poster} id={el.id}/>
+                  );}
+              })}
 
               {/* <article className="small-film-card catalog__films-card">
                 <div className="small-film-card__image">

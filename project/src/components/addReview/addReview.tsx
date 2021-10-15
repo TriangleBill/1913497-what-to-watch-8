@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { FilmsDescription } from "../../types/films";
+import { Link } from 'react-router-dom';
+import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
 import Page404 from './../404/page404';
 import FormReview from './formReview';
@@ -9,12 +9,12 @@ type AddReviewProps = {
 }
 
 export default function AddReview({films}: AddReviewProps): JSX.Element {
-  const params = useParams<{ id?: string }>()
-  const reviewFilm = films.find(el => el.id === params.id)
+  const params = useParams<{ id?: string }>();
+  const reviewFilm = films.find((el) => el.id === params.id);
 
 
   if (!reviewFilm) {
-    return <Page404 />
+    return <Page404 />;
   }
 
   return (
