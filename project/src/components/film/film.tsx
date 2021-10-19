@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page404';
 import Card from '../main/card';
+import FilmsList from '../main/filmsList';
 import AddReviewBtn from './../addReview/addReviewBtn';
 
 type FilmProps = {
@@ -153,12 +154,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
           <div className="catalog__films-list">
 
-            {films.map((el) => {
-              if (el.genre.includes(film.genre[0])) {
-                return (<Card filmData={el} mouseOver={() => null} />
-                );
-              }
-            })}
+            <FilmsList films={films} />
           </div>
         </section>
 

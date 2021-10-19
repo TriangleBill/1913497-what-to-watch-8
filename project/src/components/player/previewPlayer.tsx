@@ -1,36 +1,29 @@
 
+import { MouseEventHandler } from 'react';
 type PreviewPlayerProps = {
     src: string,
     poster: string,
+    stopPreview: MouseEventHandler,
+    playPreview: MouseEventHandler,
+    cardIsActive: boolean,
+    setActiveCard: Function
 }
 
 
-export default function PreviewPlayer({ src, poster }: PreviewPlayerProps): JSX.Element {
-  let timeoutId: ReturnType<typeof setTimeout>;
+export default function PreviewPlayer(props: PreviewPlayerProps): JSX.Element {
 
-  function play(e:any) {
-    timeoutId = setTimeout(()=> {
-      if (e) {
-        e.target.play();
-      }
-    }, 5000);
-
-  }
-
-
-  function stop(e: any) {
-    const vid = e.target;
-    if (e !== null) {
-      vid.pause();
-      vid.currentTime = 0;
-      vid.load();
+    function onMouseOver(e:any) {
+        props.playPreview(e)
+        props.setActiveCard(true)
     }
-    if (timeoutId) {clearTimeout(timeoutId);}
-  }
 
+    function onMouseOut(e:any) {
+        props.stopPreview(e)
+        props.setActiveCard(false)
+    }
 
   return (
-    <video src={src} autoPlay={false} controls={false} width="280" height="175" poster={poster} loop muted style={{ objectFit: 'cover'}} onMouseOver={play} onMouseOut={stop}>
+    <video src={props.src} autoPlay={false} controls={false} width="280" height="175" poster={props.poster} loop muted style={{ objectFit: 'cover'}} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
 
     </video>
   );
