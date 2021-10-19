@@ -155,7 +155,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
             {films.map((el) => {
               if (el.genre.includes(film.genre[0])) {
-                return (<Card filmName={el.name} previewImage={el.poster} id={el.id} mouseOver={() => null} />
+                return (<Card filmData={el} mouseOver={() => null} />
                 );
               }
             })}

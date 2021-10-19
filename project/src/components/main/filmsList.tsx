@@ -12,12 +12,13 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
 
   function mouseOver (id:string) {
     setActiveFilm(id);
+
   }
 
   return (
     <>
       {films.map((film, id) => (
-        <Card key={film.id} filmName={film.name} previewImage={film.poster} id={film.id} mouseOver={()=>{mouseOver(film.id);}}/>
+        <Card key={film.id} filmData={film} mouseOver={()=>{mouseOver(film.id);}}/>
       ))}
     </>
   );
