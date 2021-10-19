@@ -6,21 +6,21 @@ type PreviewPlayerProps = {
     stopPreview: MouseEventHandler,
     playPreview: MouseEventHandler,
     cardIsActive: boolean,
-    setActiveCard: Function
+    setActiveCard: (value: boolean) => void;
 }
 
 
 export default function PreviewPlayer(props: PreviewPlayerProps): JSX.Element {
 
-    function onMouseOver(e:any) {
-        props.playPreview(e)
-        props.setActiveCard(true)
-    }
+  function onMouseOver(e:any) {
+    props.playPreview(e);
+    props.setActiveCard(true);
+  }
 
-    function onMouseOut(e:any) {
-        props.stopPreview(e)
-        props.setActiveCard(false)
-    }
+  function onMouseOut(e:any) {
+    props.stopPreview(e);
+    props.setActiveCard(false);
+  }
 
   return (
     <video src={props.src} autoPlay={false} controls={false} width="280" height="175" poster={props.poster} loop muted style={{ objectFit: 'cover'}} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>

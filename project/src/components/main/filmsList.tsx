@@ -8,7 +8,7 @@ type FilmsListProps = {
 
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState('');
-  let timeoutId: ReturnType<typeof setTimeout>
+  let timeoutId: ReturnType<typeof setTimeout>;
 
   function mouseOver (id:string) {
     setActiveFilm(id);
@@ -17,9 +17,9 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   function playPreview (e: any) {
     if (e) {
       timeoutId = setTimeout(()=> {
-          e.target.play();
+        e.target.play();
       }, 1000);
-      
+
     }
   }
 
@@ -30,8 +30,8 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
       vid.currentTime = 0;
       vid.load();
     }
-    
-    clearTimeout(timeoutId)
+
+    clearTimeout(timeoutId);
   }
 
 

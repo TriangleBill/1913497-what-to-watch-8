@@ -2,7 +2,6 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page404';
-import Card from '../main/card';
 import FilmsList from '../main/filmsList';
 import AddReviewBtn from './../addReview/addReviewBtn';
 

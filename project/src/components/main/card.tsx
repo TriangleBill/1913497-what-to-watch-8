@@ -11,7 +11,7 @@ type cardProps = {
 }
 
 export default function Card({ filmData, mouseOver, stopPreview, playPreview }: cardProps): JSX.Element {
-  const[isActive, setIsActive] = useState(false)
+  const[isActive, setIsActive] = useState(false);
   const history = useHistory();
 
   function Push() {
