@@ -5,14 +5,13 @@ import { FilmsDescription } from '../../types/films';
 import PreviewPlayer from './preview-player';
 type cardProps = {
   filmData: FilmsDescription,
-  mouseOver: MouseEventHandler,
-  stopPreview: MouseEventHandler,
-  playPreview: MouseEventHandler
+  mouseOver: (id:string) => void,
+  activeFilm: string
 }
 
-export default function Card({ filmData, mouseOver, stopPreview, playPreview }: cardProps): JSX.Element {
-  const[isActive, setIsActive] = useState(false);
+export default function Card({ filmData, mouseOver, activeFilm }: cardProps): JSX.Element {
   const history = useHistory();
+
 
   function Push() {
     history.push(`/films/${filmData.id}`);
@@ -21,9 +20,9 @@ export default function Card({ filmData, mouseOver, stopPreview, playPreview }: 
 
   return (
 
-    <article className="small-film-card catalog__films-card"  onClick={Push} onMouseOver={mouseOver} >
+    <article className="small-film-card catalog__films-card"  onClick={Push} onMouseOver={()=> {mouseOver(filmData.id)}} >
 
-      <PreviewPlayer src={filmData.trailer} poster={filmData.poster} stopPreview={stopPreview} playPreview={playPreview} cardIsActive={isActive} setActiveCard={setIsActive} />
+      <PreviewPlayer src={filmData.trailer} poster={filmData.poster} filmId={filmData.id} activeFilm={activeFilm}/>
 
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${filmData.id}`} >{filmData.name}</Link>
