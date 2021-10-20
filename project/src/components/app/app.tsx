@@ -1,12 +1,12 @@
 import Main from './../main/main';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import SignIn from './../signIn/signIn';
-import MyList from './../myList/myList';
+import SignIn from '../signIn/sign-in';
+import MyList from '../myList/my-list';
 import Film from './../film/film';
-import AddReview from './../addReview/addReview';
+import AddReview from '../addReview/add-review';
 import Player from './../player/player';
-import Page404 from '../404/page404';
-import PrivateRoute from './../privateRoute';
+import Page404 from '../404/page-404';
+import PrivateRoute from '../private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { FilmsDescription } from '../../types/films';
 

@@ -1,4 +1,4 @@
-import FilmsList from './filmsList';
+import FilmsList from '../film-components/films-list';
 import { FilmsDescription } from '../../types/films';
 import { Link } from 'react-router-dom';
 
