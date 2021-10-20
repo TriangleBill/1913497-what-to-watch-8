@@ -8,7 +8,6 @@ type FilmsListProps = {
 
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState('');
-  
 
 
   return (
