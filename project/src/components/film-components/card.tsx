@@ -2,7 +2,7 @@ import { MouseEventHandler, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
-import PreviewPlayer from '../player/preview-player';
+import PreviewPlayer from './preview-player';
 type cardProps = {
   filmData: FilmsDescription,
   mouseOver: MouseEventHandler,

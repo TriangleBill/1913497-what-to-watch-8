@@ -1,5 +1,5 @@
 import { FilmsDescription } from '../../types/films';
-import FilmsList from '../main/films-list';
+import FilmsList from '../film-components/films-list';
 
 type MyListProps = {
   films: FilmsDescription[]

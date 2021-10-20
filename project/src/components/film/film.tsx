@@ -2,7 +2,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
-import FilmsList from '../main/films-list';
+import FilmsList from '../film-components/films-list';
 import AddReviewBtn from '../addReview/add-review-btn';
 
 type FilmProps = {
