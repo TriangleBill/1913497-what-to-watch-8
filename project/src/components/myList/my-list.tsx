@@ -1,28 +1,16 @@
-import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
-import { useParams } from 'react-router';
-import Page404 from './../404/page404';
-import FormReview from './formReview';
+import FilmsList from '../main/films-list';
 
-type AddReviewProps = {
+type MyListProps = {
   films: FilmsDescription[]
 }
 
-export default function AddReview({ films }: AddReviewProps): JSX.Element {
-  const params = useParams<{ id?: string }>();
-  const reviewFilm = films.find((el) => el.id === params.id);
-
-
-  if (!reviewFilm) {
-    return <Page404 />;
-  }
-
+export default function MyList({ films }: MyListProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
-
             <title>+</title>
             <desc>Created with Sketch.</desc>
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -49,56 +37,52 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
         </svg>
       </div>
 
-      <section className="film-card film-card--full">
-        <div className="film-card__header">
-          <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={reviewFilm.name} />
+      <div className="user-page">
+        <header className="page-header user-page__head">
+          <div className="logo">
+            <a href="main.html" className="logo__link">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+          <h1 className="page-title user-page__title">My list</h1>
 
-          <header className="page-header">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+          <ul className="user-block">
+            <li className="user-block__item">
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
+            </li>
+            <li className="user-block__item">
+              <a className="user-block__link">Sign out</a>
+            </li>
+          </ul>
+        </header>
 
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <Link to={`/films/${reviewFilm.id}`} className="breadcrumbs__link">{reviewFilm.name}</Link>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a href='#' className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
-
-          <div className="film-card__poster film-card__poster--small">
-            <img src={reviewFilm.poster} alt={reviewFilm.name} width="218" height="327" />
+          <div className="catalog__films-list">
+            <FilmsList films={films} />
           </div>
-        </div>
+        </section>
 
-        <div className="add-review">
-          <FormReview />
-        </div>
+        <footer className="page-footer">
+          <div className="logo">
+            <a href="main.html" className="logo__link logo__link--light">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
+          </div>
 
-      </section>
+          <div className="copyright">
+            <p>© 2019 What to watch Ltd.</p>
+          </div>
+        </footer>
+      </div>
     </>
   );
 }

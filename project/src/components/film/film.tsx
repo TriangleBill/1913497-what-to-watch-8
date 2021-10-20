@@ -1,9 +1,9 @@
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
-import Page404 from '../404/page404';
-import FilmsList from '../main/filmsList';
-import AddReviewBtn from './../addReview/addReviewBtn';
+import Page404 from '../404/page-404';
+import FilmsList from '../main/films-list';
+import AddReviewBtn from '../addReview/add-review-btn';
 
 type FilmProps = {
   films: FilmsDescription[]
