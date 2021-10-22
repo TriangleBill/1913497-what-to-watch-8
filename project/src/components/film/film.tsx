@@ -2,9 +2,10 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
-import FilmsList from '../film-components/films-list';
+
 import AddReviewBtn from '../add-review/add-review-btn';
 import Tabs from './../tabs/tabs';
+import RelatedFilmsList from './../film-components/related-films-list';
 
 type FilmProps = {
   films: FilmsDescription[]
@@ -13,6 +14,7 @@ type FilmProps = {
 export default function Film({ films }: FilmProps): JSX.Element {
   const params = useParams<{ id?: string }>();
   const film = films.find((el) => el.id === params.id);
+  const filmGenre = film ? film.genre : [''];
 
 
   if (!film) {
@@ -127,8 +129,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
 
           <div className="catalog__films-list">
-
-            <FilmsList films={films} />
+            <RelatedFilmsList films={films} filmGenre={filmGenre} filmId={film.id} />
           </div>
         </section>
 
