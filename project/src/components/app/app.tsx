@@ -1,9 +1,9 @@
 import Main from './../main/main';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import SignIn from '../signIn/sign-in';
-import MyList from '../myList/my-list';
+import SignIn from '../sign-in/sign-in';
+import MyList from '../my-list/my-list';
 import Film from './../film/film';
-import AddReview from '../addReview/add-review';
+import AddReview from '../add-review/add-review';
 import Player from './../player/player';
 import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';

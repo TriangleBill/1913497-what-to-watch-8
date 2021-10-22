@@ -2,8 +2,10 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
-import FilmsList from '../film-components/films-list';
-import AddReviewBtn from '../addReview/add-review-btn';
+
+import AddReviewBtn from '../add-review/add-review-btn';
+import Tabs from './../tabs/tabs';
+import RelatedFilmsList from './../film-components/related-films-list';
 
 type FilmProps = {
   films: FilmsDescription[]
@@ -12,6 +14,7 @@ type FilmProps = {
 export default function Film({ films }: FilmProps): JSX.Element {
   const params = useParams<{ id?: string }>();
   const film = films.find((el) => el.id === params.id);
+  const filmGenre = film ? film.genre : [''];
 
 
   if (!film) {
@@ -115,33 +118,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
               <img src={film.poster} alt={film.name} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {film.description}
-              </div>
-            </div>
+            <Tabs film={film} />
           </div>
         </div>
       </section>
@@ -152,8 +129,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
 
           <div className="catalog__films-list">
-
-            <FilmsList films={films} />
+            <RelatedFilmsList films={films} filmGenre={filmGenre} filmId={film.id} />
           </div>
         </section>
 
