@@ -1,4 +1,4 @@
-import { ActionType, ChangeGenre, GetFilms } from '../types/action';
+import { ActionType, ChangeGenre, SetFilms } from '../types/action';
 import { FilmsDescription } from '../types/films';
 
 export const changeGenre = (genre: string): ChangeGenre => ({
@@ -6,7 +6,7 @@ export const changeGenre = (genre: string): ChangeGenre => ({
   payload: genre,
 });
 
-export const getFilms = (films: FilmsDescription[]): GetFilms => ({
-  type: ActionType.GetFilms,
+export const setFilms = (films: FilmsDescription[]): SetFilms => ({
+  type: ActionType.SetFilms,
   payload: films,
 });
