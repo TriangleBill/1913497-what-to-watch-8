@@ -1,4 +1,4 @@
-import { FilmsDescription } from "./films"
+import { FilmsDescription } from './films';
 
 export enum ActionType {
     ChangeGenre = 'film/changeGenre',

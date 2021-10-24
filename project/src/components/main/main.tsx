@@ -111,7 +111,7 @@ export default function Main({ films }: MainProps): JSX.Element {
           <GenreList films={films}/>
 
           <div className="catalog__films-list">
-            <FilmsList films={films} />
+            <FilmsList />
           </div>
 
           <div className="catalog__more">

@@ -1,4 +1,4 @@
-import { FilmsDescription } from "./films";
+import { FilmsDescription } from './films';
 
 export type State = {
     genre: string,

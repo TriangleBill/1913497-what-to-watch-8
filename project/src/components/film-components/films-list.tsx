@@ -1,40 +1,56 @@
 import { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Actions } from '../../types/action';
 import { FilmsDescription } from '../../types/films';
 import { State } from '../../types/state';
 import Card from './card';
 
-type FilmsListProps = {
-  films: FilmsDescription[];
-}
 
-const mapStateToProps = ({genre}: State) => ({
+const mapStateToProps = ({ genre, filmsList }: State) => ({
   genre,
-})
+  filmsList,
+});
 
-const  mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onChangeGenre (genre:string) {
-      
-  }
-})
 
-const connector = connect(mapStateToProps, mapDispatchToProps)
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
-type ConnectedComponentProps = PropsFromRedux & FilmsListProps
 
 
-export default function FilmsList({ films }: FilmsListProps): JSX.Element {
+export function FilmsList(props: PropsFromRedux): JSX.Element {
   const [activeFilm, setActiveFilm] = useState('');
+
+  const cardElement: FilmsDescription[] = [];
+
+
+  for (let i = 0; i < props.filmsList.length; i++) {
+    if (findFilms(props.filmsList[i].genre, props.genre) && cardElement.length < 8) {
+      cardElement.push(props.filmsList[i]);
+    }
+  }
+
+
+  function findFilms(filmsList: string[], genre: string) {
+    if (filmsList.includes(genre) || genre === 'All genres') {
+      return true;
+    }
+  }
+
+  function renderCards() {
+    return (
+      cardElement[0] ?
+        cardElement.map((el, id) => (
+          <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />
+        ))
+        :
+        <h1>Films not found</h1>);
+  }
 
 
   return (
     <>
-      {films.map((film, id) => (
-        <Card key={film.id} activeFilm={activeFilm} filmData={film} setActiveFilm={setActiveFilm} />
-      ))}
+      {renderCards()}
     </>
   );
 }
+
+export default connector(FilmsList);
