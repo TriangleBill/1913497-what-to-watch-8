@@ -18,7 +18,6 @@ export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Elem
     }
   }
 
-  // props.films[i].genre.includes(props.filmGenre[0])
 
   function findRelatedFilms(filmsList:string[], filmGenre: string[] ) {
     for (let i = 0; i < filmGenre.length; i++) {
