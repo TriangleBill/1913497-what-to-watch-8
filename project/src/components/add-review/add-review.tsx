@@ -10,8 +10,9 @@ type AddReviewProps = {
 
 export default function AddReview({ films }: AddReviewProps): JSX.Element {
   const params = useParams<{ id?: string }>();
-  const reviewFilm = films.find((el) => el.id === params.id);
-
+  const reviewFilm = films.find((el) => String(el.id) === params.id);
+  console.log(params);
+  
 
   if (!reviewFilm) {
     return <Page404 />;
@@ -90,7 +91,7 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={reviewFilm.poster} alt={reviewFilm.name} width="218" height="327" />
+            <img src={reviewFilm.poster_image} alt={reviewFilm.name} width="218" height="327" />
           </div>
         </div>
 

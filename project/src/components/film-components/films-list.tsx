@@ -17,7 +17,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 
 export function FilmsList(props: PropsFromRedux): JSX.Element {
-  const [activeFilm, setActiveFilm] = useState('');
+  const [activeFilm, setActiveFilm] = useState(0);
 
   const cardElement: FilmsDescription[] = [];
 
@@ -29,7 +29,7 @@ export function FilmsList(props: PropsFromRedux): JSX.Element {
   }
 
 
-  function findFilms(filmsList: string[], genre: string) {
+  function findFilms(filmsList: string, genre: string) {
     if (filmsList.includes(genre) || genre === 'All genres') {
       return true;
     }
@@ -38,7 +38,7 @@ export function FilmsList(props: PropsFromRedux): JSX.Element {
   function renderCards() {
     return (
       cardElement[0] ?
-        cardElement.map((el, id) => (
+        cardElement.map((el, _id) => (
           <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />
         ))
         :

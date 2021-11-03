@@ -5,10 +5,10 @@ import PreviewPlayer from './preview-player';
 type cardProps = {
   filmData: FilmsDescription,
   setActiveFilm:setActiveFilm,
-  activeFilm: string
+  activeFilm: number
 }
 
-type setActiveFilm =  (value: string) => void
+type setActiveFilm =  (value: number) => void
 
 
 export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps): JSX.Element {
@@ -18,7 +18,7 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
 
   function mouseOut() {
     if (timeoutID) {window.clearTimeout(timeoutID);}
-    setActiveFilm('');
+    setActiveFilm(0);
   }
 
   function mouseOver() {
@@ -37,7 +37,7 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
 
     <article className="small-film-card catalog__films-card" onClick={Push} onMouseOver={() => mouseOver()} onMouseLeave={() => mouseOut()} >
 
-      <PreviewPlayer src={filmData.trailer} poster={filmData.poster} filmId={filmData.id} activeFilm={activeFilm} />
+      <PreviewPlayer src={filmData.preview_video_link} poster={filmData.preview_image} filmId={filmData.id} activeFilm={activeFilm} />
 
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${filmData.id}`} >{filmData.name}</Link>

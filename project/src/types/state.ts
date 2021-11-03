@@ -2,5 +2,6 @@ import { FilmsDescription } from './films';
 
 export type State = {
     genre: string,
-    filmsList: FilmsDescription[]
+    filmsList: FilmsDescription[],
+    isLoadData: boolean
 }

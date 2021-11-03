@@ -13,8 +13,10 @@ type FilmProps = {
 
 export default function Film({ films }: FilmProps): JSX.Element {
   const params = useParams<{ id?: string }>();
-  const film = films.find((el) => el.id === params.id);
-  const filmGenre = film ? film.genre : [''];
+  const film = films.find((el) => String(el.id) === params.id);
+  const filmGenre = film ? film.genre : '';
+
+console.log(films);
 
 
   if (!film) {
@@ -56,10 +58,10 @@ export default function Film({ films }: FilmProps): JSX.Element {
         </svg>
       </div>
 
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor: `${film.background_color}`}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film.background_image} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -89,8 +91,8 @@ export default function Film({ films }: FilmProps): JSX.Element {
             <div className="film-card__desc">
               <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre.join(' ')}</span>
-                <span className="film-card__year">{film.releaseDate}</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -112,10 +114,10 @@ export default function Film({ films }: FilmProps): JSX.Element {
           </div>
         </div>
 
-        <div className="film-card__wrap film-card__translate-top">
+        <div className="film-card__wrap film-card__translate-top" >
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.poster} alt={film.name} width="218" height="327" />
+              <img src={film.poster_image} alt={film.name} width="218" height="327" />
             </div>
 
             <Tabs film={film} />

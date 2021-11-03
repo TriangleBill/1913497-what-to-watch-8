@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom';
 import GenreList from './genre-list';
 
 type MainProps = {
-  films: FilmsDescription[]
+  films: FilmsDescription[],
+  isLoad: boolean
 }
 
+export default function Main(props: MainProps): JSX.Element {
+  
+  const headerFilm =  props.films.find(el=>{el.is_favorite}) || props.films[0] ;
 
-export default function Main({ films }: MainProps): JSX.Element {
-  const headerFilm = films[7];
+
 
   return (
     <>
@@ -47,7 +50,7 @@ export default function Main({ films }: MainProps): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={headerFilm.name} />
+          <img src={headerFilm.background_image} alt={headerFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -76,14 +79,14 @@ export default function Main({ films }: MainProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={headerFilm.poster} alt={headerFilm.name} width="218" height="327" />
+              <img src={headerFilm.poster_image} alt={headerFilm.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
               <h2 className="film-card__title">{headerFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{headerFilm.genre}</span>
-                <span className="film-card__year">{headerFilm.releaseDate}</span>
+                <span className="film-card__year">{headerFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -108,7 +111,7 @@ export default function Main({ films }: MainProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList films={films}/>
+          <GenreList />
 
           <div className="catalog__films-list">
             <FilmsList />
@@ -136,3 +139,4 @@ export default function Main({ films }: MainProps): JSX.Element {
     </>
   );
 }
+

@@ -4,12 +4,12 @@ import Card from './card';
 
 type RelatedFilmsListProps = {
     films: FilmsDescription[],
-    filmGenre: string[],
-    filmId: string
+    filmGenre: string,
+    filmId: number
 }
 
 export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Element {
-  const [activeFilm, setActiveFilm] = useState('');
+  const [activeFilm, setActiveFilm] = useState(0);
   const cardElement = [];
 
   for (let i = 0; i < props.films.length; i++) {
@@ -19,7 +19,7 @@ export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Elem
   }
 
 
-  function findRelatedFilms(filmsList:string[], filmGenre: string[] ) {
+  function findRelatedFilms(filmsList:string, filmGenre: string) {
     for (let i = 0; i < filmGenre.length; i++) {
       if (filmsList.includes(filmGenre[i])) {
         return true;

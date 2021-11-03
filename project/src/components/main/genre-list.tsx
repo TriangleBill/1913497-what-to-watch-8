@@ -1,16 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Actions } from '../../types/action';
-import { FilmsDescription } from '../../types/films';
 import { changeGenre } from './../../store/action';
 import { State } from '../../types/state';
 
-type GenreListProps = {
-    films: FilmsDescription[]
-}
-
-const mapStateToProps = ({genre}: State) => ({
+const mapStateToProps = ({genre, filmsList}: State) => ({
   genre,
+  filmsList
 });
 
 const  mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
@@ -22,17 +18,14 @@ const  mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
-type ConnectedComponentProps = PropsFromRedux & GenreListProps
 
-export function GenreList(props: ConnectedComponentProps): JSX.Element {
+export function GenreList(props: PropsFromRedux): JSX.Element {
   const genres: string[] = [];
 
-  props.films.map((el, id) => {
-    el.genre.forEach((elem) => {
-      if (!genres.includes(elem)) {
-        genres.push(elem);
+  props.filmsList.map((el, id) => {
+      if (!genres.includes(el.genre)) {
+        genres.push(el.genre);
       }
-    });
   });
 
   function onClick(e:any) {
