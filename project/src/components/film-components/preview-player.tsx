@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react';
 type PreviewPlayerProps = {
     src: string,
     poster: string,
-    activeFilm: string,
-    filmId: string,
+    activeFilm: number,
+    filmId: number,
 }
 
 

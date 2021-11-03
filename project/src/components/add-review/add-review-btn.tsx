@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 
 type AddReviewBtnProps = {
-    id: string
+    id: number
 }
 
 export default function AddReviewBtn({id}:AddReviewBtnProps):JSX.Element {

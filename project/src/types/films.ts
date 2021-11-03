@@ -1,10 +1,19 @@
 export type FilmsDescription = {
-    id: string;
+    id: number;
     name: string;
-    genre: string[];
-    releaseDate: number;
+    genre: string;
+    posterImage: string;
+    previewImage: string;
+    backgroundImage: string;
+    backgroundColor: string;
+    videoLink: string;
+    previewVideoLink: string;
     description: string;
     rating: number;
-    trailer: string;
-    poster: string;
+    scoresCount: number;
+    director: string;
+    starring: string[];
+    runTime: number;
+    released: string;
+    isFavorite: boolean;
 }
