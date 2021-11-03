@@ -4,10 +4,10 @@ import { State } from '../types/state';
 const initialState = {
   genre: 'All genres',
   filmsList: [],
-  isLoadData: true
+  isLoadData: true,
 };
 
-const reducer = (state: State = initialState, action: Actions) => {
+const reducer = (state: State = initialState, action: Actions) : State => {
   switch (action.type) {
     case ActionType.ChangeGenre:
       return { ...state, genre: action.payload };

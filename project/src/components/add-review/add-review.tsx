@@ -11,8 +11,7 @@ type AddReviewProps = {
 export default function AddReview({ films }: AddReviewProps): JSX.Element {
   const params = useParams<{ id?: string }>();
   const reviewFilm = films.find((el) => String(el.id) === params.id);
-  console.log(params);
-  
+
 
   if (!reviewFilm) {
     return <Page404 />;
@@ -50,10 +49,10 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
         </svg>
       </div>
 
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor: reviewFilm.backgroundColor}}>
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={reviewFilm.name} />
+            <img src={reviewFilm.backgroundImage} alt={reviewFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -91,12 +90,12 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={reviewFilm.poster_image} alt={reviewFilm.name} width="218" height="327" />
+            <img src={reviewFilm.posterImage} alt={reviewFilm.name} width="218" height="327" />
           </div>
         </div>
 
-        <div className="add-review">
-          <FormReview />
+        <div className="add-review" >
+          <FormReview reviewFilm={reviewFilm}/>
         </div>
 
       </section>

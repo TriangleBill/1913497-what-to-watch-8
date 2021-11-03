@@ -8,7 +8,6 @@ import Player from './../player/player';
 import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { FilmsDescription } from '../../types/films';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import LoadingScreen from '../loading-screen';
@@ -16,7 +15,7 @@ import LoadingScreen from '../loading-screen';
 const mapStateToProps = ({ genre, filmsList, isLoadData }: State) => ({
   genre,
   filmsList,
-  isLoadData
+  isLoadData,
 });
 
 
@@ -26,13 +25,13 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 function App( props: PropsFromRedux): JSX.Element {
   if (props.isLoadData) {
-    return <LoadingScreen />
+    return <LoadingScreen />;
   }
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <Main films={props.filmsList} isLoad={props.isLoadData}/>
+          <Main films={props.filmsList}/>
         </Route>
 
         <Route path={AppRoute.SignIn} exact>
@@ -71,4 +70,4 @@ function App( props: PropsFromRedux): JSX.Element {
 }
 
 
-export default connector(App)
+export default connector(App);

@@ -16,8 +16,6 @@ export default function Film({ films }: FilmProps): JSX.Element {
   const film = films.find((el) => String(el.id) === params.id);
   const filmGenre = film ? film.genre : '';
 
-console.log(films);
-
 
   if (!film) {
     return <Page404 />;
@@ -58,10 +56,10 @@ console.log(films);
         </svg>
       </div>
 
-      <section className="film-card film-card--full" style={{backgroundColor: `${film.background_color}`}}>
+      <section className="film-card film-card--full" style={{backgroundColor: `${film.backgroundColor}`}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.background_image} alt={film.name} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -117,7 +115,7 @@ console.log(films);
         <div className="film-card__wrap film-card__translate-top" >
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.poster_image} alt={film.name} width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
             <Tabs film={film} />

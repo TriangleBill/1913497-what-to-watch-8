@@ -12,5 +12,5 @@ export const setFilms = (films: FilmsDescription[]): SetFilms => ({
 });
 
 export const changeIsLoadData = (): ChangeIsLoadData => ({
-  type: ActionType.ChangeIsLoadData
-})
+  type: ActionType.ChangeIsLoadData,
+});

@@ -37,7 +37,7 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
 
     <article className="small-film-card catalog__films-card" onClick={Push} onMouseOver={() => mouseOver()} onMouseLeave={() => mouseOut()} >
 
-      <PreviewPlayer src={filmData.preview_video_link} poster={filmData.preview_image} filmId={filmData.id} activeFilm={activeFilm} />
+      <PreviewPlayer src={filmData.previewVideoLink} poster={filmData.previewImage} filmId={filmData.id} activeFilm={activeFilm} />
 
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${filmData.id}`} >{filmData.name}</Link>

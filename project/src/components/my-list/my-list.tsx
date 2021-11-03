@@ -56,7 +56,7 @@ export default function MyList({ films }: MyListProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <div className="user-block__link">Sign out</div>
             </li>
           </ul>
         </header>

@@ -9,7 +9,7 @@ type TabsContentProps = {
     activeTab: string
 }
 
-export default function TabsContent(props: TabsContentProps) {
+export default function TabsContent(props: TabsContentProps): JSX.Element {
   function switchRender(activeTab: string): JSX.Element {
     switch (activeTab) {
       case 'Overview':

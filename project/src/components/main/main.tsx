@@ -2,16 +2,15 @@ import FilmsList from '../film-components/films-list';
 import { FilmsDescription } from '../../types/films';
 import { Link } from 'react-router-dom';
 import GenreList from './genre-list';
+import { AppRoute } from '../../const';
 
 type MainProps = {
   films: FilmsDescription[],
-  isLoad: boolean
 }
 
 export default function Main(props: MainProps): JSX.Element {
-  
-  const headerFilm =  props.films.find(el=>{el.is_favorite}) || props.films[0] ;
 
+  const headerFilm =  props.films.find((el)=>(el.isFavorite)) || props.films[0] ;
 
 
   return (
@@ -50,7 +49,7 @@ export default function Main(props: MainProps): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={headerFilm.background_image} alt={headerFilm.name} />
+          <img src={headerFilm.backgroundImage} alt={headerFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -71,7 +70,7 @@ export default function Main(props: MainProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a href="#" className="user-block__link">Sign out</a>
+              <Link to={AppRoute.Main} className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -79,7 +78,7 @@ export default function Main(props: MainProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={headerFilm.poster_image} alt={headerFilm.name} width="218" height="327" />
+              <img src={headerFilm.posterImage} alt={headerFilm.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -124,11 +123,11 @@ export default function Main(props: MainProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="#" className="logo__link logo__link--light">
+            <Link to={AppRoute.Main} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">

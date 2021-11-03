@@ -6,7 +6,7 @@ import { State } from '../../types/state';
 
 const mapStateToProps = ({genre, filmsList}: State) => ({
   genre,
-  filmsList
+  filmsList,
 });
 
 const  mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
@@ -22,10 +22,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export function GenreList(props: PropsFromRedux): JSX.Element {
   const genres: string[] = [];
 
-  props.filmsList.map((el, id) => {
-      if (!genres.includes(el.genre)) {
-        genres.push(el.genre);
-      }
+  props.filmsList.map((el, _id): void => {
+    if (!genres.includes(el.genre)) {
+      genres.push(el.genre);
+    }
   });
 
   function onClick(e:any) {
