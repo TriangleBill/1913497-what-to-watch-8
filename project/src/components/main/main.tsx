@@ -3,6 +3,9 @@ import { FilmsDescription } from '../../types/films';
 import { Link } from 'react-router-dom';
 import GenreList from './genre-list';
 import { AppRoute } from '../../const';
+import User from '../header/user';
+import Logo from './../header/logo';
+
 
 type MainProps = {
   films: FilmsDescription[],
@@ -10,7 +13,7 @@ type MainProps = {
 
 export default function Main(props: MainProps): JSX.Element {
 
-  const headerFilm =  props.films.find((el)=>(el.isFavorite)) || props.films[0] ;
+  const headerFilm = props.films.find((el) => (el.isFavorite)) || props.films[0];
 
 
   return (
@@ -54,25 +57,11 @@ export default function Main(props: MainProps): JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header film-card__head">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to={AppRoute.Main} className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+        <header className="page-header film-card__head">
+          <Logo />
+
+          <User />
         </header>
 
         <div className="film-card__wrap">

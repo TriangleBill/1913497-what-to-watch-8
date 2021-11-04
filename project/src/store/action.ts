@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from '../const';
 import { ActionType, ChangeGenre, ChangeIsLoadData, SetFilms } from '../types/action';
 import { FilmsDescription } from '../types/films';
 
@@ -14,3 +15,12 @@ export const setFilms = (films: FilmsDescription[]): SetFilms => ({
 export const changeIsLoadData = (): ChangeIsLoadData => ({
   type: ActionType.ChangeIsLoadData,
 });
+
+export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
+  type: ActionType.RequireAuthorization,
+  payload: authStatus,
+} as const);
+
+export const requireLogout = () => ({
+  type: ActionType.RequireLogout,
+} as const);
