@@ -10,6 +10,7 @@ type AddReviewProps = {
   films: FilmsDescription[]
 }
 
+
 export default function AddReview({ films }: AddReviewProps): JSX.Element {
   const params = useParams<{ id?: string }>();
   const reviewFilm = films.find((el) => String(el.id) === params.id);

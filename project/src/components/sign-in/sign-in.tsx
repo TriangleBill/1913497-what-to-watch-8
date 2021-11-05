@@ -21,6 +21,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function SignIn(props: PropsFromRedux): JSX.Element {
   const { onSubmit } = props;
+  const spacesPresence = /\s/;
+  const lettersPresence = /[a-zа-яё]/i;
+  const numbersPresence = /[0-9]/i
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -30,13 +33,26 @@ function SignIn(props: PropsFromRedux): JSX.Element {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current !== null
+      && passwordRef.current !== null
+      && passwordRef.current.value !== ''
+      && loginRef.current.value !== ''
+      && !spacesPresence.test(passwordRef.current.value)
+      && lettersPresence.test(passwordRef.current.value)
+      && numbersPresence.test(passwordRef.current.value)) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
       history.push(AppRoute.Main);
-    }
+
+      console.log(loginRef.current.value);
+      console.log(passwordRef.current.value);
+
+
+
+    } else alert('Нужно ввести все данные. Пароль должен содержать хотя бы одну цифру и букву и не должен содержать пробелов.')
+
   }
 
   return (
@@ -131,5 +147,5 @@ function SignIn(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {SignIn};
+export { SignIn };
 export default connector(SignIn);
