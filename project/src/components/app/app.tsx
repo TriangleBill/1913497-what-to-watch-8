@@ -50,9 +50,13 @@ function App( props: PropsFromRedux): JSX.Element {
           <Film films={props.filmsList}/>
         </Route>
 
-        <Route path={AppRoute.AddReview} exact>
-          <AddReview films={props.filmsList} />
-        </Route>
+        <PrivateRoute
+          path={AppRoute.AddReview}
+          exact
+          render={() => <AddReview films={props.filmsList} />}
+        >
+
+        </PrivateRoute>
 
         <Route path={AppRoute.Player} exact>
           <Player films={props.filmsList}/>
