@@ -7,6 +7,8 @@ import { connect, ConnectedProps } from 'react-redux';
 import { FormEvent, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { AppRoute } from '../../const';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -23,7 +25,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
   const { onSubmit } = props;
   const spacesPresence = /\s/;
   const lettersPresence = /[a-zа-яё]/i;
-  const numbersPresence = /[0-9]/i
+  const numbersPresence = /[0-9]/i;
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -46,12 +48,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
       });
       history.push(AppRoute.Main);
 
-      console.log(loginRef.current.value);
-      console.log(passwordRef.current.value);
-
-
-
-    } else alert('Нужно ввести все данные. Пароль должен содержать хотя бы одну цифру и букву и не должен содержать пробелов.')
+    } else {toast.info('Нужно ввести все данные. Пароль должен содержать хотя бы одну цифру и букву и не должен содержать пробелов.');}
 
   }
 
@@ -125,7 +122,6 @@ function SignIn(props: PropsFromRedux): JSX.Element {
             </div>
             <div className="sign-in__submit">
               <button
-                // onClick={() => history.push(AppRoute.Main)}
                 className="sign-in__btn"
                 type="submit"
               >
@@ -133,6 +129,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
               </button>
             </div>
           </form>
+          <ToastContainer />
         </div>
 
         <footer className="page-footer">
