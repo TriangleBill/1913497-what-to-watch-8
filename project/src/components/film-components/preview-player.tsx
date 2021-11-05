@@ -20,7 +20,7 @@ export default function PreviewPlayer(props: PreviewPlayerProps): JSX.Element {
       videoRef.current?.load();
     }
 
-  }, [props.activeFilm]);
+  });
 
 
   return (

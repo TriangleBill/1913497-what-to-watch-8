@@ -3,10 +3,13 @@ import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
 import Page404 from '../404/page-404';
 import FormReview from './form-review';
+import User from '../header/user';
+import Logo from './../header/logo';
 
 type AddReviewProps = {
   films: FilmsDescription[]
 }
+
 
 export default function AddReview({ films }: AddReviewProps): JSX.Element {
   const params = useParams<{ id?: string }>();
@@ -58,13 +61,7 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+            <Logo />
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
@@ -72,21 +69,12 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
                   <Link to={`/films/${reviewFilm.id}`} className="breadcrumbs__link">{reviewFilm.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a href='#' className="breadcrumbs__link">Add review</a>
+                  <div  className="breadcrumbs__link">Add review</div>
                 </li>
               </ul>
             </nav>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <User/>
           </header>
 
           <div className="film-card__poster film-card__poster--small">

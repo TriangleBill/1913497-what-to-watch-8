@@ -7,7 +7,7 @@ import AddReview from '../add-review/add-review';
 import Player from './../player/player';
 import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import LoadingScreen from '../loading-screen';
@@ -42,7 +42,6 @@ function App( props: PropsFromRedux): JSX.Element {
           path={AppRoute.MyList}
           exact
           render={() => <MyList films={props.filmsList} />}
-          autorizationStatus={AuthorizationStatus.Auth}
         >
 
         </PrivateRoute>
@@ -51,9 +50,13 @@ function App( props: PropsFromRedux): JSX.Element {
           <Film films={props.filmsList}/>
         </Route>
 
-        <Route path={AppRoute.AddReview} exact>
-          <AddReview films={props.filmsList} />
-        </Route>
+        <PrivateRoute
+          path={AppRoute.AddReview}
+          exact
+          render={() => <AddReview films={props.filmsList} />}
+        >
+
+        </PrivateRoute>
 
         <Route path={AppRoute.Player} exact>
           <Player films={props.filmsList}/>

@@ -1,11 +1,11 @@
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
-
 import AddReviewBtn from '../add-review/add-review-btn';
 import Tabs from './../tabs/tabs';
 import RelatedFilmsList from './../film-components/related-films-list';
+import User from '../header/user';
+import Logo from './../header/logo';
 
 type FilmProps = {
   films: FilmsDescription[]
@@ -65,24 +65,9 @@ export default function Film({ films }: FilmProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+            <Logo/>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <User />
           </header>
 
           <div className="film-card__wrap">
@@ -134,13 +119,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
