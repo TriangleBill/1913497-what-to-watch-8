@@ -1,11 +1,15 @@
 import { useParams } from 'react-router';
 import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
-import AddReviewBtn from '../add-review/add-review-btn';
+import AddReviewBtn from '../header/add-review-btn';
 import Tabs from './../tabs/tabs';
 import RelatedFilmsList from './../film-components/related-films-list';
 import User from '../header/user';
 import Logo from './../header/logo';
+import FilmPoster from './../header/film-poster';
+import FilmTitle from './../header/film-title';
+import PlayBtn from '../header/play-btn';
+import MylistBtn from './../header/mylist-btn';
 
 type FilmProps = {
   films: FilmsDescription[]
@@ -72,25 +76,11 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
-              </p>
+              <FilmTitle filmName={film.name} filmGenre={film.genre} released={film.released}/>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayBtn />
+                <MylistBtn />
                 <AddReviewBtn id={film.id} />
               </div>
             </div>
@@ -100,7 +90,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top" >
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt={film.name} width="218" height="327" />
+              <FilmPoster filmPoster={film.posterImage} filmName={film.name} />
             </div>
 
             <Tabs film={film} />

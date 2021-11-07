@@ -8,30 +8,24 @@ import Player from './../player/player';
 import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';
 import { AppRoute } from '../../const';
-import { connect, ConnectedProps } from 'react-redux';
-import { State } from '../../types/state';
+import { useSelector } from 'react-redux';
 import LoadingScreen from '../loading-screen';
-
-const mapStateToProps = ({ genre, filmsList, isLoadData }: State) => ({
-  genre,
-  filmsList,
-  isLoadData,
-});
+import { getLoadedDataStatus } from '../../store/films-data/selector';
+import { getFilms } from './../../store/films-data/selector';
 
 
-const connector = connect(mapStateToProps);
+function App(): JSX.Element {
+  const isLoadData = useSelector(getLoadedDataStatus);
+  const filmsList = useSelector(getFilms);
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-function App( props: PropsFromRedux): JSX.Element {
-  if (props.isLoadData) {
+  if (isLoadData) {
     return <LoadingScreen />;
   }
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.Main} exact>
-          <Main films={props.filmsList}/>
+          <Main films={filmsList}/>
         </Route>
 
         <Route path={AppRoute.SignIn} exact>
@@ -41,25 +35,25 @@ function App( props: PropsFromRedux): JSX.Element {
         <PrivateRoute
           path={AppRoute.MyList}
           exact
-          render={() => <MyList films={props.filmsList} />}
+          render={() => <MyList films={filmsList} />}
         >
 
         </PrivateRoute>
 
         <Route path={AppRoute.Film} exact>
-          <Film films={props.filmsList}/>
+          <Film films={filmsList}/>
         </Route>
 
         <PrivateRoute
           path={AppRoute.AddReview}
           exact
-          render={() => <AddReview films={props.filmsList} />}
+          render={() => <AddReview films={filmsList} />}
         >
 
         </PrivateRoute>
 
         <Route path={AppRoute.Player} exact>
-          <Player films={props.filmsList}/>
+          <Player films={filmsList}/>
         </Route>
 
         <Route exact>
@@ -73,4 +67,4 @@ function App( props: PropsFromRedux): JSX.Element {
 }
 
 
-export default connector(App);
+export default App;

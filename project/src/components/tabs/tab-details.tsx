@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { FilmsDescription } from '../../types/films';
 
 type TabDetailsProps = {
   film: FilmsDescription
 }
 
-export default function TabDetails(props: TabDetailsProps): JSX.Element {
+function TabDetails(props: TabDetailsProps): JSX.Element {
   const runTimeHour = Math.floor(props.film.runTime / 60);
   const runTimeMinutes = props.film.runTime % 60;
 
@@ -41,3 +42,5 @@ export default function TabDetails(props: TabDetailsProps): JSX.Element {
     </div>
   );
 }
+
+export default memo(TabDetails);

@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from '../const';
 import snakeToCamel from '../snake-to-camel';
 import { ThunkActionResult } from '../types/action';
-import { changeIsLoadData, requireAuthorization, setFilms, requireLogout } from './action';
+import { requireAuthorization, setFilms, requireLogout } from './action';
 import { AuthData } from '../types/auth-data';
 import { dropToken, saveToken, Token } from '../services/token';
 
@@ -11,7 +11,6 @@ export const fetchFilmsAction = (): ThunkActionResult =>
 
     const camelData = snakeToCamel(data);
     dispatch(setFilms(camelData));
-    dispatch(changeIsLoadData());
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

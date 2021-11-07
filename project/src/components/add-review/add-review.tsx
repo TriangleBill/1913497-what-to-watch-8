@@ -5,6 +5,7 @@ import Page404 from '../404/page-404';
 import FormReview from './form-review';
 import User from '../header/user';
 import Logo from './../header/logo';
+import FilmPoster from '../header/film-poster';
 
 type AddReviewProps = {
   films: FilmsDescription[]
@@ -78,7 +79,8 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={reviewFilm.posterImage} alt={reviewFilm.name} width="218" height="327" />
+            <FilmPoster filmName={reviewFilm.name} filmPoster={reviewFilm.posterImage}/>
+            {/* <img src={reviewFilm.posterImage} alt={reviewFilm.name} width="218" height="327" /> */}
           </div>
         </div>
 
