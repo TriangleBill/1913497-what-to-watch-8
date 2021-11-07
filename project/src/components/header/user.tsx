@@ -5,6 +5,7 @@ import { logoutAction } from '../../store/api-actions';
 import { ThunkAppDispatch } from '../../types/action';
 import { State } from '../../types/state';
 import { useHistory } from 'react-router';
+import { memo } from 'react';
 
 const mapStateToProps = ({ authorizationStatus }: State) => ({
   authorizationStatus,
@@ -55,4 +56,4 @@ function User(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export default connector(User);
+export default memo(connector(User));

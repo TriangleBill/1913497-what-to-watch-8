@@ -1,6 +1,7 @@
+import { memo } from "react";
 
 
-export default function TabReviews(): JSX.Element {
+function TabReviews(): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
@@ -86,3 +87,5 @@ export default function TabReviews(): JSX.Element {
     </div>
   );
 }
+
+export default memo(TabReviews)

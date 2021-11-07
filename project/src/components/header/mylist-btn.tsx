@@ -1,6 +1,7 @@
+import { memo } from "react"
 
 
-export default function MylistBtn() {
+function MylistBtn() {
     return (
         <button className="btn btn--list film-card__button" type="button">
             <svg viewBox="0 0 19 20" width="19" height="20">
@@ -10,3 +11,5 @@ export default function MylistBtn() {
         </button>
     )
 }
+
+export default memo(MylistBtn)

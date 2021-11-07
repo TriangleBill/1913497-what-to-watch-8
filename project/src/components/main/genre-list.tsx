@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { Actions } from '../../types/action';
 import { changeGenre } from './../../store/action';
 import { State } from '../../types/state';
+import { memo } from 'react';
 
 const mapStateToProps = ({genre, filmsList}: State) => ({
   genre,
@@ -48,4 +49,4 @@ export function GenreList(props: PropsFromRedux): JSX.Element {
 }
 
 
-export default connector(GenreList);
+export default memo(connector(GenreList));

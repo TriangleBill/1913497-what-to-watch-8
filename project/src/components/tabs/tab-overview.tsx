@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { FilmsDescription } from '../../types/films';
 
 type TabOverviewProps = {
     film: FilmsDescription
 }
 
-export default function TabOverview(props:TabOverviewProps): JSX.Element {
+function TabOverview(props:TabOverviewProps): JSX.Element {
   return (
     <>
       <div className="film-rating">
@@ -21,3 +22,5 @@ export default function TabOverview(props:TabOverviewProps): JSX.Element {
     </>
   );
 }
+
+export default memo(TabOverview)

@@ -1,10 +1,12 @@
+import { memo } from "react"
+
 type FilmTitleProps = {
     filmName: string,
     filmGenre: string,
     released: string
 }
 
-export default function FilmTitle(props: FilmTitleProps) {
+function FilmTitle(props: FilmTitleProps) {
     return (
         <>
             <h2 className="film-card__title">{props.filmName}</h2>
@@ -15,3 +17,5 @@ export default function FilmTitle(props: FilmTitleProps) {
         </>
     )
 }
+
+export default memo(FilmTitle)
