@@ -11,7 +11,7 @@ export const setFilms = createAction(
       films,
     },
   }),
-  );
+);
 export const changeGenre = createAction(
   ActionType.ChangeGenre,
   (genre: string) => ({
@@ -19,7 +19,7 @@ export const changeGenre = createAction(
       genre,
     },
   }),
-  );
+);
 export const requireAuthorization = createAction(
   ActionType.RequireAuthorization,
   (authStatus: AuthorizationStatus) => ({
@@ -27,7 +27,7 @@ export const requireAuthorization = createAction(
       authStatus,
     },
   }),
-  );
-export const requireLogout = createAction(ActionType.RequireLogout)
+);
+export const requireLogout = createAction(ActionType.RequireLogout);
 
 

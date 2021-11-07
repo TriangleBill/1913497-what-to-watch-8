@@ -12,4 +12,4 @@ function AddReviewBtn({id}:AddReviewBtnProps):JSX.Element {
   );
 }
 
-export default memo(AddReviewBtn)
+export default memo(AddReviewBtn);

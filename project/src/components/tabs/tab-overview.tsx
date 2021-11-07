@@ -23,4 +23,4 @@ function TabOverview(props:TabOverviewProps): JSX.Element {
   );
 }
 
-export default memo(TabOverview)
+export default memo(TabOverview);

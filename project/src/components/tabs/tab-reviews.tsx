@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 
 function TabReviews(): JSX.Element {
@@ -88,4 +88,4 @@ function TabReviews(): JSX.Element {
   );
 }
 
-export default memo(TabReviews)
+export default memo(TabReviews);

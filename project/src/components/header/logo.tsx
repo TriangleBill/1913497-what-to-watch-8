@@ -13,4 +13,4 @@ function Logo(): JSX.Element {
   );
 }
 
-export default memo(Logo)
+export default memo(Logo);

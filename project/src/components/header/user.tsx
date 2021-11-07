@@ -1,4 +1,4 @@
-import { connect, ConnectedProps, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-actions';
@@ -8,11 +8,11 @@ import { getAuthorizationStatus } from './../../store/user-process/selector';
 
 function User(): JSX.Element {
   const history = useHistory();
-  const authorizationStatus = useSelector(getAuthorizationStatus)
-  const dispatch = useDispatch()
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
 
   function onClick() {
-    dispatch(logoutAction())
+    dispatch(logoutAction());
     history.push(AppRoute.Main);
   }
 

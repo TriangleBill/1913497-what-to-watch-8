@@ -6,9 +6,9 @@ import { getFilms } from './../../store/films-data/selector';
 
 
 export function GenreList(): JSX.Element {
-  const genre = useSelector(getGenre)
-  const filmsList = useSelector(getFilms)
-  const dispatch = useDispatch()
+  const genre = useSelector(getGenre);
+  const filmsList = useSelector(getFilms);
+  const dispatch = useDispatch();
   const genres: string[] = [];
 
   filmsList.map((el, _id): void => {
@@ -18,8 +18,8 @@ export function GenreList(): JSX.Element {
   });
 
   function onClick(e:any) {
-    const genre = e.target.innerText;
-    dispatch(changeGenre(genre))
+    const data = e.target.innerText;
+    dispatch(changeGenre(data));
   }
 
   return (

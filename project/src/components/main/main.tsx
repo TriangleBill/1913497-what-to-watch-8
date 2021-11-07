@@ -76,7 +76,7 @@ export default function Main(props: MainProps): JSX.Element {
 
             <div className="film-card__desc">
               <FilmTitle filmName={headerFilm.name} filmGenre={headerFilm.genre} released={headerFilm.released} />
-              
+
               <div className="film-card__buttons">
                 <PlayBtn />
                 <MylistBtn />

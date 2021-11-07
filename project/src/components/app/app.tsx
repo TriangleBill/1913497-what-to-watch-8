@@ -15,8 +15,8 @@ import { getFilms } from './../../store/films-data/selector';
 
 
 function App(): JSX.Element {
-  const isLoadData = useSelector(getLoadedDataStatus)
-  const filmsList = useSelector(getFilms)
+  const isLoadData = useSelector(getLoadedDataStatus);
+  const filmsList = useSelector(getFilms);
 
   if (isLoadData) {
     return <LoadingScreen />;

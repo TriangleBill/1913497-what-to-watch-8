@@ -1,15 +1,15 @@
-import { memo } from "react"
+import { memo } from 'react';
 
 
 function MylistBtn() {
-    return (
-        <button className="btn btn--list film-card__button" type="button">
-            <svg viewBox="0 0 19 20" width="19" height="20">
-                <use xlinkHref="#add"></use>
-            </svg>
-            <span>My list</span>
-        </button>
-    )
+  return (
+    <button className="btn btn--list film-card__button" type="button">
+      <svg viewBox="0 0 19 20" width="19" height="20">
+        <use xlinkHref="#add"></use>
+      </svg>
+      <span>My list</span>
+    </button>
+  );
 }
 
-export default memo(MylistBtn)
+export default memo(MylistBtn);

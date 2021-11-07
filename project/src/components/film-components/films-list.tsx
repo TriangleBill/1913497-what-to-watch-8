@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { connect, ConnectedProps, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FilmsDescription } from '../../types/films';
-import { State } from '../../types/state';
 import Card from './card';
 import { getGenre } from './../../store/films-process/selector';
 import { getFilms } from './../../store/films-data/selector';
@@ -9,8 +8,8 @@ import { getFilms } from './../../store/films-data/selector';
 export function FilmsList(): JSX.Element {
   const [activeFilm, setActiveFilm] = useState(0);
 
-  const genre = useSelector(getGenre)
-  const  filmsList = useSelector(getFilms)
+  const genre = useSelector(getGenre);
+  const  filmsList = useSelector(getFilms);
 
   const cardElement: FilmsDescription[] = [];
 
@@ -22,8 +21,8 @@ export function FilmsList(): JSX.Element {
   }
 
 
-  function findFilms(filmsList: string, genre: string) {
-    if (filmsList.includes(genre) || genre === 'All genres') {
+  function findFilms(films: string, filmGenre: string) {
+    if (films.includes(genre) || filmGenre === 'All genres') {
       return true;
     }
   }

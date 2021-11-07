@@ -43,4 +43,4 @@ function TabDetails(props: TabDetailsProps): JSX.Element {
   );
 }
 
-export default memo(TabDetails)
+export default memo(TabDetails);

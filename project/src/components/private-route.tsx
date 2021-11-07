@@ -10,7 +10,7 @@ type PrivateRouteProps = RouteProps & {
 
 export function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const { exact, path, render } = props;
-  const authorizationStatus = useSelector(getAuthorizationStatus)
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
     <Route

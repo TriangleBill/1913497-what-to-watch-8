@@ -1,4 +1,4 @@
-import { memo } from "react"
+import { memo } from 'react';
 
 type FilmPosterProps = {
     filmPoster: string,
@@ -6,11 +6,9 @@ type FilmPosterProps = {
 }
 
 function FilmPoster({filmPoster, filmName}: FilmPosterProps) {
-    return (
-        <>
-            <img src={filmPoster} alt={filmName} width='218' height='327' />
-        </>
-    )
+  return (
+    <img src={filmPoster} alt={filmName} width='218' height='327' />
+  );
 }
 
-export default memo(FilmPoster)
+export default memo(FilmPoster);

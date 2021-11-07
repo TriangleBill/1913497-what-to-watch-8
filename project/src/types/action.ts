@@ -12,7 +12,6 @@ export enum ActionType {
 }
 
 
-
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>
 
 export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Action>
