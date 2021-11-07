@@ -5,6 +5,10 @@ import GenreList from './genre-list';
 import { AppRoute } from '../../const';
 import User from '../header/user';
 import Logo from './../header/logo';
+import FilmPoster from './../header/film-poster';
+import PlayBtn from '../header/play-btn';
+import MylistBtn from './../header/mylist-btn';
+import FilmTitle from './../header/film-title';
 
 
 type MainProps = {
@@ -67,29 +71,20 @@ export default function Main(props: MainProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={headerFilm.posterImage} alt={headerFilm.name} width="218" height="327" />
+              <FilmPoster filmName={headerFilm.name} filmPoster={headerFilm.posterImage} />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{headerFilm.name}</h2>
+              <FilmTitle filmName={headerFilm.name} filmGenre={headerFilm.genre} released={headerFilm.released} />
+              {/* <h2 className="film-card__title">{headerFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{headerFilm.genre}</span>
                 <span className="film-card__year">{headerFilm.released}</span>
-              </p>
+              </p> */}
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayBtn />
+                <MylistBtn />
               </div>
             </div>
           </div>
