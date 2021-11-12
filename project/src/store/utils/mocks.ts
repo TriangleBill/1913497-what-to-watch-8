@@ -18,7 +18,7 @@ export const makeFakeFilmsList = ():FilmsDescription[] => ([{
     starring: [faker.name.findName(), faker.name.findName()],
     runTime: faker.datatype.number(),
     released: faker.random.word(),
-    isFavorite: faker.random.boolean(),
+    isFavorite: faker.datatype.boolean(),
 
 },
 {
@@ -38,6 +38,6 @@ export const makeFakeFilmsList = ():FilmsDescription[] => ([{
     starring: [faker.name.findName(), faker.name.findName()],
     runTime: faker.datatype.number(),
     released: faker.random.word(),
-    isFavorite: faker.random.boolean(),
+    isFavorite: faker.datatype.boolean(),
 
 }])

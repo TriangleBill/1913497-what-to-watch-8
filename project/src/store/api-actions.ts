@@ -8,7 +8,6 @@ import { dropToken, saveToken, Token } from '../services/token';
 export const fetchFilmsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const { data } = await api.get('/films');
-
     const camelData = snakeToCamel(data);
     dispatch(setFilms(camelData));
   };
