@@ -28,12 +28,14 @@ export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Elem
   }
 
   function renderComponent() {
-    cardElement[0] ?
-      cardElement.map((el, _id) => (
+    if (cardElement[0]) {
+      return cardElement.map((el, _id) => (
         <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />
-      ))
-      :
-      <h1>Related films not found</h1>;
+      ));
+    } else {
+      return <h1>Related films not found</h1>;
+    }
+
   }
 
 
