@@ -80,7 +80,6 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
 
           <div className="film-card__poster film-card__poster--small">
             <FilmPoster filmName={reviewFilm.name} filmPoster={reviewFilm.posterImage}/>
-            {/* <img src={reviewFilm.posterImage} alt={reviewFilm.name} width="218" height="327" /> */}
           </div>
         </div>
 

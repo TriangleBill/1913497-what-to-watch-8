@@ -1,5 +1,5 @@
 import Main from './../main/main';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import SignIn from '../sign-in/sign-in';
 import MyList from '../my-list/my-list';
 import Film from './../film/film';
@@ -22,45 +22,42 @@ function App(): JSX.Element {
     return <LoadingScreen />;
   }
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path={AppRoute.Main} exact>
-          <Main films={filmsList}/>
-        </Route>
+    <Switch>
+      <Route path={AppRoute.Main} exact>
+        <Main films={filmsList}/>
+      </Route>
 
-        <Route path={AppRoute.SignIn} exact>
-          <SignIn />
-        </Route>
+      <Route path={AppRoute.SignIn} exact>
+        <SignIn />
+      </Route>
 
-        <PrivateRoute
-          path={AppRoute.MyList}
-          exact
-          render={() => <MyList films={filmsList} />}
-        >
+      <PrivateRoute
+        path={AppRoute.MyList}
+        exact
+        render={() => <MyList films={filmsList} />}
+      >
+      </PrivateRoute>
 
-        </PrivateRoute>
+      <Route path={AppRoute.Film} exact>
+        <Film films={filmsList}/>
+      </Route>
 
-        <Route path={AppRoute.Film} exact>
-          <Film films={filmsList}/>
-        </Route>
+      <PrivateRoute
+        path={AppRoute.AddReview}
+        exact
+        render={() => <AddReview films={filmsList} />}
+      >
 
-        <PrivateRoute
-          path={AppRoute.AddReview}
-          exact
-          render={() => <AddReview films={filmsList} />}
-        >
+      </PrivateRoute>
 
-        </PrivateRoute>
+      <Route path={AppRoute.Player} exact>
+        <Player films={filmsList}/>
+      </Route>
 
-        <Route path={AppRoute.Player} exact>
-          <Player films={filmsList}/>
-        </Route>
-
-        <Route exact>
-          <Page404 />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+      <Route exact>
+        <Page404 />
+      </Route>
+    </Switch>
 
 
   );
