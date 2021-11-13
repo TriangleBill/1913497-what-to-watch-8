@@ -60,7 +60,7 @@ export default function MyList({ films }: MyListProps): JSX.Element {
           <Logo/>
 
           <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
+            <p>© 2021 What to watch Ltd.</p>
           </div>
         </footer>
       </div>

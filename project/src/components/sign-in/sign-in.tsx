@@ -1,28 +1,18 @@
-
-import { ThunkAppDispatch } from '../../types/action';
 import Logo from './../header/logo';
 import { loginAction } from './../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
-import { connect, ConnectedProps } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormEvent, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { AppRoute } from '../../const';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  onSubmit(authData: AuthData) {
-    dispatch(loginAction(authData));
-  },
-});
 
-const connector = connect(null, mapDispatchToProps);
+function SignIn(): JSX.Element {
+  const dispatch = useDispatch();
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-
-function SignIn(props: PropsFromRedux): JSX.Element {
-  const { onSubmit } = props;
+  const onSubmit = (authData: AuthData) => {dispatch(loginAction(authData));};
   const spacesPresence = /\s/;
   const lettersPresence = /[a-zа-яё]/i;
   const numbersPresence = /[0-9]/i;
@@ -105,6 +95,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
+                  data-testid="login"
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
@@ -116,6 +107,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
                   placeholder="Password"
                   name="user-password"
                   id="user-password"
+                  data-testid="password"
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
@@ -136,7 +128,7 @@ function SignIn(props: PropsFromRedux): JSX.Element {
           <Logo />
 
           <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
+            <p>© 2021 What to watch Ltd.</p>
           </div>
         </footer>
       </div>
@@ -144,5 +136,4 @@ function SignIn(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export { SignIn };
-export default connector(SignIn);
+export default SignIn;

@@ -1,9 +1,9 @@
 import { memo } from 'react';
 
 type FilmTitleProps = {
-    filmName: string,
-    filmGenre: string,
-    released: string
+  filmName: string,
+  filmGenre: string,
+  released: string
 }
 
 function FilmTitle(props: FilmTitleProps) {
