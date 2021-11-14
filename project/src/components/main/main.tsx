@@ -9,6 +9,8 @@ import FilmPoster from './../header/film-poster';
 import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
 import FilmTitle from './../header/film-title';
+import ShowMoreBtn from './../film-components/show-more-btn';
+import { useState } from 'react';
 
 
 type MainProps = {
@@ -17,8 +19,9 @@ type MainProps = {
 
 export default function Main(props: MainProps): JSX.Element {
 
+  const [shownFilms, setShownFilms] = useState(8);
   const headerFilm = props.films.find((el) => (el.isFavorite)) || props.films[0];
-
+  // const [cardElements, setCardElements] = useState<FilmsDescription[]>([])
 
   return (
     <>
@@ -92,12 +95,10 @@ export default function Main(props: MainProps): JSX.Element {
           <GenreList />
 
           <div className="catalog__films-list">
-            <FilmsList />
+            <FilmsList shownFilms={shownFilms} />
           </div>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreBtn setShownFilms={setShownFilms} shownFilms={shownFilms}/>
         </section>
 
         <footer className="page-footer">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FilmsDescription } from '../../types/films';
 import TabsContent from './tabs-content';
 
@@ -9,9 +9,10 @@ type TabsProps = {
 export default function Tabs(props: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'];
+  const tabRef = useRef<HTMLDivElement>(null);
 
   function onClick (e:any) {
-    setActiveTab(e.target.innerText);
+    if (e.target !== null) {setActiveTab(e.target.innerText);}
   }
 
   return (
@@ -20,7 +21,7 @@ export default function Tabs(props: TabsProps): JSX.Element {
         <ul className="film-nav__list">
           {titles.map((el, index)=> (
             <li key={+(index+Date.now())} className={`film-nav__item ${activeTab===el ? 'film-nav__item--active' : null}`}>
-              <div style={{cursor: 'pointer'}} className="film-nav__link" onClick={onClick}>{el}</div>
+              <div ref={tabRef} style={{cursor: 'pointer'}} className="film-nav__link" onClick={onClick}>{el}</div>
             </li>
           ))}
 

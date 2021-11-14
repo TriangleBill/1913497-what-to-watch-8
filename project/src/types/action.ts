@@ -6,9 +6,11 @@ import { State } from './state';
 export enum ActionType {
     ChangeGenre = 'film/changeGenre',
     SetFilms = 'film/setFilms',
+    SetCardElements = 'film/setCardElement',
     ChangeIsLoadData = 'data/changeIsLoadData',
     RequireAuthorization = 'user/requireAuthorization',
-    RequireLogout = 'user/requireLogout'
+    RequireLogout = 'user/requireLogout',
+
 }
 
 
