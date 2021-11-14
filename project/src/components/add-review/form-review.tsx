@@ -74,7 +74,7 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
       </div>
 
       <div className="add-review__text" style={{backgroundColor: `rgba(${hexToRgba(reviewFilm.backgroundColor)})`}}>
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" ref={textReviewValue}>{textReview}</textarea>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" ref={textReviewValue} defaultValue={textReview}/>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit">Post</button>
         </div>

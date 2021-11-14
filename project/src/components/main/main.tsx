@@ -1,8 +1,6 @@
 import FilmsList from '../film-components/films-list';
 import { FilmsDescription } from '../../types/films';
-import { Link } from 'react-router-dom';
 import GenreList from './genre-list';
-import { AppRoute } from '../../const';
 import User from '../header/user';
 import Logo from './../header/logo';
 import FilmPoster from './../header/film-poster';
@@ -104,9 +102,7 @@ export default function Main(props: MainProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <Link to={AppRoute.Main} className="logo__link logo__link--light">
-              <Logo />
-            </Link>
+            <Logo />
           </div>
 
           <div className="copyright">
