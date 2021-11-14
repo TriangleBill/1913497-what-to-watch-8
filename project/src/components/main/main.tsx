@@ -10,7 +10,8 @@ import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
 import FilmTitle from './../header/film-title';
 import ShowMoreBtn from './../film-components/show-more-btn';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { resetShownFilms } from '../../store/action';
 
 
 type MainProps = {
@@ -19,9 +20,9 @@ type MainProps = {
 
 export default function Main(props: MainProps): JSX.Element {
 
-  const [shownFilms, setShownFilms] = useState(8);
   const headerFilm = props.films.find((el) => (el.isFavorite)) || props.films[0];
-  // const [cardElements, setCardElements] = useState<FilmsDescription[]>([])
+  const dispatch = useDispatch();
+  dispatch(resetShownFilms());
 
   return (
     <>
@@ -95,10 +96,10 @@ export default function Main(props: MainProps): JSX.Element {
           <GenreList />
 
           <div className="catalog__films-list">
-            <FilmsList shownFilms={shownFilms} />
+            <FilmsList/>
           </div>
 
-          <ShowMoreBtn setShownFilms={setShownFilms} shownFilms={shownFilms}/>
+          <ShowMoreBtn />
         </section>
 
         <footer className="page-footer">

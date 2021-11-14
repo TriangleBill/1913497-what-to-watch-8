@@ -29,5 +29,5 @@ export const requireAuthorization = createAction(
   }),
 );
 export const requireLogout = createAction(ActionType.RequireLogout);
-
-
+export const incrementShownFilms = createAction(ActionType.incrementShownFilms);
+export const resetShownFilms = createAction(ActionType.resetShownFilms);

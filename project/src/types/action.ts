@@ -5,12 +5,13 @@ import { State } from './state';
 
 export enum ActionType {
     ChangeGenre = 'film/changeGenre',
+    incrementShownFilms = 'film/incrementShownFilms',
+    resetShownFilms = 'film/resetShownFilms',
     SetFilms = 'film/setFilms',
     SetCardElements = 'film/setCardElement',
     ChangeIsLoadData = 'data/changeIsLoadData',
     RequireAuthorization = 'user/requireAuthorization',
     RequireLogout = 'user/requireLogout',
-
 }
 
 

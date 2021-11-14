@@ -1,34 +1,18 @@
-import { Dispatch, SetStateAction, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { FilmsDescription } from '../../types/films';
-import { getFilms } from './../../store/films-data/selector';
-import { getGenre } from './../../store/films-process/selector';
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilterFilms, getShownFilms } from './../../store/films-process/selector';
+import { incrementShownFilms } from './../../store/action';
 
-type ShowMoreBtnProps = {
-    setShownFilms: Dispatch<SetStateAction<number>>,
-    shownFilms: number,
-}
 
-export default function ShowMoreBtn({ setShownFilms, shownFilms }: ShowMoreBtnProps): JSX.Element {
-  const filmsList = useSelector(getFilms);
+export default function ShowMoreBtn(): JSX.Element {
+  const dispatch = useDispatch();
   const btnElement = useRef<HTMLButtonElement>(null);
-  const cardElements:FilmsDescription[] = [];
-  const genre = useSelector(getGenre);
+  const cardElements = useSelector(getFilterFilms);
+  const shownFilms = useSelector(getShownFilms);
 
-  for (let i = 0; i < filmsList.length; i++) {
-    if ((findFilms(filmsList[i].genre, genre)) && (cardElements.length < shownFilms)) {
-      cardElements.push(filmsList[i]);
-    }
-  }
-
-  function findFilms(film: string, filmGenre: string) {
-    if (film.includes(filmGenre) || filmGenre === 'All genres') {
-      return true;
-    }
-  }
 
   function onClick() {
-    setShownFilms(shownFilms + 8);
+    dispatch(incrementShownFilms());
   }
 
   if  (btnElement.current !== null) {

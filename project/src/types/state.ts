@@ -9,6 +9,7 @@ export type FilmsData = {
 
 export type FilmsProcess = {
     genre: string,
+    shownFilms: number
 }
 
 export type UserProcess = {
