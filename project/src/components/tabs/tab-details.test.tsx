@@ -5,7 +5,7 @@ import { makeFakeFilmsList } from './../../store/utils/mocks';
 import TabDetails from './tab-details';
 
 
-describe('Component: Tav-details', () => {
+describe('Component: Tab-details', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const fakeFilm = makeFakeFilmsList()[0];

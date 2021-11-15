@@ -1,14 +1,15 @@
 import FilmsList from '../film-components/films-list';
 import { FilmsDescription } from '../../types/films';
-import { Link } from 'react-router-dom';
 import GenreList from './genre-list';
-import { AppRoute } from '../../const';
 import User from '../header/user';
 import Logo from './../header/logo';
 import FilmPoster from './../header/film-poster';
 import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
 import FilmTitle from './../header/film-title';
+import ShowMoreBtn from './../film-components/show-more-btn';
+import { useDispatch } from 'react-redux';
+import { resetShownFilms } from '../../store/action';
 
 
 type MainProps = {
@@ -18,7 +19,8 @@ type MainProps = {
 export default function Main(props: MainProps): JSX.Element {
 
   const headerFilm = props.films.find((el) => (el.isFavorite)) || props.films[0];
-
+  const dispatch = useDispatch();
+  dispatch(resetShownFilms());
 
   return (
     <>
@@ -92,19 +94,15 @@ export default function Main(props: MainProps): JSX.Element {
           <GenreList />
 
           <div className="catalog__films-list">
-            <FilmsList />
+            <FilmsList/>
           </div>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreBtn />
         </section>
 
         <footer className="page-footer">
           <div className="logo">
-            <Link to={AppRoute.Main} className="logo__link logo__link--light">
-              <Logo />
-            </Link>
+            <Logo />
           </div>
 
           <div className="copyright">

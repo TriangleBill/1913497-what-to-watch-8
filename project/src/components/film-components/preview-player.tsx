@@ -15,9 +15,9 @@ export default function PreviewPlayer(props: PreviewPlayerProps): JSX.Element {
   useEffect(() => {
     if (null !== videoRef.current && props.activeFilm === props.filmId) {
       videoRef.current.play();
-    } else {
-      videoRef.current?.pause();
-      videoRef.current?.load();
+    } else if(null !== videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.load();
     }
 
   });
