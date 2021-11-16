@@ -1,5 +1,3 @@
-import { FilmsDescription } from './types/films';
-
 export enum AppRoute {
    Main= '/',
    SignIn = '/login',
@@ -14,5 +12,3 @@ export enum AuthorizationStatus {
    NoAuth = 'NO_AUTH',
    Unknown = 'UNKNOWN',
  }
-
-export const cardElements: FilmsDescription[] = [];
