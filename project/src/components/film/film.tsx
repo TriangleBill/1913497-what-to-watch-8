@@ -10,23 +10,40 @@ import FilmPoster from './../header/film-poster';
 import FilmTitle from './../header/film-title';
 import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
+import { api } from './../../index';
+import { useEffect, useState } from 'react';
+import _ from 'lodash';
+import LoadingScreen from './../loading-screen';
 
-type FilmProps = {
-  films: FilmsDescription[]
-}
 
-export default function Film({ films }: FilmProps): JSX.Element {
+export default function Film() {
   const params = useParams<{ id?: string }>();
-  const film = films.find((el) => String(el.id) === params.id);
-  const filmGenre = film ? film.genre : '';
+  const [film, setFilm] = useState<FilmsDescription | null>(null);
+  const [similarFilms, setSimilarFilms] = useState<FilmsDescription[]>();
+  const [isPageExists, setIsPageExists] = useState(true);
 
 
-  if (!film) {
+  useEffect(() => {
+    api.get(`/films/${params.id}`).then((resp) => {
+      const filmData = _.mapKeys(resp.data, (_value, key: string) => _.camelCase(key)) as FilmsDescription;
+      setFilm(filmData);
+    }).catch(() => setIsPageExists(false));
+
+    api.get(`/films/${params.id}/similar`).then((resp) => {
+      setSimilarFilms(resp.data);
+    }).catch(() => setIsPageExists(false));
+
+  }, [params]);
+
+  if (!film || !similarFilms) {
+    if (isPageExists) {
+      return <LoadingScreen />;
+    }
     return <Page404 />;
   }
 
-  return (
 
+  return (
     <>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -60,7 +77,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
         </svg>
       </div>
 
-      <section className="film-card film-card--full" style={{backgroundColor: `${film.backgroundColor}`}}>
+      <section className="film-card film-card--full" style={{ backgroundColor: `${film.backgroundColor}` }}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film.backgroundImage} alt={film.name} />
@@ -69,14 +86,14 @@ export default function Film({ films }: FilmProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo/>
+            <Logo />
 
             <User />
           </header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <FilmTitle filmName={film.name} filmGenre={film.genre} released={film.released}/>
+              <FilmTitle filmName={film.name} filmGenre={film.genre} released={film.released} />
 
               <div className="film-card__buttons">
                 <PlayBtn />
@@ -93,7 +110,7 @@ export default function Film({ films }: FilmProps): JSX.Element {
               <FilmPoster filmPoster={film.posterImage} filmName={film.name} />
             </div>
 
-            <Tabs film={film} />
+            <Tabs film={film}/>
           </div>
         </div>
       </section>
@@ -104,12 +121,12 @@ export default function Film({ films }: FilmProps): JSX.Element {
 
 
           <div className="catalog__films-list">
-            <RelatedFilmsList films={films} filmGenre={filmGenre} filmId={film.id} />
+            <RelatedFilmsList films={similarFilms} filmId={film.id} />
           </div>
         </section>
 
         <footer className="page-footer">
-          <Logo/>
+          <Logo />
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>

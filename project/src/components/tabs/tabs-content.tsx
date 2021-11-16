@@ -1,12 +1,13 @@
 import React from 'react';
-import { FilmsDescription } from '../../types/films';
+import { FilmReviews, FilmsDescription } from '../../types/films';
 import TabDetails from './tab-details';
 import TabOverview from './tab-overview';
 import TabReviews from './tab-reviews';
 
 type TabsContentProps = {
     film: FilmsDescription,
-    activeTab: string
+    activeTab: string,
+    filmReviews: FilmReviews[]
 }
 
 export default function TabsContent(props: TabsContentProps): JSX.Element {
@@ -19,7 +20,7 @@ export default function TabsContent(props: TabsContentProps): JSX.Element {
         return <TabDetails film={props.film} />;
 
       case 'Reviews':
-        return <TabReviews />;
+        return <TabReviews filmReviews={props.filmReviews}/>;
 
 
       default:

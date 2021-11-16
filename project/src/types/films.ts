@@ -17,3 +17,14 @@ export type FilmsDescription = {
     released: string;
     isFavorite: boolean;
 }
+
+export type FilmReviews = {
+    if: number,
+    user: {
+      id: number,
+      name: string
+    },
+    rating: number,
+    comment: string,
+    date: Date
+  }

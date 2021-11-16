@@ -1,37 +1,31 @@
+import _ from 'lodash';
 import { useState } from 'react';
 import { FilmsDescription } from '../../types/films';
 import Card from './card';
 
 type RelatedFilmsListProps = {
-    films: FilmsDescription[],
-    filmGenre: string,
-    filmId: number
+  films: FilmsDescription[],
+  filmId: number
 }
 
 export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState(0);
-  const cardElement:FilmsDescription[] = [];
-
-  for (let i = 0; i < props.films.length; i++) {
-    if (findRelatedFilms(props.films[i].genre, props.filmGenre) && props.filmId !== props.films[i].id && cardElement.length < 4) {
-      cardElement.push(props.films[i]);
+  let cardElements: FilmsDescription[] = [];
+  for (const key in props.films) {
+    if (props.films[key].id !== props.filmId) {
+      cardElements.push(props.films[key]);
     }
   }
 
+  cardElements = cardElements.map((el: FilmsDescription) => _.mapKeys(el, (_value, key: string) => _.camelCase(key))) as FilmsDescription[];
+  cardElements = Object.entries(cardElements).slice(0,4).map((entry) => entry[1]);
 
-  function findRelatedFilms(filmsList:string, filmGenre: string) {
-    for (let i = 0; i < filmGenre.length; i++) {
-      if (filmsList.includes(filmGenre[i])) {
-        return true;
-      }
-    }
-  }
 
   function renderComponent() {
-    if (cardElement[0]) {
-      return cardElement.map((el, _id) => (
-        <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />
-      ));
+    if (cardElements[0]) {
+      return cardElements.map((el, _id) => {
+        if (el.id !== props.filmId) {return <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />;}
+      });
     } else {
       return <h1>Related films not found</h1>;
     }

@@ -10,7 +10,7 @@ import { AuthorizationStatus } from './const';
 import { rootReducer } from './store/root-reducer';
 import { BrowserRouter } from 'react-router-dom';
 
-const api = createAPI(
+export const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
