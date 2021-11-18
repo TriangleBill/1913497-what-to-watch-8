@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { configureStore } from '@reduxjs/toolkit';
 import { createAPI } from './services/api';
-import { checkAuthAction, fetchFilmsAction } from './store/api-actions';
+import { checkAuthAction, fetchFilmsAction, fetchPromoFilmAction } from './store/api-actions';
 import { requireAuthorization } from './store/action';
 import { AuthorizationStatus } from './const';
 import { rootReducer } from './store/root-reducer';
@@ -26,6 +26,7 @@ const store = configureStore({
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFilmsAction());
+store.dispatch(fetchPromoFilmAction());
 
 
 ReactDOM.render(

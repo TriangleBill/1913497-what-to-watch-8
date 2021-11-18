@@ -1,7 +1,7 @@
 import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
 import Page404 from './../404/page-404';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import PlayBtn from './play-btn';
 import PauseBtn from './pause-btn';
 import TimeBar from './time-bar';
@@ -14,27 +14,27 @@ type PlayerProps = {
 }
 
 export default function Player({ films }: PlayerProps): JSX.Element {
-  const params = useParams<{ id?: string }>()
-  const film = films.find(el => el.id === Number(params.id))
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlayed, setIsPlayed] = useState(false)
+  const params = useParams<{ id?: string }>();
+  const film = films.find((el) => el.id === Number(params.id));
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlayed, setIsPlayed] = useState(false);
 
   if (!film) {
 
-    return <Page404 />
+    return <Page404 />;
   }
 
   function onClickBtnPlay() {
     if (videoRef.current) {
-      videoRef.current.play()
-      setIsPlayed(true)
+      videoRef.current.play();
+      setIsPlayed(true);
     }
   }
 
   function onClickBtnPause() {
     if (videoRef.current) {
-      videoRef.current.pause()
-      setIsPlayed(false)
+      videoRef.current.pause();
+      setIsPlayed(false);
     }
   }
 
@@ -87,8 +87,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
               {isPlayed ?
                 <PauseBtn onClick={onClickBtnPause} />
                 :
-                <PlayBtn onClick={onClickBtnPlay} />
-              }
+                <PlayBtn onClick={onClickBtnPlay} />}
             </button>
 
             <div className="player__name">Transpotting</div>

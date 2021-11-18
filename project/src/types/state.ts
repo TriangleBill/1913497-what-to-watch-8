@@ -4,6 +4,8 @@ import { FilmsDescription } from './films';
 
 export type FilmsData = {
     filmsList: FilmsDescription[],
+    favoriteFilms: FilmsDescription[],
+    promoFilm: FilmsDescription,
     isLoadData: boolean,
 }
 

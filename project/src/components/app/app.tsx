@@ -24,7 +24,7 @@ function App(): JSX.Element {
   return (
     <Switch>
       <Route path={AppRoute.Main} exact>
-        <Main films={filmsList}/>
+        <Main />
       </Route>
 
       <Route path={AppRoute.SignIn} exact>

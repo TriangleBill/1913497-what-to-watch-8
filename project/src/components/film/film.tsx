@@ -97,7 +97,7 @@ export default function Film(): JSX.Element {
 
               <div className="film-card__buttons">
                 <PlayBtn filmId={film.id}/>
-                <MylistBtn />
+                <MylistBtn film={film}/>
                 <AddReviewBtn id={film.id} />
               </div>
             </div>

@@ -6,10 +6,10 @@ type PlayBtnProps = {
 }
 
 function PlayBtn({filmId}: PlayBtnProps): JSX.Element {
-  const histtory = useHistory()
+  const histtory = useHistory();
 
   function onClick() {
-    histtory.push(`/player/${filmId}`)
+    histtory.push(`/player/${filmId}`);
   }
 
   return (
