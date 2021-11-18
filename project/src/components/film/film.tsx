@@ -16,7 +16,7 @@ import _ from 'lodash';
 import LoadingScreen from './../loading-screen';
 
 
-export default function Film() {
+export default function Film(): JSX.Element {
   const params = useParams<{ id?: string }>();
   const [film, setFilm] = useState<FilmsDescription | null>(null);
   const [similarFilms, setSimilarFilms] = useState<FilmsDescription[]>();

@@ -23,13 +23,12 @@ export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Elem
 
   function renderComponent() {
     if (cardElements[0]) {
-      return cardElements.map((el, _id) => {
-        if (el.id !== props.filmId) {return <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />;}
-      });
+      return cardElements.filter((el) => el.id !== props.filmId).map((el) => <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />);
     } else {
       return <h1>Related films not found</h1>;
     }
-
+    // cardElements.map((el, _id) => {
+    //   if (el.id !== props.filmId) {return <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />;}
   }
 
 

@@ -11,15 +11,15 @@ export function GenreList(): JSX.Element {
   const dispatch = useDispatch();
   const genres: string[] = [];
 
-  filmsList.map((el, _id): void => {
+  filmsList.forEach((el, _id) => {
     if (!genres.includes(el.genre)) {
       genres.push(el.genre);
     }
   });
 
-  function onClick(e: any)  {
-    if (e.target !== null) {
-      const data = e.target.innerText;
+  function onClick(e: React.FormEvent<HTMLDivElement>)  {
+    if (e.currentTarget !== null) {
+      const data = e.currentTarget.innerText;
       dispatch(changeGenre(data));
       dispatch(resetShownFilms());
     }
