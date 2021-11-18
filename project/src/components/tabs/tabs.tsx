@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { FilmReviews, FilmsDescription } from '../../types/films';
 import TabsContent from './tabs-content';
 import { api } from './../../index';
-import { useParams } from 'react-router';
 import LoadingScreen from './../loading-screen';
 
 type TabsProps = {
@@ -10,7 +9,6 @@ type TabsProps = {
 }
 
 export default function Tabs(props: TabsProps): JSX.Element {
-  const params = useParams();
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'];
   const tabRef = useRef<HTMLDivElement>(null);
@@ -21,11 +19,11 @@ export default function Tabs(props: TabsProps): JSX.Element {
       setFilmReviews(resp.data);
       setFilmReviews((prevState) => prevState?.slice(0, 4));
     });
-  }, [params]);
+  }, [props.film.id]);
 
 
-  function onClick(e: any) {
-    if (e.target !== null) { setActiveTab(e.target.innerText); }
+  function onClick(e: React.FormEvent<HTMLDivElement>) {
+    if (e.currentTarget !== null) { setActiveTab(e.currentTarget.innerText); }
   }
 
   if (!filmReviews) {

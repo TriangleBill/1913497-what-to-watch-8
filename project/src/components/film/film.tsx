@@ -16,7 +16,7 @@ import _ from 'lodash';
 import LoadingScreen from './../loading-screen';
 
 
-export default function Film() {
+export default function Film(): JSX.Element {
   const params = useParams<{ id?: string }>();
   const [film, setFilm] = useState<FilmsDescription | null>(null);
   const [similarFilms, setSimilarFilms] = useState<FilmsDescription[]>();
@@ -96,8 +96,8 @@ export default function Film() {
               <FilmTitle filmName={film.name} filmGenre={film.genre} released={film.released} />
 
               <div className="film-card__buttons">
-                <PlayBtn />
-                <MylistBtn />
+                <PlayBtn filmId={film.id}/>
+                <MylistBtn film={film}/>
                 <AddReviewBtn id={film.id} />
               </div>
             </div>

@@ -8,6 +8,8 @@ export enum ActionType {
     incrementShownFilms = 'film/incrementShownFilms',
     resetShownFilms = 'film/resetShownFilms',
     SetFilms = 'film/setFilms',
+    SetFavoriteFilms= 'film/setFavoriteFilms',
+    SetPromoFilm='film/setPromoFilm',
     SetCardElements = 'film/setCardElement',
     ChangeIsLoadData = 'data/changeIsLoadData',
     RequireAuthorization = 'user/requireAuthorization',

@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Card from './card';
-import { getFilterFilms } from './../../store/films-process/selector';
+import { FilmsDescription } from '../../types/films';
+import { State } from '../../types/state';
 
 
-export function FilmsList(): JSX.Element {
+type FilmsListProps = {
+  selector:(state: State) => FilmsDescription[]
+}
+
+export function FilmsList({selector}: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState(0);
-  const cardElements = useSelector(getFilterFilms);
+  const cardElements = useSelector(selector);
+
 
   function renderCards() {
     return (

@@ -30,9 +30,10 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
   }
 
 
-  function handleChangeStar(e: any) {
-    setStarRating(Number(e.target.value));
-
+  function handleChangeStar(e: React.FormEvent<HTMLInputElement>) {
+    if (e.currentTarget !== null) {
+      setStarRating(Number(e.currentTarget.value));
+    }
   }
 
   function handleChangeText() {
@@ -44,8 +45,21 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
   function handleSubmit() {
     if (textReviewValue.current !== null && textReviewValue.current.value.length > 49 && textReviewValue.current.value.length < 401) {
       api.post(`/comments/${Number(reviewFilm.id)}`, postReviewData).then(() => history.push(`/films/${reviewFilm.id}`));
-    } else {toast.info('Review text must be at least 50 and no more than 400 characters.');}
+    } else { toast.info('Review text must be at least 50 and no more than 400 characters.'); }
 
+  }
+
+  function renderStars() {
+    const starsElements: JSX.Element[] = [];
+    for (let i = 10; i > 0; i--) {
+      starsElements.push(
+        <>
+          <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleChangeStar} />
+          <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
+        </>,
+      );
+    }
+    return starsElements;
   }
 
   return (
@@ -53,36 +67,7 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
       <ToastContainer />
       <div className="rating">
         <div className="rating__stars">
-
-          <input className="rating__input" id={'star-10'} type="radio" name="rating" value='10' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-10'}>Rating 10</label>
-
-          <input className="rating__input" id={'star-9'} type="radio" name="rating" value='9' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-9'}>Rating 9</label>
-
-          <input className="rating__input" id={'star-8'} type="radio" name="rating" value='8' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-8'}>Rating 8</label>
-
-          <input className="rating__input" id={'star-7'} type="radio" name="rating" value='7' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-7'}>Rating 7</label>
-
-          <input className="rating__input" id={'star-6'} type="radio" name="rating" value='6' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-6'}>Rating 6</label>
-
-          <input className="rating__input" id={'star-5'} type="radio" name="rating" value='5' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-5'}>Rating 5</label>
-
-          <input className="rating__input" id={'star-4'} type="radio" name="rating" value='4' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-4'}>Rating 4</label>
-
-          <input className="rating__input" id={'star-3'} type="radio" name="rating" value='3' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-3'}>Rating 3</label>
-
-          <input className="rating__input" id={'star-2'} type="radio" name="rating" value='2' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-2'}>Rating 1</label>
-
-          <input className="rating__input" id={'star-1'} type="radio" name="rating" value='1' onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={'star-1'}>Rating 1</label>
+          {renderStars().map((el) =>el)}
         </div>
       </div>
 

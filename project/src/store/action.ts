@@ -12,6 +12,22 @@ export const setFilms = createAction(
     },
   }),
 );
+export const setFavoriteFilms = createAction(
+  ActionType.SetFavoriteFilms,
+  (films: FilmsDescription[]) => ({
+    payload: {
+      films,
+    },
+  }),
+);
+export const setPromoFilm = createAction(
+  ActionType.SetPromoFilm,
+  (film: FilmsDescription) => ({
+    payload: {
+      film,
+    },
+  }),
+);
 export const changeGenre = createAction(
   ActionType.ChangeGenre,
   (genre: string) => ({

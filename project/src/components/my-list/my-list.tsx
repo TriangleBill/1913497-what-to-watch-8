@@ -2,12 +2,18 @@ import { FilmsDescription } from '../../types/films';
 import FilmsList from '../film-components/films-list';
 import User from '../header/user';
 import Logo from './../header/logo';
+import { useDispatch } from 'react-redux';
+import { getFavoriteFilms } from '../../store/films-data/selector';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 type MyListProps = {
   films: FilmsDescription[]
 }
 
 export default function MyList({ films }: MyListProps): JSX.Element {
+  const dispatch = useDispatch();
+  dispatch(fetchFavoriteFilmsAction());
+
   return (
     <>
       <div className="visually-hidden">
@@ -45,19 +51,19 @@ export default function MyList({ films }: MyListProps): JSX.Element {
 
           <h1 className="page-title user-page__title">My list</h1>
 
-          <User/>
+          <User />
         </header>
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <div className="catalog__films-list">
-            <FilmsList/>
+            <FilmsList selector={getFavoriteFilms}/>
           </div>
         </section>
 
         <footer className="page-footer">
-          <Logo/>
+          <Logo />
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>

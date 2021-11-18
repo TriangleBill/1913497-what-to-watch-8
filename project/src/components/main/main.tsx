@@ -1,5 +1,4 @@
 import FilmsList from '../film-components/films-list';
-import { FilmsDescription } from '../../types/films';
 import GenreList from './genre-list';
 import User from '../header/user';
 import Logo from './../header/logo';
@@ -8,17 +7,14 @@ import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
 import FilmTitle from './../header/film-title';
 import ShowMoreBtn from './../film-components/show-more-btn';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetShownFilms } from '../../store/action';
+import { getPromoFilm } from './../../store/films-data/selector';
+import { getFilterFilms } from '../../store/films-process/selector';
 
 
-type MainProps = {
-  films: FilmsDescription[],
-}
-
-export default function Main(props: MainProps): JSX.Element {
-
-  const headerFilm = props.films.find((el) => (el.isFavorite)) || props.films[0];
+export default function Main(): JSX.Element {
+  const headerFilm = useSelector(getPromoFilm);
   const dispatch = useDispatch();
   dispatch(resetShownFilms());
 
@@ -80,8 +76,8 @@ export default function Main(props: MainProps): JSX.Element {
               <FilmTitle filmName={headerFilm.name} filmGenre={headerFilm.genre} released={headerFilm.released} />
 
               <div className="film-card__buttons">
-                <PlayBtn />
-                <MylistBtn />
+                <PlayBtn filmId={headerFilm.id}/>
+                <MylistBtn film={headerFilm}/>
               </div>
             </div>
           </div>
@@ -94,7 +90,7 @@ export default function Main(props: MainProps): JSX.Element {
           <GenreList />
 
           <div className="catalog__films-list">
-            <FilmsList/>
+            <FilmsList selector={getFilterFilms}/>
           </div>
 
           <ShowMoreBtn />
