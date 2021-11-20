@@ -1,5 +1,6 @@
 import { FilmsDescription } from '../../types/films';
 import faker from 'faker';
+import { AuthData } from '../../types/auth-data';
 
 export const makeFakeFilmsList = ():FilmsDescription[] => ([{
   id: faker.datatype.number(),
@@ -41,3 +42,8 @@ export const makeFakeFilmsList = ():FilmsDescription[] => ([{
   isFavorite: faker.datatype.boolean(),
 
 }]);
+
+export const makeFakeAuthData = (): AuthData => ({
+  login: faker.internet.email() ,
+  password: faker.internet.password(),
+});

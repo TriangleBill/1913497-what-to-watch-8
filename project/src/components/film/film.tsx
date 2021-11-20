@@ -10,10 +10,10 @@ import FilmPoster from './../header/film-poster';
 import FilmTitle from './../header/film-title';
 import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
-import { api } from './../../index';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import LoadingScreen from './../loading-screen';
+import { api } from './../../store/store';
 
 
 export default function Film(): JSX.Element {

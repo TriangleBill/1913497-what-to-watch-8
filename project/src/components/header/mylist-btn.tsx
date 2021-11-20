@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { getFavoriteFilms } from '../../store/films-data/selector';
 import { FilmsDescription } from '../../types/films';
-import { api } from './../../index';
 import { getAuthorizationStatus } from './../../store/user-process/selector';
 import { useHistory } from 'react-router';
+import { api } from './../../store/store';
 
 type MylistBtnProps = {
   film: FilmsDescription

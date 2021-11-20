@@ -4,10 +4,12 @@ import { setFavoriteFilms, setFilms } from '../action';
 import { setPromoFilm } from './../action';
 import { makeFakeFilmsList } from './../utils/mocks';
 
+export const mosckPromoFilm = makeFakeFilmsList()[0];
+
 const initialState: FilmsData = {
   filmsList: [],
   favoriteFilms: [],
-  promoFilm: makeFakeFilmsList()[0],
+  promoFilm: mosckPromoFilm,
   isLoadData: true,
 };
 

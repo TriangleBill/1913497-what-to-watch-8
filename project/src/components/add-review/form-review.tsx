@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { FilmsDescription } from '../../types/films';
 import { useHistory } from 'react-router';
-import { api } from './../../index';
 import { toast, ToastContainer } from 'react-toastify';
+import { api } from './../../store/store';
 
 type FormReviewProps = {
   reviewFilm: FilmsDescription
