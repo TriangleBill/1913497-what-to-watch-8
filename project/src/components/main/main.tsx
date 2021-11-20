@@ -14,7 +14,7 @@ import { getFilterFilms } from '../../store/films-process/selector';
 
 
 export default function Main(): JSX.Element {
-  const headerFilm = useSelector(getPromoFilm);
+  const promoFilm = useSelector(getPromoFilm);
   const dispatch = useDispatch();
   dispatch(resetShownFilms());
 
@@ -54,7 +54,7 @@ export default function Main(): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={headerFilm.backgroundImage} alt={headerFilm.name} />
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -69,15 +69,15 @@ export default function Main(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <FilmPoster filmName={headerFilm.name} filmPoster={headerFilm.posterImage} />
+              <FilmPoster filmName={promoFilm.name} filmPoster={promoFilm.posterImage} />
             </div>
 
             <div className="film-card__desc">
-              <FilmTitle filmName={headerFilm.name} filmGenre={headerFilm.genre} released={headerFilm.released} />
+              <FilmTitle filmName={promoFilm.name} filmGenre={promoFilm.genre} released={promoFilm.released} />
 
               <div className="film-card__buttons">
-                <PlayBtn filmId={headerFilm.id}/>
-                <MylistBtn film={headerFilm}/>
+                <PlayBtn filmId={promoFilm.id}/>
+                <MylistBtn film={promoFilm}/>
               </div>
             </div>
           </div>

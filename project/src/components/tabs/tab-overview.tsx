@@ -8,12 +8,12 @@ type TabOverviewProps = {
 function TabOverview(props: TabOverviewProps): JSX.Element {
   const ratingLevel = defineRatingLevel(props.film.rating);
 
-  function defineRatingLevel (rating: number) {
-    if (0 < rating && rating < 3) {return 'Bad';}
-    if (3 < rating && rating < 5) {return 'Normal';}
-    if (5 < rating && rating < 8) {return 'Good';}
-    if (8 < rating && rating < 10) {return 'Very Good';}
-    if (rating === 10) {return 'Awesome';}
+  function defineRatingLevel(rating: number) {
+    if (0 < rating && rating < 3) { return 'Bad'; }
+    if (3 < rating && rating < 5) { return 'Normal'; }
+    if (5 < rating && rating < 8) { return 'Good'; }
+    if (8 < rating && rating < 10) { return 'Very Good'; }
+    if (rating === 10) { return 'Awesome'; }
     return 'Too good for grading';
   }
 
@@ -29,7 +29,18 @@ function TabOverview(props: TabOverviewProps): JSX.Element {
       </div>
 
       <div className="film-card__text">
-        {props.film.description}
+        <p>{props.film.description}</p>
+
+        <p className="film-card__director"><strong>Director: {props.film.director}</strong></p>
+
+        <p
+          className="film-card__starring"
+        >
+          <strong>
+            Starring:
+            {props.film.starring.join(', ')}
+          </strong>
+        </p>
       </div>
     </>
   );

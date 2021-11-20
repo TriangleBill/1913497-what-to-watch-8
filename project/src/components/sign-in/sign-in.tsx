@@ -1,16 +1,23 @@
 import Logo from './../header/logo';
 import { loginAction } from './../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormEvent, useRef } from 'react';
-import { useHistory } from 'react-router';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getAuthorizationStatus } from './../../store/user-process/selector';
+import { useHistory } from 'react-router';
 
 
 function SignIn(): JSX.Element {
   const dispatch = useDispatch();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const history = useHistory();
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    history.push(AppRoute.Main);
+  }
 
   const onSubmit = (authData: AuthData) => {dispatch(loginAction(authData));};
   const spacesPresence = /\s/;
@@ -19,8 +26,6 @@ function SignIn(): JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const history = useHistory();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
