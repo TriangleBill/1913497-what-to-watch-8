@@ -68,8 +68,8 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
     for (let i = 10; i > 0; i--) {
       starsElements.push(
         <>
-          <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleChangeStar} />
-          <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
+          <input key={i} className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleChangeStar} />
+          <label key={i + 100} className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
         </>,
       );
     }
@@ -97,6 +97,7 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
             onChange={handleChangeText}
             maxLength={400}
             minLength={50}
+            data-testid="review-text"
           />
           <div className="add-review__submit">
             <button ref={btnRef} className="add-review__btn" type="submit" disabled>Post</button>

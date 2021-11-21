@@ -15,12 +15,19 @@ describe('Component: Tab-details', () => {
         <TabDetails film={fakeFilm}/>
       </Router>,
     );
+    setTimeout(() => {
+      expect(screen.getByText('Director')).toBeInTheDocument();
+      expect(screen.getByText(fakeFilm.director)).toBeInTheDocument();
+      expect(screen.getByText('Starring')).toBeInTheDocument();
+      fakeFilm.starring.forEach((el) => {
+        expect(screen.getByText(el)).toBeInTheDocument();
+      });
+      expect(screen.getByText('Run Time')).toBeInTheDocument();
+      expect(screen.getByText('Genre')).toBeInTheDocument();
+      expect(screen.getByText(fakeFilm.genre)).toBeInTheDocument();
+      expect(screen.getByText('Released')).toBeInTheDocument();
+      expect(screen.getByText(fakeFilm.released)).toBeInTheDocument();
+    }, 5000);
 
-
-    expect(screen.getByText('Director')).toBeInTheDocument();
-    expect(screen.getByText('Starring')).toBeInTheDocument();
-    expect(screen.getByText('Run Time')).toBeInTheDocument();
-    expect(screen.getByText('Genre')).toBeInTheDocument();
-    expect(screen.getByText('Released')).toBeInTheDocument();
   });
 });

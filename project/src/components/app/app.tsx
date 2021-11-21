@@ -34,7 +34,7 @@ function App(): JSX.Element {
       <PrivateRoute
         path={AppRoute.MyList}
         exact
-        render={() => <MyList films={filmsList} />}
+        render={() => <MyList/>}
       >
       </PrivateRoute>
 

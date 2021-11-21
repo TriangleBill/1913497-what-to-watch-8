@@ -23,6 +23,7 @@ function User(): JSX.Element {
           <div
             onClick={() => history.push('/mylist')}
             className="user-block__avatar"
+            data-testid="user-avatar"
           >
             <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
           </div>

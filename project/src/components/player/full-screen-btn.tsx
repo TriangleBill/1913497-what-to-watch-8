@@ -7,7 +7,6 @@ export default function FullScreenBtn({videoRef}: FullScreenBtnProps): JSX.Eleme
   function openFullScreen() {
     if (videoRef && videoRef.requestFullscreen) {
       videoRef.requestFullscreen();
-      videoRef.controls = false;
     }
   }
 

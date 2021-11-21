@@ -19,7 +19,7 @@ export type FilmsDescription = {
 }
 
 export type FilmReviews = {
-    if: number,
+    id: number,
     user: {
       id: number,
       name: string

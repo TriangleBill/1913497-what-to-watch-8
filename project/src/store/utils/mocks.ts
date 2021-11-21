@@ -1,4 +1,4 @@
-import { FilmsDescription } from '../../types/films';
+import { FilmReviews, FilmsDescription } from '../../types/films';
 import faker from 'faker';
 import { AuthData } from '../../types/auth-data';
 
@@ -47,3 +47,23 @@ export const makeFakeAuthData = (): AuthData => ({
   login: faker.internet.email() ,
   password: faker.internet.password(),
 });
+
+export const makeFakeReviewsFilm = (): FilmReviews[] => ([{
+  id: faker.datatype.number(),
+  user: {
+    id: faker.datatype.number(),
+    name: faker.name.title(),
+  },
+  rating: faker.datatype.number(),
+  comment: faker.lorem.text(),
+  date: faker.date.recent(),
+},{
+  id: faker.datatype.number(),
+  user: {
+    id: faker.datatype.number(),
+    name: faker.name.title(),
+  },
+  rating: faker.datatype.number(),
+  comment: faker.lorem.text(),
+  date: faker.date.recent(),
+}]);

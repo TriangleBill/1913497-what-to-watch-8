@@ -9,9 +9,10 @@ describe('Component: FilmsPoster', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const fakeName = faker.name.title();
+    const fakePoster = faker.system.filePath();
     render(
       <Router history={history}>
-        <FilmPoster filmPoster={faker.system.filePath()} filmName={fakeName}/>
+        <FilmPoster filmPoster={fakePoster} filmName={fakeName}/>
       </Router>,
     );
 

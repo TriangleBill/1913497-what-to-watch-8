@@ -1,4 +1,3 @@
-import { FilmsDescription } from '../../types/films';
 import FilmsList from '../film-components/films-list';
 import User from '../header/user';
 import Logo from './../header/logo';
@@ -6,11 +5,8 @@ import { useDispatch } from 'react-redux';
 import { getFavoriteFilms } from '../../store/films-data/selector';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
-type MyListProps = {
-  films: FilmsDescription[]
-}
 
-export default function MyList({ films }: MyListProps): JSX.Element {
+export default function MyList(): JSX.Element {
   const dispatch = useDispatch();
   dispatch(fetchFavoriteFilmsAction());
 

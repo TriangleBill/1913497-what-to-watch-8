@@ -27,8 +27,6 @@ export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Elem
     } else {
       return <h1>Related films not found</h1>;
     }
-    // cardElements.map((el, _id) => {
-    //   if (el.id !== props.filmId) {return <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />;}
   }
 
 
