@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { getFavoriteFilms } from '../../store/films-data/selector';
 import { FilmsDescription } from '../../types/films';
-import { api } from './../../index';
 import { getAuthorizationStatus } from './../../store/user-process/selector';
 import { useHistory } from 'react-router';
+import { api } from './../../store/store';
 
 type MylistBtnProps = {
   film: FilmsDescription
@@ -37,7 +37,7 @@ function MylistBtn({ film }: MylistBtnProps) {
     if (isFavorite) {
       return (
         <button onClick={removeInFavorite} className="btn btn--list film-card__button" type="button">
-          <svg viewBox="0 0 19 20" width="19" height="20">
+          <svg data-testid='film is favotite'  viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#in-list"></use>
           </svg>
 
@@ -47,7 +47,7 @@ function MylistBtn({ film }: MylistBtnProps) {
     } else {
       return (
         <button onClick={addInFavorite} className="btn btn--list film-card__button" type="button">
-          <svg viewBox="0 0 19 20" width="19" height="20">
+          <svg data-testid='film is not favotite' viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#add"></use>
           </svg>
 

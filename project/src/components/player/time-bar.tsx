@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 type TimeBarProps = {
-    videoRef: HTMLVideoElement | null,
-    filmIsPlayed: boolean
+  videoRef: HTMLVideoElement | null,
+  filmIsPlayed: boolean
 }
 
 export default function TimeBar({ videoRef, filmIsPlayed }: TimeBarProps): JSX.Element {
@@ -12,7 +12,7 @@ export default function TimeBar({ videoRef, filmIsPlayed }: TimeBarProps): JSX.E
   useEffect(() => {
     if (videoRef) {
       const interval = setInterval(() => setTimePercent((videoRef.currentTime * 100) / (videoRef.duration)), 1000);
-      if (!filmIsPlayed) {clearInterval(interval);}
+      if (!filmIsPlayed) { clearInterval(interval); }
       return () => {
         clearInterval(interval);
       };
@@ -22,10 +22,10 @@ export default function TimeBar({ videoRef, filmIsPlayed }: TimeBarProps): JSX.E
   return (
     <>
       <progress className="player__progress" value={timePercent} max="100"></progress>
-      <div className="player__toggler"
+      <div data-testid="toggler" className="player__toggler"
         style={{ left: `${timePercent}%` }}
       >
-                Toggler
+        Toggler
       </div>
     </>
   );

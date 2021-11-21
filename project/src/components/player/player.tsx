@@ -83,12 +83,10 @@ export default function Player({ films }: PlayerProps): JSX.Element {
           </div>
 
           <div className="player__controls-row">
-            <button type="button" className="player__play">
-              {isPlayed ?
-                <PauseBtn onClick={onClickBtnPause} />
-                :
-                <PlayBtn onClick={onClickBtnPlay} />}
-            </button>
+            {isPlayed ?
+              <PauseBtn onClick={onClickBtnPause} />
+              :
+              <PlayBtn onClick={onClickBtnPlay} />}
 
             <div className="player__name">Transpotting</div>
             <FullScreenBtn videoRef={videoRef.current} />
