@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 
 type TimeBarProps = {
   videoRef: HTMLVideoElement | null,
-  filmIsPlayed: boolean
+  filmIsPlayed: boolean,
+  isLoaded: boolean
 }
 
-export default function TimeBar({ videoRef, filmIsPlayed }: TimeBarProps): JSX.Element {
+export default function TimeBar({ videoRef, filmIsPlayed, isLoaded }: TimeBarProps): JSX.Element {
   const [timePercent, setTimePercent] = useState(0);
 
 
   useEffect(() => {
-    if (videoRef) {
+    if (videoRef && isLoaded) {
       const interval = setInterval(() => setTimePercent((videoRef.currentTime * 100) / (videoRef.duration)), 1000);
       if (!filmIsPlayed) { clearInterval(interval); }
       return () => {
         clearInterval(interval);
       };
     }
-  }, [filmIsPlayed, videoRef]);
+  }, [filmIsPlayed, videoRef, isLoaded]);
 
   return (
     <>
@@ -27,6 +28,7 @@ export default function TimeBar({ videoRef, filmIsPlayed }: TimeBarProps): JSX.E
       >
         Toggler
       </div>
+
     </>
   );
 }

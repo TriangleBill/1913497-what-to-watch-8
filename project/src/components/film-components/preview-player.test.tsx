@@ -14,6 +14,7 @@ window.HTMLMediaElement.prototype.load = load;
 window.HTMLMediaElement.prototype.pause = pause;
 
 describe('Component: PreviewPlayer', () => {
+
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const fakeFilmData = makeFakeFilmsList()[0];

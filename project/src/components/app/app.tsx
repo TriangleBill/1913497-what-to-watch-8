@@ -9,7 +9,7 @@ import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';
 import { AppRoute } from '../../const';
 import { useSelector } from 'react-redux';
-import LoadingScreen from '../loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { getLoadedDataStatus } from '../../store/films-data/selector';
 import { getFilms } from './../../store/films-data/selector';
 

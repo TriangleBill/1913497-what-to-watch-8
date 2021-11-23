@@ -3,20 +3,21 @@ import { useEffect, useState } from 'react';
 type TimeValueProps = {
   filmIsPlayed: boolean,
   videoRef: HTMLVideoElement | null,
+  isLoaded: boolean
 }
-export default function TimeValue({ filmIsPlayed, videoRef }: TimeValueProps): JSX.Element {
+export default function TimeValue({ filmIsPlayed, videoRef, isLoaded }: TimeValueProps): JSX.Element {
   const [timeLeftSec, setTimeLeftSec] = useState(100);
 
 
   useEffect(() => {
-    if (videoRef) {
+    if (videoRef && isLoaded) {
       const interval = setInterval(() => setTimeLeftSec(Math.floor(videoRef.duration - videoRef.currentTime) as number), 1000);
       if (!filmIsPlayed) { clearInterval(interval); }
       return () => {
         clearInterval(interval);
       };
     }
-  }, [filmIsPlayed, videoRef]);
+  }, [filmIsPlayed, videoRef, isLoaded]);
 
   if (videoRef === null) {
     return <div className="player__time-value">00:00:00</div>;

@@ -12,7 +12,7 @@ import PlayBtn from '../header/play-btn';
 import MylistBtn from './../header/mylist-btn';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import LoadingScreen from './../loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { api } from './../../store/store';
 
 
@@ -96,8 +96,8 @@ export default function Film(): JSX.Element {
               <FilmTitle filmName={film.name} filmGenre={film.genre} released={film.released} />
 
               <div className="film-card__buttons">
-                <PlayBtn filmId={film.id}/>
-                <MylistBtn film={film}/>
+                <PlayBtn filmId={film.id} />
+                <MylistBtn film={film} />
                 <AddReviewBtn id={film.id} />
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function Film(): JSX.Element {
               <FilmPoster filmPoster={film.posterImage} filmName={film.name} />
             </div>
 
-            <Tabs film={film}/>
+            <Tabs film={film} />
           </div>
         </div>
       </section>

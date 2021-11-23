@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FilmReviews, FilmsDescription } from '../../types/films';
 import TabsContent from './tabs-content';
-import LoadingScreen from './../loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { api } from './../../store/store';
 
 type TabsProps = {

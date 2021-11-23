@@ -1,13 +1,14 @@
 import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
 import Page404 from './../404/page-404';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import PlayBtn from './play-btn';
 import PauseBtn from './pause-btn';
 import TimeBar from './time-bar';
 import TimeValue from './time-value';
 import FullScreenBtn from './full-screen-btn';
 import ExitBtn from './exit-btn';
+import Loading from '../loading-screen/loading';
 
 type PlayerProps = {
   films: FilmsDescription[]
@@ -15,9 +16,34 @@ type PlayerProps = {
 
 export default function Player({ films }: PlayerProps): JSX.Element {
   const params = useParams<{ id?: string }>();
-  const film = films.find((el) => el.id === Number(params.id));
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlayed, setIsPlayed] = useState(false);
+  const [isShownSpinner, setIsShownSpinner] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [film, setFilm] = useState<FilmsDescription | undefined>(undefined);
+
+  useEffect(() => {
+    const data = films.find((el) => el.id === Number(params.id));
+    setFilm(data);
+  }, [films, params.id]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      setIsLoaded(true);
+      videoRef.current.onplaying = () => {
+        setIsShownSpinner(false);
+      };
+      videoRef.current.onwaiting = () => {
+        setIsShownSpinner(true);
+      };
+    }
+  }, [film]);
+
+  useEffect(() => {
+    if (isLoaded) {
+      onClickBtnPlay();
+    }
+  }, [isLoaded]);
 
   if (!film) {
 
@@ -38,7 +64,9 @@ export default function Player({ films }: PlayerProps): JSX.Element {
     }
   }
 
+
   return (
+
     <>
       <div className="visually-hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -71,14 +99,15 @@ export default function Player({ films }: PlayerProps): JSX.Element {
 
       <div className="player">
         <video ref={videoRef} src={film.videoLink} className="player__video" poster={film.previewImage}></video>
+        {isShownSpinner ? <Loading /> : ''}
         <ExitBtn filmId={film.id} />
         <div className="player__controls">
           <div className="player__controls-row">
             <div className="player__time">
-              <TimeBar videoRef={videoRef.current} filmIsPlayed={isPlayed} />
+              <TimeBar isLoaded={isLoaded} videoRef={videoRef.current} filmIsPlayed={isPlayed} />
 
             </div>
-            <TimeValue videoRef={videoRef.current} filmIsPlayed={isPlayed} />
+            <TimeValue videoRef={videoRef.current} filmIsPlayed={isPlayed} isLoaded={isLoaded} />
 
           </div>
 
@@ -88,7 +117,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
               :
               <PlayBtn onClick={onClickBtnPlay} />}
 
-            <div className="player__name">Transpotting</div>
+            <div className="player__name">{film.name}</div>
             <FullScreenBtn videoRef={videoRef.current} />
 
           </div>
