@@ -33,7 +33,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
 
               <footer className="review__details">
                 <cite className="review__author">{el.user.name}</cite>
-                <time className="review__date" dateTime="2016-12-24">{getCorrectDate(el.date)}</time>
+                <time className="review__date" dateTime="2016-12-24">{getCorrectDate(new Date(el.date))}</time>
               </footer>
             </blockquote>
 
@@ -50,7 +50,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
 
               <footer className="review__details">
                 <cite className="review__author">{el.user.name}</cite>
-                <time className="review__date" dateTime="2016-12-24">{getCorrectDate(el.date)}</time>
+                <time className="review__date" dateTime="2016-12-24">{getCorrectDate(new Date (el.date))}</time>
               </footer>
             </blockquote>
 

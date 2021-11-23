@@ -69,7 +69,6 @@ export const setSimilarFilms = createAction(
   }),
 );
 export const requireLogout = createAction(ActionType.RequireLogout);
-export const requireServerError = createAction(ActionType.RequireServerError);
 export const incrementShownFilms = createAction(ActionType.incrementShownFilms);
 export const resetShownFilms = createAction(ActionType.resetShownFilms);
 

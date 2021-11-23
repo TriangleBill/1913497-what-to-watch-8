@@ -1,7 +1,7 @@
 
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
-import { makeFakeFilmsList } from '../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../../store/utils/mocks';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -9,7 +9,7 @@ import ShowMoreBtn from './show-more-btn';
 import { render, screen } from '@testing-library/react';
 import * as Redux from 'react-redux';
 import userEvent from '@testing-library/user-event';
-import { ActionType } from '../../types/action';
+import { ActionType } from '../../../types/action';
 
 const mockStore = configureMockStore([thunk]);
 const fakeFilms = makeFakeFilmsList();

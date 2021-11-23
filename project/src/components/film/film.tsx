@@ -1,44 +1,44 @@
 import { useParams } from 'react-router';
 import Page404 from '../404/page-404';
-import AddReviewBtn from '../header/add-review-btn';
+import AddReviewBtn from '../add-review/add-review-btn';
 import Tabs from './../tabs/tabs';
-import RelatedFilmsList from './../film-components/related-films-list';
-import User from '../header/user';
-import Logo from './../header/logo';
-import FilmPoster from './../header/film-poster';
-import FilmTitle from './../header/film-title';
-import PlayBtn from '../header/play-btn';
-import MylistBtn from './../header/mylist-btn';
+import RelatedFilmsList from './related-films-list';
+import User from '../user/user';
+import Logo from '../logo/logo';
+import FilmPoster from './film-poster';
+import FilmTitle from './film-title';
+import PlayBtn from '../player/player-btn';
+import MylistBtn from '../my-list/mylist-btn';
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilm } from '../../store/films-data/selector';
 import { fetchFilmAction } from '../../store/api-actions';
 
 export default function Film(): JSX.Element {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const params = useParams<{ id?: string }>();
-  const film = useSelector(getFilm)
+  const film = useSelector(getFilm);
   const [isPageExists, setIsPageExists] = useState(true);
 
 
   useEffect(() => {
-    dispatch(fetchFilmAction(Number(params.id)))
-  }, [params.id]);
+    dispatch(fetchFilmAction(Number(params.id)));
+  }, [params.id, dispatch]);
 
   useEffect(() => {
-    window.setTimeout(() => {
-      setIsPageExists(false)
-    }, 5000)
-  }, [isPageExists, params.id])
+    const timer = window.setTimeout(() => {
+      setIsPageExists(false);
+    }, 5000);
+    return clearTimeout(timer);
+  }, [isPageExists, params.id]);
 
   if (!film) {
     if (isPageExists) {
-      return <Page404 />
+      return <Page404 />;
     }
-    return <LoadingScreen />
-  } 
+    return <LoadingScreen />;
+  }
 
 
   return (
@@ -124,7 +124,7 @@ export default function Film(): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isLight />
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>

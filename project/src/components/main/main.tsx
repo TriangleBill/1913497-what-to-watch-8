@@ -1,12 +1,12 @@
-import FilmsList from '../film-components/films-list';
+import FilmsList from '../film/films-list';
 import GenreList from './genre-list';
-import User from '../header/user';
-import Logo from './../header/logo';
-import FilmPoster from './../header/film-poster';
-import PlayBtn from '../header/play-btn';
-import MylistBtn from './../header/mylist-btn';
-import FilmTitle from './../header/film-title';
-import ShowMoreBtn from './../film-components/show-more-btn';
+import User from '../user/user';
+import Logo from '../logo/logo';
+import FilmPoster from '../film//film-poster';
+import PlayBtn from '../player/player-btn';
+import MylistBtn from '../my-list//mylist-btn';
+import FilmTitle from '../film//film-title';
+import ShowMoreBtn from '../film/show-more-btn';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetShownFilms } from '../../store/action';
 import { getPromoFilm } from './../../store/films-data/selector';
@@ -21,7 +21,7 @@ export default function Main(): JSX.Element {
 
   useEffect(() => {
     dispatch(resetShownFilms());
-  }, [])
+  }, [dispatch]);
 
 
   return (
@@ -97,7 +97,6 @@ export default function Main(): JSX.Element {
           </div>}
 
 
-
       </section>
 
       <div className="page-content">
@@ -114,7 +113,7 @@ export default function Main(): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <Logo />
+            <Logo isLight />
           </div>
 
           <div className="copyright">

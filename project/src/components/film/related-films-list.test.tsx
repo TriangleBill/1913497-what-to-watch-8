@@ -2,7 +2,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
 import RelatedFilmsList from './related-films-list';
-import { makeFakeFilmsList } from '../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../../store/utils/mocks';
 
 
 describe('Component: RelatedFilmsList', () => {

@@ -3,7 +3,7 @@ import { Route, Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
 import MylistBtn from './mylist-btn';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../store/utils/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';

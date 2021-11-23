@@ -4,7 +4,7 @@ import { ThunkActionResult } from '../types/action';
 import { requireAuthorization, setFilms, requireLogout, setFavoriteFilms, setPromoFilm, setFilmReviews, setSimilarFilms, setFilm } from './action';
 import { AuthData } from '../types/auth-data';
 import { dropToken, saveToken, Token } from '../services/token';
-import { FilmReviews, FilmsDescription } from '../types/films';
+import { FilmsDescription } from '../types/films';
 import _ from 'lodash';
 import { ReviewData } from '../types/reviewData';
 import { toast } from 'react-toastify';
@@ -22,7 +22,7 @@ export const fetchFilmAction = (filmId: number): ThunkActionResult =>
       .then((response) => {
         const camelData = _.mapKeys(response.data, (_value, key: string) => _.camelCase(key)) as FilmsDescription;
         dispatch(setFilm(camelData));
-      })
+      });
   };
 
 
@@ -79,17 +79,13 @@ export const logoutAction = (): ThunkActionResult =>
 
 export const postReviewAction = (FilmId: number, reviewData: ReviewData): ThunkActionResult =>
   async (_dispatch, _getState, api) => {
-    await api.post(`/comments/${FilmId}`, reviewData).catch((error) => error);
+    await api.post(`/comments/${FilmId}`, reviewData);
   };
 
 export const fetchReviewsAction = (FilmId: number): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     await api.get(`/comments/${FilmId}`)
       .then((resp) => {
-        resp.data.map((el: FilmReviews) => el.date = new Date(el.date));
         dispatch(setFilmReviews(resp.data));
-      })
-      .catch((error) => {
-        toast.error('Error: ', error);
       });
   };

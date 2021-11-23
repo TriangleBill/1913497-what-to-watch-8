@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import { Route, Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
-import PlayBtn from './play-btn';
+import PlayBtn from './player-btn';
 import userEvent from '@testing-library/user-event';
 
 

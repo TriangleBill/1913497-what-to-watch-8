@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilmsDescription } from '../../types/films';
 import TabsContent from './tabs-content';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,6 @@ export default function Tabs(props: TabsProps): JSX.Element {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'];
-  const tabRef = useRef<HTMLDivElement>(null);
   const filmReviews = useSelector(getFilmReviews);
   useEffect(() => {
     dispatch(fetchReviewsAction(props.film.id));
@@ -34,7 +33,7 @@ export default function Tabs(props: TabsProps): JSX.Element {
         <ul className="film-nav__list">
           {titles.map((el, index) => (
             <li key={+(index + Date.now())} className={`film-nav__item ${activeTab === el ? 'film-nav__item--active' : null}`}>
-              <div ref={tabRef} style={{ cursor: 'pointer' }} className="film-nav__link" onClick={onClick}>{el}</div>
+              <div style={{ cursor: 'pointer' }} className="film-nav__link" onClick={onClick}>{el}</div>
             </li>
           ))}
 

@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, Fragment } from 'react';
 import { FilmsDescription } from '../../types/films';
 import { useHistory } from 'react-router';
-import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { postReviewAction } from './../../store/api-actions';
 
@@ -54,10 +53,10 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
     }
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (formRef.current !== null) {
       formRef.current.disabled = true;
-      await dispatch(postReviewAction(reviewFilm.id, postReviewData));
+      dispatch(postReviewAction(reviewFilm.id, postReviewData));
       formRef.current ? formRef.current.disabled = false : void 0;
       history.push(`/films/${reviewFilm.id}`);
     }
@@ -68,19 +67,18 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
     const starsElements: JSX.Element[] = [];
     for (let i = 10; i > 0; i--) {
       starsElements.push(
-        <>
-          <input key={i} className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleChangeStar} />
-          <label key={i + 100} className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
-        </>,
+        <Fragment key={i}>
+          <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleChangeStar} />
+          <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
+        </Fragment>,
       );
     }
     return starsElements;
   }
 
   return (
-    <form action="" className="add-review__form" onSubmit={(e) => { e.preventDefault(); handleSubmit().catch((error) => toast.error('Не удалось отправить отзыв', error)); }}>
+    <form action="" className="add-review__form" onSubmit={(e) => { e.preventDefault(); handleSubmit();}}>
       <fieldset ref={formRef} style={{ border: '0 none' }}>
-        <ToastContainer />
         <div className="rating">
           <div className="rating__stars">
             {renderStars().map((el) => el)}

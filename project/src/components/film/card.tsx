@@ -16,6 +16,7 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
 
   let timeoutID: number | null = null;
 
+
   function mouseOut() {
     if (timeoutID) {window.clearTimeout(timeoutID);}
     setActiveFilm(0);

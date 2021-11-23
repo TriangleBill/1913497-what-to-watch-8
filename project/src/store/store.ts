@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../const';
 import { createAPI } from '../services/api';
-import { requireAuthorization, requireServerError } from './action';
+import { requireAuthorization } from './action';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import { toast } from 'react-toastify';

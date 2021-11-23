@@ -1,4 +1,4 @@
-import Logo from './../header/logo';
+import Logo from '../logo/logo';
 import { loginAction } from './../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import { useDispatch, useSelector } from 'react-redux';

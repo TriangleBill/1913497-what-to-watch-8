@@ -11,11 +11,8 @@ export enum ActionType {
     SetFilm = 'film/setFilm',
     SetFavoriteFilms= 'film/setFavoriteFilms',
     SetPromoFilm='film/setPromoFilm',
-    SetCardElements = 'film/setCardElement',
     SetFilmReviews = 'film/setFilmReviews',
     SetSimilarFilms = 'film/setSimilarFilms',
-    ChangeIsLoadData = 'data/changeIsLoadData',
-    RequireServerError = 'data/requireServerError',
     RequireAuthorization = 'user/requireAuthorization',
     RequireLogout = 'user/requireLogout',
 }

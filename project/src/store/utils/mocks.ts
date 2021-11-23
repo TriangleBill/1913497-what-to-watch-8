@@ -56,7 +56,7 @@ export const makeFakeReviewsFilm = (): FilmReviews[] => ([{
   },
   rating: faker.datatype.number(),
   comment: faker.lorem.text(),
-  date: faker.date.recent(),
+  date: String(faker.date.recent()),
 },{
   id: faker.datatype.number(),
   user: {
@@ -65,5 +65,5 @@ export const makeFakeReviewsFilm = (): FilmReviews[] => ([{
   },
   rating: faker.datatype.number(),
   comment: faker.lorem.text(),
-  date: faker.date.recent(),
+  date: String(faker.date.recent()),
 }]);

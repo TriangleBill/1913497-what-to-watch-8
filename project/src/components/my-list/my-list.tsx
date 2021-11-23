@@ -1,6 +1,6 @@
-import FilmsList from '../film-components/films-list';
-import User from '../header/user';
-import Logo from './../header/logo';
+import FilmsList from '../film/films-list';
+import User from '../user/user';
+import Logo from '../logo/logo';
 import { useDispatch } from 'react-redux';
 import { getFavoriteFilms } from '../../store/films-data/selector';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
@@ -59,7 +59,7 @@ export default function MyList(): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isLight />
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>

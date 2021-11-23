@@ -3,9 +3,9 @@ import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
 import Page404 from '../404/page-404';
 import FormReview from './form-review';
-import User from '../header/user';
-import Logo from './../header/logo';
-import FilmPoster from '../header/film-poster';
+import User from '../user/user';
+import Logo from '../logo/logo';
+import FilmPoster from '../film/film-poster';
 
 type AddReviewProps = {
   films: FilmsDescription[]

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilterFilms, getShownFilms } from './../../store/films-process/selector';
-import { incrementShownFilms } from './../../store/action';
+import { getFilterFilms, getShownFilms } from '../../store/films-process/selector';
+import { incrementShownFilms } from '../../store/action';
 
 
 export default function ShowMoreBtn(): JSX.Element {

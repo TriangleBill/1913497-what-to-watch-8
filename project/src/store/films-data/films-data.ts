@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FilmsData } from '../../types/state';
-import { requireServerError, setFavoriteFilms, setFilm, setFilmReviews, setFilms } from '../action';
+import { setFavoriteFilms, setFilm, setFilmReviews, setFilms } from '../action';
 import { setPromoFilm, setSimilarFilms } from './../action';
 import { makeFakeFilmsList } from './../utils/mocks';
 
@@ -48,10 +48,6 @@ export const filmsData = createReducer(initialState, (builder) => {
     .addCase(setSimilarFilms, (state, action) => {
       const { films } = action.payload;
       state.similarFilms = films;
-      state.isLoadData = false;
-    })
-    .addCase(requireServerError, (state) => {
-      state.isServerError = true;
       state.isLoadData = false;
     });
 });

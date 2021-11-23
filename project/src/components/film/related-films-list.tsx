@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from './card';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSimilarFilms } from './../../store/films-data/selector';
+import { getSimilarFilms } from '../../store/films-data/selector';
 import { fetchSimilarFilmsAction } from '../../store/api-actions';
 
 type RelatedFilmsListProps = {

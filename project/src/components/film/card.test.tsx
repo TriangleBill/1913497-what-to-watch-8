@@ -2,7 +2,7 @@ import { createMemoryHistory } from 'history';
 import { Route, Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
 import Card from './card';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../store/utils/mocks';
 import faker from 'faker';
 import userEvent from '@testing-library/user-event';
 

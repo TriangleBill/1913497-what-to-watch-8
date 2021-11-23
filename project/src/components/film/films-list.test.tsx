@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { FilmsList } from './films-list';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
-import { makeFakeFilmsList } from '../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../../store/utils/mocks';
 
 const mockStore = configureMockStore();
 
