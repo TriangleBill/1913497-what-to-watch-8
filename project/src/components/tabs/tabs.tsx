@@ -1,25 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
-import { FilmReviews, FilmsDescription } from '../../types/films';
+import { FilmsDescription } from '../../types/films';
 import TabsContent from './tabs-content';
-import LoadingScreen from '../loading-screen/loading-screen';
-import { api } from './../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { getFilmReviews } from '../../store/films-data/selector';
 
 type TabsProps = {
   film: FilmsDescription,
 }
 
 export default function Tabs(props: TabsProps): JSX.Element {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'];
   const tabRef = useRef<HTMLDivElement>(null);
-  const [filmReviews, setFilmReviews] = useState<FilmReviews[]>();
+  const filmReviews = useSelector(getFilmReviews);
   useEffect(() => {
-    api.get(`/comments/${+props.film.id}`).then((resp) => {
-      resp.data.map((el: FilmReviews) => el.date = new Date(el.date));
-      setFilmReviews(resp.data);
-      setFilmReviews((prevState) => prevState?.slice(0, 4));
-    });
-  }, [props.film.id]);
+    dispatch(fetchReviewsAction(props.film.id));
+  }, [props.film.id, dispatch]);
 
 
   function onClick(e: React.FormEvent<HTMLDivElement>) {
@@ -27,7 +25,7 @@ export default function Tabs(props: TabsProps): JSX.Element {
   }
 
   if (!filmReviews) {
-    return <LoadingScreen />;
+    return <h1>Sorry, the server is unavailable. Please try again later.</h1>;
   }
 
   return (

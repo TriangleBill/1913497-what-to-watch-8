@@ -1,29 +1,28 @@
-import _ from 'lodash';
-import { useState } from 'react';
-import { FilmsDescription } from '../../types/films';
+import { useState, useEffect } from 'react';
 import Card from './card';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSimilarFilms } from './../../store/films-data/selector';
+import { fetchSimilarFilmsAction } from '../../store/api-actions';
 
 type RelatedFilmsListProps = {
-  films: FilmsDescription[],
   filmId: number
 }
 
-export default function RelatedFilmsList(props: RelatedFilmsListProps): JSX.Element {
+export default function RelatedFilmsList({ filmId }: RelatedFilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState(0);
-  let cardElements: FilmsDescription[] = [];
-  for (const key in props.films) {
-    if (props.films[key].id !== props.filmId) {
-      cardElements.push(props.films[key]);
-    }
-  }
+  const similarFilms = useSelector(getSimilarFilms);
+  const dispatch = useDispatch();
 
-  cardElements = cardElements.map((el: FilmsDescription) => _.mapKeys(el, (_value, key: string) => _.camelCase(key))) as FilmsDescription[];
-  cardElements = Object.entries(cardElements).slice(0,4).map((entry) => entry[1]);
-
+  useEffect(() => {
+    dispatch(fetchSimilarFilmsAction(filmId));
+  }, [dispatch, filmId]);
 
   function renderComponent() {
-    if (cardElements[0]) {
-      return cardElements.filter((el) => el.id !== props.filmId).map((el) => <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />);
+    if (similarFilms[0]) {
+      const filteredSimilarFilms = similarFilms
+        .filter((el) => el.id !== filmId)
+        .slice(0, 4);
+      return filteredSimilarFilms.map((el) => <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />);
     } else {
       return <h1>Related films not found</h1>;
     }

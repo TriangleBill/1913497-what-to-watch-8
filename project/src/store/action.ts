@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
-import { ActionType} from '../types/action';
-import { FilmsDescription } from '../types/films';
+import { ActionType } from '../types/action';
+import { FilmReviews, FilmsDescription } from '../types/films';
 
 
 export const setFilms = createAction(
@@ -9,6 +9,14 @@ export const setFilms = createAction(
   (films: FilmsDescription[]) => ({
     payload: {
       films,
+    },
+  }),
+);
+export const setFilm = createAction(
+  ActionType.SetFilm,
+  (film: FilmsDescription) => ({
+    payload: {
+      film,
     },
   }),
 );
@@ -44,6 +52,24 @@ export const requireAuthorization = createAction(
     },
   }),
 );
+export const setFilmReviews = createAction(
+  ActionType.SetFilmReviews,
+  (reviews: FilmReviews[]) => ({
+    payload: {
+      reviews,
+    },
+  }),
+);
+export const setSimilarFilms = createAction(
+  ActionType.SetSimilarFilms,
+  (films: FilmsDescription[]) => ({
+    payload: {
+      films,
+    },
+  }),
+);
 export const requireLogout = createAction(ActionType.RequireLogout);
+export const requireServerError = createAction(ActionType.RequireServerError);
 export const incrementShownFilms = createAction(ActionType.incrementShownFilms);
 export const resetShownFilms = createAction(ActionType.resetShownFilms);
+

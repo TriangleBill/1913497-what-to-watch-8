@@ -10,17 +10,28 @@ import PrivateRoute from '../private-route';
 import { AppRoute } from '../../const';
 import { useSelector } from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { getLoadedDataStatus } from '../../store/films-data/selector';
+import { getLoadedDataStatus, getServerErrorStatus } from '../../store/films-data/selector';
 import { getFilms } from './../../store/films-data/selector';
 
 
 function App(): JSX.Element {
   const isLoadData = useSelector(getLoadedDataStatus);
+  const isServerError = useSelector(getServerErrorStatus);
   const filmsList = useSelector(getFilms);
 
   if (isLoadData) {
     return <LoadingScreen />;
   }
+
+  if (isServerError) {
+    return (
+      <div >
+        <h1 style={{ display: 'flex', justifyContent: 'center' }}><strong>404</strong></h1>
+        <h1 style={{ display: 'flex', justifyContent: 'center' }}><strong>Server is not available.</strong></h1>
+        <h1 style={{ display: 'flex', justifyContent: 'center' }}>Please try again later.</h1>
+      </div>);
+  }
+
   return (
     <Switch>
       <Route path={AppRoute.Main} exact>
@@ -34,7 +45,7 @@ function App(): JSX.Element {
       <PrivateRoute
         path={AppRoute.MyList}
         exact
-        render={() => <MyList/>}
+        render={() => <MyList />}
       >
       </PrivateRoute>
 
@@ -51,7 +62,7 @@ function App(): JSX.Element {
       </PrivateRoute>
 
       <Route path={AppRoute.Player} exact>
-        <Player films={filmsList}/>
+        <Player films={filmsList} />
       </Route>
 
       <Route exact>

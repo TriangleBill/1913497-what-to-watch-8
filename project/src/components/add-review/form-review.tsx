@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FilmsDescription } from '../../types/films';
 import { useHistory } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
-import { api } from './../../store/store';
+import { useDispatch } from 'react-redux';
+import { postReviewAction } from './../../store/api-actions';
 
 type FormReviewProps = {
   reviewFilm: FilmsDescription
@@ -10,6 +11,7 @@ type FormReviewProps = {
 
 export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [starRating, setStarRating] = useState(0);
   const [textReview, setTextReview] = useState('');
   const textReviewValue = useRef<HTMLTextAreaElement>(null);
@@ -30,38 +32,37 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
     return `${r}, ${g}, ${b}, ${0.2}`;
   }
 
+  useEffect(() => {
+    if (btnRef.current !== null) {
+      if (textReview.length > 49
+        && textReview.length < 401
+        && starRating !== 0) {
+        btnRef.current.disabled = false;
+      } else { btnRef.current.disabled = true; }
+    }
+  }, [starRating, textReview]);
 
   function handleChangeStar(e: React.FormEvent<HTMLInputElement>) {
     if (e.currentTarget !== null) {
       setStarRating(Number(e.currentTarget.value));
-      handleShownBtn();
     }
   }
 
   function handleChangeText() {
     if (null !== textReviewValue.current) {
       setTextReview(textReviewValue.current.value);
-      handleShownBtn();
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (formRef.current !== null) {
       formRef.current.disabled = true;
-      api.post(`/comments/${Number(reviewFilm.id)}`, postReviewData)
-        .then(() => formRef.current ? formRef.current.disabled = false : void 0)
-        .then(() => history.push(`/films/${reviewFilm.id}`))
-        .catch((error) => toast.error('Не удалось отправить отзыв', error));
+      await dispatch(postReviewAction(reviewFilm.id, postReviewData));
+      formRef.current ? formRef.current.disabled = false : void 0;
+      history.push(`/films/${reviewFilm.id}`);
     }
   }
 
-  function handleShownBtn() {
-    if (btnRef.current !== null) {
-      if (textReviewValue.current !== null && textReviewValue.current.value.length > 49 && textReviewValue.current.value.length < 401) {
-        btnRef.current.disabled = false;
-      } else {btnRef.current.disabled = true;}
-    }
-  }
 
   function renderStars() {
     const starsElements: JSX.Element[] = [];
@@ -77,8 +78,8 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
   }
 
   return (
-    <form action="" className="add-review__form" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <fieldset ref={formRef} style={{border: '0 none'}}>
+    <form action="" className="add-review__form" onSubmit={(e) => { e.preventDefault(); handleSubmit().catch((error) => toast.error('Не удалось отправить отзыв', error)); }}>
+      <fieldset ref={formRef} style={{ border: '0 none' }}>
         <ToastContainer />
         <div className="rating">
           <div className="rating__stars">

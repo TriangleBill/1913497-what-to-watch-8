@@ -11,12 +11,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetShownFilms } from '../../store/action';
 import { getPromoFilm } from './../../store/films-data/selector';
 import { getFilterFilms } from '../../store/films-process/selector';
+import { useEffect } from 'react';
+import Loading from './../loading-screen/loading';
 
 
 export default function Main(): JSX.Element {
   const promoFilm = useSelector(getPromoFilm);
   const dispatch = useDispatch();
-  dispatch(resetShownFilms());
+
+  useEffect(() => {
+    dispatch(resetShownFilms());
+  }, [])
+
 
   return (
     <>
@@ -53,9 +59,13 @@ export default function Main(): JSX.Element {
       </div>
 
       <section className="film-card">
-        <div className="film-card__bg">
-          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
-        </div>
+        {!promoFilm ?
+          <Loading />
+          :
+          <div className="film-card__bg">
+            <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
+          </div>}
+
 
         <h1 className="visually-hidden">WTW</h1>
 
@@ -66,22 +76,28 @@ export default function Main(): JSX.Element {
           <User />
         </header>
 
-        <div className="film-card__wrap">
-          <div className="film-card__info">
-            <div className="film-card__poster">
-              <FilmPoster filmName={promoFilm.name} filmPoster={promoFilm.posterImage} />
-            </div>
+        {!promoFilm ?
+          <Loading />
+          :
+          <div className="film-card__wrap">
+            <div className="film-card__info">
+              <div className="film-card__poster">
+                <FilmPoster filmName={promoFilm.name} filmPoster={promoFilm.posterImage} />
+              </div>
 
-            <div className="film-card__desc">
-              <FilmTitle filmName={promoFilm.name} filmGenre={promoFilm.genre} released={promoFilm.released} />
+              <div className="film-card__desc">
+                <FilmTitle filmName={promoFilm.name} filmGenre={promoFilm.genre} released={promoFilm.released} />
 
-              <div className="film-card__buttons">
-                <PlayBtn filmId={promoFilm.id}/>
-                <MylistBtn film={promoFilm}/>
+                <div className="film-card__buttons">
+                  <PlayBtn filmId={promoFilm.id} />
+                  <MylistBtn film={promoFilm} />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div>}
+
+
+
       </section>
 
       <div className="page-content">
@@ -90,7 +106,7 @@ export default function Main(): JSX.Element {
           <GenreList />
 
           <div className="catalog__films-list">
-            <FilmsList selector={getFilterFilms}/>
+            <FilmsList selector={getFilterFilms} />
           </div>
 
           <ShowMoreBtn />

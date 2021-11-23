@@ -6,9 +6,10 @@ const timeout = 5000;
 
 enum HttpCode  {
   Unauthorized = 401,
+  Unfound = 404
 }
 
-export const createAPI = (onUnauthorized:() => void) : AxiosInstance => {
+export const createAPI = (onUnauthorized:() => void, onUnfound: () => void) : AxiosInstance => {
   const api = axios.create({
     baseURL: baseURL,
     timeout: timeout,
@@ -22,6 +23,11 @@ export const createAPI = (onUnauthorized:() => void) : AxiosInstance => {
 
       if (response?.status === HttpCode.Unauthorized) {
         onUnauthorized();
+      }
+
+
+      if (response?.status === HttpCode.Unfound) {
+        onUnfound();
       }
 
       return Promise.reject(error);

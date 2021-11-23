@@ -1,5 +1,4 @@
 import { useParams } from 'react-router';
-import { FilmsDescription } from '../../types/films';
 import Page404 from '../404/page-404';
 import AddReviewBtn from '../header/add-review-btn';
 import Tabs from './../tabs/tabs';
@@ -13,34 +12,33 @@ import MylistBtn from './../header/mylist-btn';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { api } from './../../store/store';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getFilm } from '../../store/films-data/selector';
+import { fetchFilmAction } from '../../store/api-actions';
 
 export default function Film(): JSX.Element {
+  const dispatch = useDispatch()
   const params = useParams<{ id?: string }>();
-  const [film, setFilm] = useState<FilmsDescription | null>(null);
-  const [similarFilms, setSimilarFilms] = useState<FilmsDescription[]>();
+  const film = useSelector(getFilm)
   const [isPageExists, setIsPageExists] = useState(true);
 
 
   useEffect(() => {
-    api.get(`/films/${params.id}`).then((resp) => {
-      const filmData = _.mapKeys(resp.data, (_value, key: string) => _.camelCase(key)) as FilmsDescription;
-      setFilm(filmData);
-    }).catch(() => setIsPageExists(false));
+    dispatch(fetchFilmAction(Number(params.id)))
+  }, [params.id]);
 
-    api.get(`/films/${params.id}/similar`).then((resp) => {
-      setSimilarFilms(resp.data);
-    }).catch(() => setIsPageExists(false));
+  useEffect(() => {
+    window.setTimeout(() => {
+      setIsPageExists(false)
+    }, 5000)
+  }, [isPageExists, params.id])
 
-  }, [params]);
-
-  if (!film || !similarFilms) {
+  if (!film) {
     if (isPageExists) {
-      return <LoadingScreen />;
+      return <Page404 />
     }
-    return <Page404 />;
-  }
+    return <LoadingScreen />
+  } 
 
 
   return (
@@ -121,7 +119,7 @@ export default function Film(): JSX.Element {
 
 
           <div className="catalog__films-list">
-            <RelatedFilmsList films={similarFilms} filmId={film.id} />
+            <RelatedFilmsList filmId={film.id} />
           </div>
         </section>
 

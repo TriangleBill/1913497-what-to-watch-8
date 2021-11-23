@@ -18,7 +18,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
     return result;
   }
 
-  if (!filmReviews || !filmReviews[0]) {
+  if (!filmReviews[0]) {
     return <h1>Reviews not found</h1>;
   }
 

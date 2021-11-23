@@ -1,12 +1,16 @@
 import { AuthorizationStatus } from '../const';
 import { RootState } from '../store/root-reducer';
-import { FilmsDescription } from './films';
+import { FilmReviews, FilmsDescription } from './films';
 
 export type FilmsData = {
     filmsList: FilmsDescription[],
+    film: FilmsDescription,
     favoriteFilms: FilmsDescription[],
+    similarFilms: FilmsDescription[],
+    filmReviews: FilmReviews[]
     promoFilm: FilmsDescription,
     isLoadData: boolean,
+    isServerError: boolean
 }
 
 export type FilmsProcess = {

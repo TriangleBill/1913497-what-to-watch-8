@@ -2,9 +2,8 @@ import Logo from './../header/logo';
 import { loginAction } from './../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getAuthorizationStatus } from './../../store/user-process/selector';
 import { useHistory } from 'react-router';
@@ -15,11 +14,15 @@ function SignIn(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const history = useHistory();
 
+  const [errorMassage, setErrorMassage] = useState('');
+
   if (authorizationStatus === AuthorizationStatus.Auth) {
     history.push(AppRoute.Main);
   }
 
-  const onSubmit = (authData: AuthData) => {dispatch(loginAction(authData));};
+  const onPost = (authData: AuthData) => { dispatch(loginAction(authData)); };
+  const mailPresence = /\S+@\S+\.\S+/;
+  const dogsPresence = /^[^\s@]+@[^\s@]+$/;
   const spacesPresence = /\s/;
   const lettersPresence = /[a-zа-яё]/i;
   const numbersPresence = /[0-9]/i;
@@ -29,23 +32,24 @@ function SignIn(): JSX.Element {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    if (loginRef.current !== null
-      && passwordRef.current !== null
-      && passwordRef.current.value !== ''
-      && loginRef.current.value !== ''
-      && !spacesPresence.test(passwordRef.current.value)
-      && lettersPresence.test(passwordRef.current.value)
-      && numbersPresence.test(passwordRef.current.value)) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-      history.push(AppRoute.Main);
-
-    } else {toast.info('Нужно ввести все данные. Пароль должен содержать хотя бы одну цифру и букву и не должен содержать пробелов.');}
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      if (mailPresence.test(loginRef.current.value)
+        && dogsPresence.test(loginRef.current.value)
+        && loginRef.current.value !== '') {
+        if (passwordRef.current.value !== ''
+          && !spacesPresence.test(passwordRef.current.value)
+          && lettersPresence.test(passwordRef.current.value)
+          && numbersPresence.test(passwordRef.current.value)) {
+          onPost({
+            login: loginRef.current.value,
+            password: passwordRef.current.value,
+          });
+        } else {setErrorMassage('Please enter a valid password. The password must contain at least one number and one letter and must not contain spaces.');}
+      } else {setErrorMassage('Please enter a valid email address');}
+    }
 
   }
+
 
   return (
     <>
@@ -91,6 +95,9 @@ function SignIn(): JSX.Element {
             className="sign-in__form"
             onSubmit={handleSubmit}
           >
+            <div className="sign-in__message">
+              <p>{errorMassage}</p>
+            </div>
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input
@@ -122,11 +129,10 @@ function SignIn(): JSX.Element {
                 className="sign-in__btn"
                 type="submit"
               >
-                Sign in
+              Sign in
               </button>
             </div>
           </form>
-          <ToastContainer />
         </div>
 
         <footer className="page-footer">
