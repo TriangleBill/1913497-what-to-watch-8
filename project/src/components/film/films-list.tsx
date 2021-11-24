@@ -11,8 +11,8 @@ type FilmsListProps = {
 }
 
 export function FilmsList({selector}: FilmsListProps): JSX.Element {
-  const SERVER_ERROR_MASSAGE = 'Sorry, the server is unavailable. Please try again later.'
-  const FILMS_NOT_FOUND_MASSAGE = 'You don`t have any favorite movies'
+  const SERVER_ERROR_MASSAGE = 'Sorry, the server is unavailable. Please try again later.';
+  const FILMS_NOT_FOUND_MASSAGE = 'You don`t have any favorite movies';
   const [activeFilm, setActiveFilm] = useState(0);
   const cardElements = useSelector(selector);
 

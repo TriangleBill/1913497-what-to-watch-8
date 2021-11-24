@@ -5,20 +5,24 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import App from './app';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
-import { mosckPromoFilm } from './../../store/films-data/films-data';
+import { makeFakeFilmsList, makeFakeReviewsFilm } from './../../store/utils/mocks';
 import thunk from 'redux-thunk';
 
 const mockStore = configureMockStore([thunk]);
 const fakeFilmsList = makeFakeFilmsList();
+const fakeReview = makeFakeReviewsFilm();
+const mockPromoFilm = fakeFilmsList[0];
 const storeNoAuth = mockStore({
   USER: { authorizationStatus: AuthorizationStatus.NoAuth },
   FILMS: { genre: 'All genre', shownFilms: 8 },
   DATA: {
     filmsList: fakeFilmsList,
-    isLoadData: false,
-    favoriteFilms: fakeFilmsList.slice(0, 8),
-    promoFilm: mosckPromoFilm,
+    film: fakeFilmsList[0],
+    favoriteFilms: fakeFilmsList,
+    similarFilms: fakeFilmsList,
+    filmReviews: fakeReview,
+    promoFilm: mockPromoFilm,
+    isLoadData: true,
   },
 });
 
@@ -27,9 +31,12 @@ const storeAuth = mockStore({
   FILMS: { genre: 'All genre', shownFilms: 8 },
   DATA: {
     filmsList: fakeFilmsList,
-    isLoadData: false,
-    favoriteFilms: fakeFilmsList.slice(0, 8),
-    promoFilm: mosckPromoFilm,
+    film: fakeFilmsList[0],
+    favoriteFilms: fakeFilmsList,
+    similarFilms: fakeFilmsList,
+    filmReviews: fakeReview,
+    promoFilm: mockPromoFilm,
+    isLoadData: true,
   },
 });
 
@@ -55,27 +62,34 @@ describe('Application Routing', () => {
     history.push(AppRoute.Main);
     render(fakeAppNoAuth);
 
-    expect(screen.getByText('All genres')).toBeInTheDocument();
-    expect(screen.getByText('Play')).toBeInTheDocument();
-    expect(screen.getByText('My list')).toBeInTheDocument();
-    expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('All genres')).toBeInTheDocument();
+      expect(screen.getByText('Play')).toBeInTheDocument();
+      expect(screen.getByText('My list')).toBeInTheDocument();
+      expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    }, 5000);
+
   });
 
   it('should render "SignIn" when user navigate to "/login"', () => {
     history.push(AppRoute.SignIn);
     render(fakeAppNoAuth);
 
-    expect(screen.getByLabelText('Email address')).toBeInTheDocument();
-    expect(screen.getByLabelText('Password')).toBeInTheDocument();
-    expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByLabelText('Email address')).toBeInTheDocument();
+      expect(screen.getByLabelText('Password')).toBeInTheDocument();
+      expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    }, 5000);
+
   });
 
   it('should render "MyList" when user navigate to "/mylist"', () => {
     history.push(AppRoute.MyList);
     render(fakeAppAuth);
-
-    expect(screen.getByText('My list')).toBeInTheDocument();
-    expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('My list')).toBeInTheDocument();
+      expect(screen.getByText('© 2021 What to watch Ltd.')).toBeInTheDocument();
+    }, 5000);
   });
 
   it('should render "Film" when user navigate to "/film"', () => {
@@ -98,25 +112,34 @@ describe('Application Routing', () => {
     history.push(`/films/${fakeFilmsList[0].id}/review`);
     render(fakeAppAuth);
 
-    expect(screen.getByText('Add review')).toBeInTheDocument();
-    expect(screen.getByText('WTW')).toBeInTheDocument();
-    expect(screen.getByText('Post')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('Add review')).toBeInTheDocument();
+      expect(screen.getByText('WTW')).toBeInTheDocument();
+      expect(screen.getByText('Post')).toBeInTheDocument();
+    }, 5000);
+
   });
 
   it('should render "Player" when user navigate to "/player"', () => {
     history.push(`/player/${fakeFilmsList[0].id}`);
     render(fakeAppNoAuth);
 
-    expect(screen.getByText('Full screen')).toBeInTheDocument();
-    expect(screen.getByText('Transpotting')).toBeInTheDocument();
-    expect(screen.getByText('Exit')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('Full screen')).toBeInTheDocument();
+      expect(screen.getByText('Transpotting')).toBeInTheDocument();
+      expect(screen.getByText('Exit')).toBeInTheDocument();
+    }, 5000);
+
   });
 
   it('should render "Page404" when user navigate to non-existent route', () => {
     history.push('/non-existent-route');
     render(fakeAppNoAuth);
 
-    expect(screen.getByText('404 page not found')).toBeInTheDocument();
-    expect(screen.getByText('Go back to the home page')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('404 page not found')).toBeInTheDocument();
+      expect(screen.getByText('Go back to the home page')).toBeInTheDocument();
+    }, 5000);
+
   });
 });

@@ -10,7 +10,6 @@ export type FilmsData = {
     filmReviews: FilmReviews[]
     promoFilm: FilmsDescription,
     isLoadData: boolean,
-    isServerError: boolean
 }
 
 export type FilmsProcess = {

@@ -21,8 +21,8 @@ function SignIn(): JSX.Element {
   }
 
   const onPost = (authData: AuthData) => { dispatch(loginAction(authData)); };
-  const LOGIN_ERROR_MASSAGE = 'Please enter a valid email address'
-  const PASSWORD_ERROR_MASSAGE = 'Please enter a valid password. The password must contain at least one number and one letter and must not contain spaces.'
+  const LOGIN_ERROR_MASSAGE = 'Please enter a valid email address';
+  const PASSWORD_ERROR_MASSAGE = 'Please enter a valid password. The password must contain at least one number and one letter and must not contain spaces.';
 
   const MAIL_PRESENCE = /\S+@\S+\.\S+/;
   const DOGS_PRESENCE = /^[^\s@]+@[^\s@]+$/;

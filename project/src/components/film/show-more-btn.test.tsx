@@ -1,7 +1,7 @@
 
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
-import { makeFakeFilmsList } from '../../../store/utils/mocks';
+import { makeFakeFilmsList, makeFakeReviewsFilm } from '../../store/utils/mocks';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -9,17 +9,21 @@ import ShowMoreBtn from './show-more-btn';
 import { render, screen } from '@testing-library/react';
 import * as Redux from 'react-redux';
 import userEvent from '@testing-library/user-event';
-import { ActionType } from '../../../types/action';
+import { ActionType } from '../../types/action';
 
 const mockStore = configureMockStore([thunk]);
 const fakeFilms = makeFakeFilmsList();
+const fakeReviews = makeFakeReviewsFilm();
 const store = mockStore({
   FILMS: { genre: 'All genre', shownFilms: 8 },
   DATA: {
     filmsList: fakeFilms,
-    isLoadData: false,
-    favoriteFilms: fakeFilms.slice(0, 8),
+    film: fakeFilms[0],
+    favoriteFilms: fakeFilms,
+    similarFilms: fakeFilms,
+    filmReviews: fakeReviews,
     promoFilm: fakeFilms[0],
+    isLoadData: true,
   },
 });
 
@@ -35,9 +39,12 @@ const storeManyFilms = mockStore({
       .concat(fakeFilms)
       .concat(fakeFilms)
       .concat(fakeFilms),
-    isLoadData: false,
-    favoriteFilms: fakeFilms.slice(0, 8),
+    film: fakeFilms[0],
+    favoriteFilms: fakeFilms,
+    similarFilms: fakeFilms,
+    filmReviews: fakeReviews,
     promoFilm: fakeFilms[0],
+    isLoadData: true,
   },
 });
 

@@ -7,7 +7,6 @@ import { dropToken, saveToken, Token } from '../services/token';
 import { FilmsDescription } from '../types/films';
 import _ from 'lodash';
 import { ReviewData } from '../types/reviewData';
-import { toast } from 'react-toastify';
 
 export const fetchFilmsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -59,9 +58,6 @@ export const loginAction = ({ login: email, password }: AuthData): ThunkActionRe
       .then((res) => {
         saveToken(res.data.token);
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      })
-      .catch((error) => {
-        toast.error('Error: ', error);
       });
   };
 
@@ -71,15 +67,15 @@ export const logoutAction = (): ThunkActionResult =>
       .then(() => {
         dropToken();
         dispatch(requireLogout());
-      })
-      .catch((error) => {
-        toast.error('Error: ', error);
       });
   };
 
 export const postReviewAction = (FilmId: number, reviewData: ReviewData): ThunkActionResult =>
-  async (_dispatch, _getState, api) => {
-    await api.post(`/comments/${FilmId}`, reviewData);
+  async (dispatch, _getState, api) => {
+    await api.post(`/comments/${FilmId}`, reviewData)
+      .then((resp) => {
+        dispatch(setFilmReviews(resp.data));
+      });
   };
 
 export const fetchReviewsAction = (FilmId: number): ThunkActionResult =>

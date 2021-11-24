@@ -4,16 +4,25 @@ import { render, screen } from '@testing-library/react';
 import FormReview from './form-review';
 import { makeFakeFilmsList } from './../../store/utils/mocks';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { configureMockStore } from '@jedmao/redux-mock-store';
+import thunk from 'redux-thunk';
 
 
 describe('Component: FormReview', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const fakeFilm = makeFakeFilmsList()[0];
+
+    const mockStore = configureMockStore([thunk]);
+    const store = mockStore();
+
     render(
-      <Router history={history}>
-        <FormReview reviewFilm={fakeFilm} />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <FormReview reviewFilm={fakeFilm} />
+        </Router>
+      </Provider>,
     );
 
     for (let index = 1; index < 11; index++) {
@@ -26,10 +35,15 @@ describe('Component: FormReview', () => {
   it('should choice star when user click on star', () => {
     const history = createMemoryHistory();
     const fakeFilm = makeFakeFilmsList()[0];
+    const mockStore = configureMockStore([thunk]);
+    const store = mockStore();
+
     render(
-      <Router history={history}>
-        <FormReview reviewFilm={fakeFilm} />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <FormReview reviewFilm={fakeFilm} />
+        </Router>
+      </Provider>,
     );
 
     for (let index = 1; index < 11; index++) {
@@ -42,10 +56,15 @@ describe('Component: FormReview', () => {
   it('button should become active when input is correct', () => {
     const history = createMemoryHistory();
     const fakeFilm = makeFakeFilmsList()[0];
+    const mockStore = configureMockStore([thunk]);
+    const store = mockStore();
+
     render(
-      <Router history={history}>
-        <FormReview reviewFilm={fakeFilm} />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <FormReview reviewFilm={fakeFilm} />
+        </Router>
+      </Provider>,
     );
 
     expect(screen.getByText('Post')).toBeDisabled();
@@ -69,15 +88,20 @@ describe('Component: FormReview', () => {
     const history = createMemoryHistory();
     history.push('/fakePath');
     const fakeFilm = makeFakeFilmsList()[0];
+    const mockStore = configureMockStore([thunk]);
+    const store = mockStore();
+
     render(
-      <Router history={history}>
-        <Route exact path={`/films/${fakeFilm.id}`}>
-          <h1>Mock Film page</h1>
-        </Route>
-        <Route>
-          <FormReview reviewFilm={fakeFilm} />
-        </Route>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <Route exact path={`/films/${fakeFilm.id}`}>
+            <h1>Mock Film page</h1>
+          </Route>
+          <Route>
+            <FormReview reviewFilm={fakeFilm} />
+          </Route>
+        </Router>
+      </Provider>,
     );
 
     userEvent.click(screen.getByText('Post'));

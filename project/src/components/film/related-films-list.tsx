@@ -9,7 +9,7 @@ type RelatedFilmsListProps = {
 }
 
 export default function RelatedFilmsList({ filmId }: RelatedFilmsListProps): JSX.Element {
-  const FILMS_NOT_FOUND_MASSAGE = 'Related films not found'
+  const FILMS_NOT_FOUND_MASSAGE = 'Related films not found';
   const [activeFilm, setActiveFilm] = useState(0);
   const similarFilms = useSelector(getSimilarFilms);
   const dispatch = useDispatch();

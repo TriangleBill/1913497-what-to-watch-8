@@ -7,7 +7,7 @@ type TabReviewProps = {
 
 
 function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
-  const NOT_FOUND_MASSAGE = 'Reviews not found'
+  const NOT_FOUND_MASSAGE = 'Reviews not found';
 
   function getCorrectDate (date: Date) {
     const monthName = ['January', 'February', 'March', 'April', 'May', 'June',

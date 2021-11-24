@@ -10,7 +10,7 @@ type TabsProps = {
 }
 
 export default function Tabs(props: TabsProps): JSX.Element {
-  const SERVER_ERROR_MASSAGEE = 'Sorry, the server is unavailable. Please try again later.'
+  const SERVER_ERROR_MASSAGEE = 'Sorry, the server is unavailable. Please try again later.';
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'] as const;

@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
+import { makeFakeFilmsList, makeFakeReviewsFilm } from './../../store/utils/mocks';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { GenreList } from './genre-list';
@@ -11,6 +11,7 @@ import { ActionType } from '../../types/action';
 
 const mockStore = configureMockStore();
 const fakeFilms = makeFakeFilmsList();
+const fakeReviews = makeFakeReviewsFilm();
 
 describe('Component: GenreList', () => {
   it('should render correctly', () => {
@@ -19,9 +20,12 @@ describe('Component: GenreList', () => {
       FILMS: { genre: 'All genre', shownFilms: 8 },
       DATA: {
         filmsList: fakeFilms,
-        isLoadData: false,
-        favoriteFilms: fakeFilms.slice(0, 8),
+        film: fakeFilms[0],
+        favoriteFilms: fakeFilms,
+        similarFilms: fakeFilms,
+        filmReviews: fakeReviews,
         promoFilm: fakeFilms[0],
+        isLoadData: true,
       },
     });
 
@@ -45,9 +49,12 @@ describe('Component: GenreList', () => {
       FILMS: { genre: 'All genre', shownFilms: 8 },
       DATA: {
         filmsList: fakeFilms,
-        isLoadData: false,
-        favoriteFilms: fakeFilms.slice(0, 8),
+        film: fakeFilms[0],
+        favoriteFilms: fakeFilms,
+        similarFilms: fakeFilms,
+        filmReviews: fakeReviews,
         promoFilm: fakeFilms[0],
+        isLoadData: true,
       },
     });
 

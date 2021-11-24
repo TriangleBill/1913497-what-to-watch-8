@@ -10,7 +10,7 @@ type FormReviewProps = {
 
 export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element {
   const MAX_LENGTH = 400;
-  const MIN_LENGTH = 50
+  const MIN_LENGTH = 50;
   const history = useHistory();
   const dispatch = useDispatch();
   const [starRating, setStarRating] = useState(0);

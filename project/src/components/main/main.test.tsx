@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
+import { makeFakeFilmsList, makeFakeReviewsFilm } from './../../store/utils/mocks';
 import Main from './main';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AuthorizationStatus } from '../../const';
@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 
 const mockStore = configureMockStore([thunk]);
 const fakeFilms = makeFakeFilmsList();
+const fakeReview = makeFakeReviewsFilm();
 
 describe('Component: Main', () => {
   it('should render correctly', () => {
@@ -19,9 +20,12 @@ describe('Component: Main', () => {
       FILMS: { genre: 'All genre', shownFilms: 8 },
       DATA: {
         filmsList: fakeFilms,
-        isLoadData: false,
-        favoriteFilms: fakeFilms.slice(0, 8),
+        film: fakeFilms[0],
+        favoriteFilms: fakeFilms,
+        similarFilms: fakeFilms,
+        filmReviews: fakeReview,
         promoFilm: fakeFilms[0],
+        isLoadData: true,
       },
     });
 

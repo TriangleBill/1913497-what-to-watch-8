@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import { render, screen } from '@testing-library/react';
-import { makeFakeFilmsList } from '../../../store/utils/mocks';
+import { makeFakeFilmsList } from '../../store/utils/mocks';
 import PreviewPlayer from './preview-player';
 
 const play = jest.fn();

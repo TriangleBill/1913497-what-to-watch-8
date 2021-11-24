@@ -2,9 +2,6 @@ import { createReducer } from '@reduxjs/toolkit';
 import { FilmsData } from '../../types/state';
 import { setFavoriteFilms, setFilm, setFilmReviews, setFilms } from '../action';
 import { setPromoFilm, setSimilarFilms } from './../action';
-import { makeFakeFilmsList } from './../utils/mocks';
-
-export const mosckFilm = makeFakeFilmsList()[0];
 
 const initialState: FilmsData = {
   filmsList: [],
@@ -14,7 +11,6 @@ const initialState: FilmsData = {
   filmReviews: [],
   promoFilm: [][0],
   isLoadData: true,
-  isServerError: false,
 };
 
 

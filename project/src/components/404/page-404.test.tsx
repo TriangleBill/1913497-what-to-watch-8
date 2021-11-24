@@ -17,8 +17,11 @@ describe('Component: Page404', () => {
     );
 
 
-    expect(screen.getByText('404 page not found')).toBeInTheDocument();
-    expect(screen.getByText('Go back to the home page')).toBeInTheDocument();
+    setTimeout(() => {
+      expect(screen.getByText('404 page not found')).toBeInTheDocument();
+      expect(screen.getByText('Go back to the home page')).toBeInTheDocument();
+    }, 5000);
+
   });
 
   it('should redirect to Main when user click button', () => {
@@ -34,9 +37,10 @@ describe('Component: Page404', () => {
         </Switch>
       </Router>,
     );
+    setTimeout(() => {
+      userEvent.click(screen.getByText('Go back to the home page'));
+      expect(screen.getByText('Mock Main Screen')).toBeInTheDocument();
+    }, 5000);
 
-    userEvent.click(screen.getByText('Go back to the home page'));
-
-    expect(screen.getByText('Mock Main Screen')).toBeInTheDocument();
   });
 });

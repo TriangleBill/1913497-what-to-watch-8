@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AuthorizationStatus } from '../../const';
-import { makeFakeFilmsList } from './../../store/utils/mocks';
+import { makeFakeFilmsList, makeFakeReviewsFilm } from './../../store/utils/mocks';
 import thunk from 'redux-thunk';
 import Film from './film';
 import ReactRouter from 'react-router';
@@ -12,15 +12,19 @@ import ReactRouter from 'react-router';
 
 const mockStore = configureMockStore([thunk]);
 const fakeFilmsList = makeFakeFilmsList();
+const fakeReview = makeFakeReviewsFilm();
 
 const storeAuth = mockStore({
   USER: { authorizationStatus: AuthorizationStatus.Auth },
   FILMS: { genre: 'All genre', shownFilms: 8 },
   DATA: {
     filmsList: fakeFilmsList,
-    isLoadData: false,
-    favoriteFilms: fakeFilmsList.slice(0, 8),
+    film: fakeFilmsList[0],
+    favoriteFilms: fakeFilmsList,
+    similarFilms: fakeFilmsList,
+    filmReviews: fakeReview,
     promoFilm: fakeFilmsList[0],
+    isLoadData: true,
   },
 });
 

@@ -5,14 +5,18 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { State } from '../types/state';
 import { Action } from 'redux';
-import { checkAuthAction, fetchFavoriteFilmsAction, fetchFilmsAction, fetchPromoFilmAction, loginAction, logoutAction } from './api-actions';
-import { requireAuthorization, requireLogout, setFavoriteFilms, setFilms, setPromoFilm } from './action';
+import { checkAuthAction, fetchFavoriteFilmsAction, fetchFilmAction, fetchFilmsAction, fetchPromoFilmAction, fetchReviewsAction, fetchSimilarFilmsAction, loginAction, logoutAction, postReviewAction } from './api-actions';
+import { requireAuthorization, requireLogout, setFavoriteFilms, setFilm, setFilms, setPromoFilm, setSimilarFilms, setFilmReviews } from './action';
 import { AuthorizationStatus } from '../const';
-import { makeFakeAuthData, makeFakeFilmsList } from './utils/mocks';
+import { makeFakeAuthData, makeFakeFilmsList, makeFakeReviewsFilm } from './utils/mocks';
 
 describe('Async actions', () => {
   const onFakeUnauthorized = jest.fn();
-  const api = createAPI(onFakeUnauthorized());
+  const onFakeUnfound = jest.fn();
+  const api = createAPI(
+    onFakeUnauthorized(),
+    onFakeUnfound(),
+  );
   const mockAPI = new MockAdapter(api);
   const middlewares = [thunk.withExtraArgument(api)];
 
@@ -51,6 +55,21 @@ describe('Async actions', () => {
     ]);
   });
 
+  it('should dispatch setFilm when GET /films/:id', async () => {
+    const mockFilm = makeFakeFilmsList()[0];
+    const fakeFilmId = mockFilm.id;
+    mockAPI
+      .onGet(`/films/${fakeFilmId}`)
+      .reply(200, mockFilm);
+
+    const store = mockStore();
+    await store.dispatch(fetchFilmAction(fakeFilmId));
+
+    expect(store.getActions()).toEqual([
+      setFilm(mockFilm),
+    ]);
+  });
+
   it('should dispatch setFavoriteFilms when GET /favorite', async () => {
     const mockFilms = makeFakeFilmsList();
     mockAPI
@@ -62,6 +81,21 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([
       setFavoriteFilms(mockFilms),
+    ]);
+  });
+
+  it('should dispatch setSimilarFilms when GET /films/:id/similar', async () => {
+    const mockFilmId = makeFakeFilmsList()[0].id;
+    const mockSimilarFilms = makeFakeFilmsList();
+    mockAPI
+      .onGet(`/films/${mockFilmId}/similar`)
+      .reply(200, mockSimilarFilms);
+
+    const store = mockStore();
+    await store.dispatch(fetchSimilarFilmsAction(mockFilmId));
+
+    expect(store.getActions()).toEqual([
+      setSimilarFilms(mockSimilarFilms),
     ]);
   });
 
@@ -112,4 +146,37 @@ describe('Async actions', () => {
     expect(Storage.prototype.removeItem).toBeCalledTimes(1);
     expect(Storage.prototype.removeItem).toBeCalledWith('wtw-token');
   });
+
+  it('should dispatch setFilmReviews when GET /comments/:id', async () => {
+    const mockFilmId = makeFakeFilmsList()[0].id;
+    const mockReviews = makeFakeReviewsFilm();
+    mockAPI
+      .onGet(`/comments/${mockFilmId}`)
+      .reply(200, mockReviews);
+
+    const store = mockStore();
+    await store.dispatch(fetchReviewsAction(mockFilmId));
+
+    expect(store.getActions()).toEqual([
+      setFilmReviews(mockReviews),
+    ]);
+  });
+
+  it('should dispatch setFilmReviews when POST /comments/:id', async () => {
+    const mockFilmId = makeFakeFilmsList()[0].id;
+    const mockReviews = makeFakeReviewsFilm();
+    const mockSentReview = makeFakeReviewsFilm()[0];
+    mockAPI
+      .onPost(`/comments/${mockFilmId}`, mockSentReview)
+      .reply(200, mockReviews);
+
+    const store = mockStore();
+    await store.dispatch(postReviewAction(mockFilmId, mockSentReview));
+
+    expect(store.getActions()).toEqual([
+      setFilmReviews(mockReviews),
+    ]);
+  });
 });
+
+

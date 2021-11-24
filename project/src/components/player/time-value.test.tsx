@@ -12,6 +12,7 @@ describe('Component: TimeValue', () => {
         <TimeValue
           videoRef={null}
           filmIsPlayed={false}
+          isLoaded
         />
       </Router>,
     );

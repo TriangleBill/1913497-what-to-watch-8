@@ -13,6 +13,7 @@ describe('Component: TimeBar', () => {
         <TimeBar
           videoRef={window.HTMLVideoElement.prototype}
           filmIsPlayed={false}
+          isLoaded
         />
       </Router>,
     );

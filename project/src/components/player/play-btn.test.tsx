@@ -1,21 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import PauseBtn from './pause-btn';
 import userEvent from '@testing-library/user-event';
+import PlayBtn from './play-btn';
 
 
-describe('Component: PauseBtn', () => {
+describe('Component: PlayBtn', () => {
   it('should render correctly when user authorized', () => {
     const history = createMemoryHistory();
 
     render(
       <Router history={history}>
-        <PauseBtn handleClick={()=> void 0} />
+        <PlayBtn handleClick={()=> void 0} />
       </Router>,
     );
 
-    expect(screen.queryByText('Pause')).toBeInTheDocument();
+    expect(screen.queryByText('Play')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
@@ -25,11 +25,11 @@ describe('Component: PauseBtn', () => {
 
     render(
       <Router history={history}>
-        <PauseBtn handleClick={propFunction} />
+        <PlayBtn handleClick={propFunction} />
       </Router>,
     );
 
-    userEvent.click(screen.getByTestId('svg-pause'));
+    userEvent.click(screen.getByTestId('svg-play'));
     expect(propFunction).toBeCalled();
   });
 });
