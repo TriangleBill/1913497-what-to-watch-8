@@ -9,7 +9,7 @@ export default function ShowMoreBtn(): JSX.Element {
   const shownFilms = useSelector(getShownFilms);
 
 
-  function onClick() {
+  function handleClick() {
     dispatch(incrementShownFilms());
   }
 
@@ -19,7 +19,7 @@ export default function ShowMoreBtn(): JSX.Element {
 
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={onClick}>Show more</button>
+      <button className="catalog__button" type="button" onClick={handleClick}>Show more</button>
     </div>
   );
 }

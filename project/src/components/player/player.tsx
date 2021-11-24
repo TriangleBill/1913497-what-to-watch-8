@@ -41,7 +41,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
 
   useEffect(() => {
     if (isLoaded) {
-      onClickBtnPlay();
+      handleClickPlay();
     }
   }, [isLoaded]);
 
@@ -50,14 +50,14 @@ export default function Player({ films }: PlayerProps): JSX.Element {
     return <Page404 />;
   }
 
-  function onClickBtnPlay() {
+  function handleClickPlay() {
     if (videoRef.current) {
       videoRef.current.play();
       setIsPlayed(true);
     }
   }
 
-  function onClickBtnPause() {
+  function handleClickPause() {
     if (videoRef.current) {
       videoRef.current.pause();
       setIsPlayed(false);
@@ -113,9 +113,9 @@ export default function Player({ films }: PlayerProps): JSX.Element {
 
           <div className="player__controls-row">
             {isPlayed ?
-              <PauseBtn onClick={onClickBtnPause} />
+              <PauseBtn handleClick={handleClickPause} />
               :
-              <PlayBtn onClick={onClickBtnPlay} />}
+              <PlayBtn handleClick={handleClickPlay} />}
 
             <div className="player__name">{film.name}</div>
             <FullScreenBtn videoRef={videoRef.current} />

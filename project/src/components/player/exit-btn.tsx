@@ -8,11 +8,11 @@ type ExitBtnProps = {
 export default function ExitBtn({filmId}: ExitBtnProps): JSX.Element {
   const history = useHistory();
 
-  function onClick() {
+  function handleClick() {
     history.push(`/films/${filmId}`);
   }
 
   return (
-    <button onClick={onClick} type="button" className="player__exit">Exit</button>
+    <button onClick={handleClick} type="button" className="player__exit">Exit</button>
   );
 }

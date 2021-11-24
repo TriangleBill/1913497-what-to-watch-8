@@ -9,6 +9,8 @@ type FormReviewProps = {
 }
 
 export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element {
+  const MAX_LENGTH = 400;
+  const MIN_LENGTH = 50
   const history = useHistory();
   const dispatch = useDispatch();
   const [starRating, setStarRating] = useState(0);
@@ -20,7 +22,7 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
   const postReviewData = {
     rating: starRating,
     comment: textReview,
-  };
+  } as const;
 
   function hexToRgba(hex: string) {
     const bigint = parseInt(hex, 16);
@@ -33,8 +35,8 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
 
   useEffect(() => {
     if (btnRef.current !== null) {
-      if (textReview.length > 49
-        && textReview.length < 401
+      if (textReview.length >= MIN_LENGTH
+        && textReview.length <= MAX_LENGTH
         && starRating !== 0) {
         btnRef.current.disabled = false;
       } else { btnRef.current.disabled = true; }
@@ -94,8 +96,8 @@ export default function FormReview({ reviewFilm }: FormReviewProps): JSX.Element
             ref={textReviewValue}
             defaultValue={textReview}
             onChange={handleChangeText}
-            maxLength={400}
-            minLength={50}
+            maxLength={MAX_LENGTH}
+            minLength={MIN_LENGTH}
             data-testid="review-text"
           />
           <div className="add-review__submit">

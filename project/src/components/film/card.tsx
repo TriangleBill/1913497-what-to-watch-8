@@ -17,26 +17,26 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
   let timeoutID: number | null = null;
 
 
-  function mouseOut() {
+  function handeleMouseOut() {
     if (timeoutID) {window.clearTimeout(timeoutID);}
     setActiveFilm(0);
   }
 
-  function mouseOver() {
+  function handleMouseOver() {
     timeoutID = window.setTimeout(() => {
       setActiveFilm(filmData.id);
     }, 1000);
   }
 
 
-  function Push() {
+  function handlePush() {
     history.push(`/films/${filmData.id}`);
   }
 
 
   return (
 
-    <article className="small-film-card catalog__films-card" onClick={Push} onMouseOver={() => mouseOver()} onMouseLeave={() => mouseOut()} >
+    <article className="small-film-card catalog__films-card" onClick={handlePush} onMouseOver={handleMouseOver} onMouseLeave={handeleMouseOut} >
 
       <PreviewPlayer src={filmData.previewVideoLink} poster={filmData.previewImage} filmId={filmData.id} activeFilm={activeFilm} />
 

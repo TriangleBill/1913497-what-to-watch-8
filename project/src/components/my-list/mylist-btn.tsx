@@ -23,12 +23,12 @@ function MylistBtn({ film }: MylistBtnProps) {
     if (authorizationStatus !== AuthorizationStatus.Auth) { setIsFavorite(false); }
   }, [favoriteFilms, film, authorizationStatus]);
 
-  function addInFavorite() {
+  function handleClickAdd() {
     if (authorizationStatus !== AuthorizationStatus.Auth) { history.push('/login'); }
     else { api.post(`/favorite/${film.id}/1`, film).then(() => setIsFavorite(true)); }
   }
 
-  function removeInFavorite() {
+  function handleClickRemove() {
     if (authorizationStatus !== AuthorizationStatus.Auth) { history.push('/login'); }
     else { api.post(`/favorite/${film.id}/0`, film).then(() => setIsFavorite(false)); }
   }
@@ -36,7 +36,7 @@ function MylistBtn({ film }: MylistBtnProps) {
   function renderComponent() {
     if (isFavorite) {
       return (
-        <button onClick={removeInFavorite} className="btn btn--list film-card__button" type="button">
+        <button onClick={handleClickRemove} className="btn btn--list film-card__button" type="button">
           <svg data-testid='film is favotite'  viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#in-list"></use>
           </svg>
@@ -46,7 +46,7 @@ function MylistBtn({ film }: MylistBtnProps) {
       );
     } else {
       return (
-        <button onClick={addInFavorite} className="btn btn--list film-card__button" type="button">
+        <button onClick={handleClickAdd} className="btn btn--list film-card__button" type="button">
           <svg data-testid='film is not favotite' viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#add"></use>
           </svg>

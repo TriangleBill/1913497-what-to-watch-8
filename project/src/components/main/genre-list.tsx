@@ -17,7 +17,7 @@ export function GenreList(): JSX.Element {
     }
   });
 
-  function onClick(value: string)  {
+  function handleClick(value: string)  {
     dispatch(changeGenre(value));
     dispatch(resetShownFilms());
   }
@@ -26,7 +26,7 @@ export function GenreList(): JSX.Element {
     <ul className="catalog__genres-list">
       { ['All genres', ...genres].map((el, id) => (
         <li key={+id + genre} className={`catalog__genres-item ${genre === el ? 'catalog__genres-item--active' : ''}`}>
-          <div onClick={() => onClick(el)} style={{ cursor: 'pointer' }} className="catalog__genres-link">{el}</div>
+          <div onClick={() => handleClick(el)} style={{ cursor: 'pointer' }} className="catalog__genres-link">{el}</div>
         </li>
       ))}
     </ul>

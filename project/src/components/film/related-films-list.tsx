@@ -9,6 +9,7 @@ type RelatedFilmsListProps = {
 }
 
 export default function RelatedFilmsList({ filmId }: RelatedFilmsListProps): JSX.Element {
+  const FILMS_NOT_FOUND_MASSAGE = 'Related films not found'
   const [activeFilm, setActiveFilm] = useState(0);
   const similarFilms = useSelector(getSimilarFilms);
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function RelatedFilmsList({ filmId }: RelatedFilmsListProps): JSX
         .slice(0, 4);
       return filteredSimilarFilms.map((el) => <Card key={el?.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />);
     } else {
-      return <h1>Related films not found</h1>;
+      return <h1>{FILMS_NOT_FOUND_MASSAGE}</h1>;
     }
   }
 

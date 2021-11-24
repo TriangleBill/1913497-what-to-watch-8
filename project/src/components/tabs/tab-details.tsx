@@ -8,6 +8,7 @@ type TabDetailsProps = {
 function TabDetails(props: TabDetailsProps): JSX.Element {
   const runTimeHour = Math.floor(props.film.runTime / 60);
   const runTimeMinutes = props.film.runTime % 60;
+  const runTime = `${!(runTimeHour===0)? `${runTimeHour }h`: '' } ${runTimeMinutes}m`
 
 
   return (
@@ -28,7 +29,7 @@ function TabDetails(props: TabDetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{!(runTimeHour===0)? `${runTimeHour }h`: '' } {runTimeMinutes} m</span>
+          <span className="film-card__details-value">{runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

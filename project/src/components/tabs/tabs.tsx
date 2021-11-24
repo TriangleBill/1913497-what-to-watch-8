@@ -10,21 +10,22 @@ type TabsProps = {
 }
 
 export default function Tabs(props: TabsProps): JSX.Element {
+  const SERVER_ERROR_MASSAGEE = 'Sorry, the server is unavailable. Please try again later.'
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('Overview');
-  const titles = ['Overview', 'Details', 'Reviews'];
+  const titles = ['Overview', 'Details', 'Reviews'] as const;
   const filmReviews = useSelector(getFilmReviews);
   useEffect(() => {
     dispatch(fetchReviewsAction(props.film.id));
   }, [props.film.id, dispatch]);
 
 
-  function onClick(e: React.FormEvent<HTMLDivElement>) {
+  function handleClick(e: React.FormEvent<HTMLDivElement>) {
     if (e.currentTarget !== null) { setActiveTab(e.currentTarget.innerText); }
   }
 
   if (!filmReviews) {
-    return <h1>Sorry, the server is unavailable. Please try again later.</h1>;
+    return <h1>{SERVER_ERROR_MASSAGEE}</h1>;
   }
 
   return (
@@ -33,7 +34,7 @@ export default function Tabs(props: TabsProps): JSX.Element {
         <ul className="film-nav__list">
           {titles.map((el, index) => (
             <li key={+(index + Date.now())} className={`film-nav__item ${activeTab === el ? 'film-nav__item--active' : null}`}>
-              <div style={{ cursor: 'pointer' }} className="film-nav__link" onClick={onClick}>{el}</div>
+              <div style={{ cursor: 'pointer' }} className="film-nav__link" onClick={handleClick}>{el}</div>
             </li>
           ))}
 

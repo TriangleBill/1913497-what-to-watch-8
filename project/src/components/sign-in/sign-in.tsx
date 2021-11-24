@@ -21,11 +21,14 @@ function SignIn(): JSX.Element {
   }
 
   const onPost = (authData: AuthData) => { dispatch(loginAction(authData)); };
-  const mailPresence = /\S+@\S+\.\S+/;
-  const dogsPresence = /^[^\s@]+@[^\s@]+$/;
-  const spacesPresence = /\s/;
-  const lettersPresence = /[a-zа-яё]/i;
-  const numbersPresence = /[0-9]/i;
+  const LOGIN_ERROR_MASSAGE = 'Please enter a valid email address'
+  const PASSWORD_ERROR_MASSAGE = 'Please enter a valid password. The password must contain at least one number and one letter and must not contain spaces.'
+
+  const MAIL_PRESENCE = /\S+@\S+\.\S+/;
+  const DOGS_PRESENCE = /^[^\s@]+@[^\s@]+$/;
+  const SPACES_PRESENCE = /\s/;
+  const LETTERS_PRESENCE = /[a-zа-яё]/i;
+  const NUMBERS_PRESENCE = /[0-9]/i;
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -33,19 +36,19 @@ function SignIn(): JSX.Element {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
-      if (mailPresence.test(loginRef.current.value)
-        && dogsPresence.test(loginRef.current.value)
+      if (MAIL_PRESENCE.test(loginRef.current.value)
+        && DOGS_PRESENCE.test(loginRef.current.value)
         && loginRef.current.value !== '') {
         if (passwordRef.current.value !== ''
-          && !spacesPresence.test(passwordRef.current.value)
-          && lettersPresence.test(passwordRef.current.value)
-          && numbersPresence.test(passwordRef.current.value)) {
+          && !SPACES_PRESENCE.test(passwordRef.current.value)
+          && LETTERS_PRESENCE.test(passwordRef.current.value)
+          && NUMBERS_PRESENCE.test(passwordRef.current.value)) {
           onPost({
             login: loginRef.current.value,
             password: passwordRef.current.value,
           });
-        } else {setErrorMassage('Please enter a valid password. The password must contain at least one number and one letter and must not contain spaces.');}
-      } else {setErrorMassage('Please enter a valid email address');}
+        } else {setErrorMassage(PASSWORD_ERROR_MASSAGE);}
+      } else {setErrorMassage(LOGIN_ERROR_MASSAGE);}
     }
 
   }

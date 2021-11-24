@@ -11,20 +11,22 @@ type FilmsListProps = {
 }
 
 export function FilmsList({selector}: FilmsListProps): JSX.Element {
+  const SERVER_ERROR_MASSAGE = 'Sorry, the server is unavailable. Please try again later.'
+  const FILMS_NOT_FOUND_MASSAGE = 'You don`t have any favorite movies'
   const [activeFilm, setActiveFilm] = useState(0);
   const cardElements = useSelector(selector);
 
 
   function renderCards() {
     if (selector === getFavoriteFilms && !cardElements[0]) {
-      return  <h1>You don&apos;t have any favorite movies</h1>;
+      return  <h1>{FILMS_NOT_FOUND_MASSAGE}</h1>;
     } else {return(
       cardElements[0] ?
         cardElements.map((el, _id) => (
           <Card key={el.id} activeFilm={activeFilm} filmData={el} setActiveFilm={setActiveFilm} />
         ))
         :
-        <h1>Sorry, the server is unavailable. Please try again later.</h1>
+        <h1>{SERVER_ERROR_MASSAGE}</h1>
     );}
   }
 

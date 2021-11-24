@@ -11,7 +11,7 @@ function User(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
 
-  function onClick() {
+  function handleClick() {
     dispatch(logoutAction());
     history.push(AppRoute.Main);
   }
@@ -29,7 +29,7 @@ function User(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <div className="user-block__link" onClick={onClick}>Sign out</div>
+          <div className="user-block__link" onClick={handleClick}>Sign out</div>
         </li>
       </ul>
     );
