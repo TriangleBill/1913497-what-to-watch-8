@@ -7,11 +7,11 @@ type TimeValueProps = {
 }
 export default function TimeValue({ filmIsPlayed, videoRef, isLoaded }: TimeValueProps): JSX.Element {
   const [timeLeftSec, setTimeLeftSec] = useState(100);
-
+  const MILISECONDS = 1000;
 
   useEffect(() => {
     if (videoRef && isLoaded) {
-      const interval = setInterval(() => setTimeLeftSec(Math.floor(videoRef.duration - videoRef.currentTime) as number), 1000);
+      const interval = setInterval(() => setTimeLeftSec(Math.floor(videoRef.duration - videoRef.currentTime) as number), MILISECONDS);
       if (!filmIsPlayed) { clearInterval(interval); }
       return () => {
         clearInterval(interval);

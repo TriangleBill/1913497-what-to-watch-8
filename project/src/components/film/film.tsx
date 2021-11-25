@@ -9,8 +9,7 @@ import FilmPoster from './film-poster';
 import FilmTitle from './film-title';
 import PlayBtn from '../player/player-btn';
 import MylistBtn from '../my-list/mylist-btn';
-import { useEffect, useState } from 'react';
-import LoadingScreen from '../loading-screen/loading-screen';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilm } from '../../store/films-data/selector';
 import { fetchFilmAction } from '../../store/api-actions';
@@ -19,25 +18,14 @@ export default function Film(): JSX.Element {
   const dispatch = useDispatch();
   const params = useParams<{ id?: string }>();
   const film = useSelector(getFilm);
-  const [isPageExists, setIsPageExists] = useState(true);
 
 
   useEffect(() => {
     dispatch(fetchFilmAction(Number(params.id)));
   }, [params.id, dispatch]);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setIsPageExists(false);
-    }, 5000);
-    return clearTimeout(timer);
-  }, [isPageExists, params.id]);
-
   if (!film) {
-    if (isPageExists) {
-      return <Page404 />;
-    }
-    return <LoadingScreen />;
+    return <Page404 />;
   }
 
 

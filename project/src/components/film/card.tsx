@@ -13,6 +13,7 @@ type setActiveFilm =  (value: number) => void
 
 export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps): JSX.Element {
   const history = useHistory();
+  const DELAY_BEFORE_SHOWING = 1000;
 
   let timeoutID: number | null = null;
 
@@ -25,7 +26,7 @@ export default function Card({ filmData, setActiveFilm, activeFilm }: cardProps)
   function handleMouseOver() {
     timeoutID = window.setTimeout(() => {
       setActiveFilm(filmData.id);
-    }, 1000);
+    }, DELAY_BEFORE_SHOWING);
   }
 
 

@@ -15,9 +15,10 @@ export default function Tabs(props: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState('Overview');
   const titles = ['Overview', 'Details', 'Reviews'] as const;
   const filmReviews = useSelector(getFilmReviews);
+
   useEffect(() => {
     dispatch(fetchReviewsAction(props.film.id));
-  }, [props.film.id, dispatch]);
+  }, [dispatch, props.film.id]);
 
 
   function handleClick(e: React.FormEvent<HTMLDivElement>) {

@@ -7,6 +7,8 @@ type TabReviewProps = {
 
 
 function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
+  const REVIEWS_NUMBER_IN_COLUMN = 2;
+  const COLUMN_NUMBER = 2;
   const NOT_FOUND_MASSAGE = 'Reviews not found';
 
   function getCorrectDate (date: Date) {
@@ -14,7 +16,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
       'July', 'August', 'September', 'October', 'November', 'December',
     ] as const;
 
-    const result = `${monthName[date.getMonth() - 1]} ${date.getDate()}, ${date.getFullYear()}`;
+    const result = `${monthName[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 
     return result;
   }
@@ -27,7 +29,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
 
-        {filmReviews.slice(0, 2).map((el) => (
+        {filmReviews.slice(0, REVIEWS_NUMBER_IN_COLUMN).map((el) => (
           <div  key={String(el.user.id)+el.date} className="review">
             <blockquote className="review__quote">
               <p className="review__text">{el.comment}</p>
@@ -44,7 +46,7 @@ function TabReviews({ filmReviews }: TabReviewProps): JSX.Element {
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {filmReviews.slice(2, 4).map((el) => (
+        {filmReviews.slice(REVIEWS_NUMBER_IN_COLUMN, REVIEWS_NUMBER_IN_COLUMN * COLUMN_NUMBER).map((el) => (
           <div key={String(el.user.id)+el.date} className="review">
             <blockquote className="review__quote">
               <p className="review__text">{el.comment}</p>

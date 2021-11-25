@@ -139,7 +139,7 @@ function SignIn(): JSX.Element {
         </div>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isLight/>
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>

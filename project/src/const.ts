@@ -13,4 +13,6 @@ export enum AuthorizationStatus {
    Unknown = 'UNKNOWN',
  }
 
+export const SHOWN_FILMS_COUNT = 8;
+
 

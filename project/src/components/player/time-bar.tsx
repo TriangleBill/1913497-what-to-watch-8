@@ -8,11 +8,12 @@ type TimeBarProps = {
 
 export default function TimeBar({ videoRef, filmIsPlayed, isLoaded }: TimeBarProps): JSX.Element {
   const [timePercent, setTimePercent] = useState(0);
+  const MILISECONDS = 1000;
 
 
   useEffect(() => {
     if (videoRef && isLoaded) {
-      const interval = setInterval(() => setTimePercent((videoRef.currentTime * 100) / (videoRef.duration)), 1000);
+      const interval = setInterval(() => setTimePercent((videoRef.currentTime * 100) / (videoRef.duration)), MILISECONDS);
       if (!filmIsPlayed) { clearInterval(interval); }
       return () => {
         clearInterval(interval);

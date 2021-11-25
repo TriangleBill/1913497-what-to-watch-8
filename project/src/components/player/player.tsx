@@ -29,7 +29,6 @@ export default function Player({ films }: PlayerProps): JSX.Element {
 
   useEffect(() => {
     if (videoRef.current) {
-      setIsLoaded(true);
       videoRef.current.onplaying = () => {
         setIsShownSpinner(false);
       };
@@ -46,7 +45,6 @@ export default function Player({ films }: PlayerProps): JSX.Element {
   }, [isLoaded]);
 
   if (!film) {
-
     return <Page404 />;
   }
 
@@ -62,6 +60,10 @@ export default function Player({ films }: PlayerProps): JSX.Element {
       videoRef.current.pause();
       setIsPlayed(false);
     }
+  }
+
+  function handleCanPlay() {
+    setIsLoaded(true);
   }
 
 
@@ -98,7 +100,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
       </div>
 
       <div className="player">
-        <video ref={videoRef} src={film.videoLink} className="player__video" poster={film.previewImage}></video>
+        <video ref={videoRef} src={film.videoLink} className="player__video" poster={film.previewImage} onCanPlay={handleCanPlay}></video>
         {isShownSpinner ? <Loading /> : ''}
         <ExitBtn filmId={film.id} />
         <div className="player__controls">
@@ -112,7 +114,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
           </div>
 
           <div className="player__controls-row">
-            {isPlayed ?
+            {isPlayed && isLoaded ?
               <PauseBtn handleClick={handleClickPause} />
               :
               <PlayBtn handleClick={handleClickPlay} />}
