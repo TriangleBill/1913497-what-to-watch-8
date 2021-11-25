@@ -1,3 +1,4 @@
+import { LoadedDataStatus } from '../../const';
 import { FilmReviews, FilmsDescription } from '../../types/films';
 import { State } from '../../types/state';
 import { NameSpace } from '../root-reducer';
@@ -8,4 +9,4 @@ export const getFavoriteFilms = (state: State): FilmsDescription[] => state[Name
 export const getSimilarFilms = (state: State): FilmsDescription[] => state[NameSpace.Data].similarFilms;
 export const getPromoFilm = (state: State): FilmsDescription => state[NameSpace.Data].promoFilm;
 export const getFilmReviews = (state: State): FilmReviews[] | null => state[NameSpace.Data].filmReviews;
-export const getLoadedDataStatus = (state: State): boolean => state[NameSpace.Data].isLoadData;
+export const getLoadedDataStatus = (state: State): LoadedDataStatus => state[NameSpace.Data].loadedStatus;

@@ -54,6 +54,6 @@ describe('Component: AddReview', () => {
       </Provider>,
     );
 
-    expect(screen.getByText('404 page not found')).toBeInTheDocument();
+    expect(screen.getByText('Loading ...')).toBeInTheDocument();
   });
 });

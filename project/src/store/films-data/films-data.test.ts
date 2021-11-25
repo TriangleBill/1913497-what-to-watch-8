@@ -3,6 +3,7 @@ import { makeFakeFilmsList } from '../utils/mocks';
 import { setFavoriteFilms, setFilm, setFilms, setPromoFilm, setFilmReviews, setSimilarFilms } from './../action';
 import { filmsData } from './films-data';
 import { makeFakeReviewsFilm } from './../utils/mocks';
+import { LoadedDataStatus } from '../../const';
 
 const mockFilmsList = makeFakeFilmsList();
 const mockPromoFilm = mockFilmsList[0];
@@ -19,7 +20,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: [],
         promoFilm: [][0],
-        isLoadData: true,
+        loadedStatus: LoadedDataStatus.Unknown,
       });
   });
   it('should update films by load films', () => {
@@ -30,7 +31,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
     };
 
     expect(filmsData(state, setFilms(mockFilmsList)))
@@ -41,7 +42,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: [],
         promoFilm: [][0],
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
 
@@ -53,7 +54,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
     };
 
     expect(filmsData(state, setFilm(mockFilmsList[0])))
@@ -64,7 +65,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: [],
         promoFilm: [][0],
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
   it('should update favorite films by load  favorite films', () => {
@@ -75,7 +76,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
 
     };
 
@@ -87,7 +88,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: [],
         promoFilm: [][0],
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
   it('should update promo film by load  promo film', () => {
@@ -98,7 +99,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
     };
 
     expect(filmsData(state, setPromoFilm(mockPromoFilm)))
@@ -109,7 +110,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: [],
         promoFilm: mockPromoFilm,
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
 
@@ -121,7 +122,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
     };
 
     expect(filmsData(state, setFilmReviews(mockReviews)))
@@ -132,7 +133,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: [],
         filmReviews: mockReviews,
         promoFilm: [][0],
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
 
@@ -144,7 +145,7 @@ describe('Reducer: filmsData', () => {
       similarFilms: [],
       filmReviews: [],
       promoFilm: [][0],
-      isLoadData: true,
+      loadedStatus: LoadedDataStatus.Unknown,
     };
 
     expect(filmsData(state, setSimilarFilms(mockFilmsList)))
@@ -155,7 +156,7 @@ describe('Reducer: filmsData', () => {
         similarFilms: mockFilmsList,
         filmReviews: [],
         promoFilm: [][0],
-        isLoadData: false,
+        loadedStatus: LoadedDataStatus.Loaded,
       });
   });
 });

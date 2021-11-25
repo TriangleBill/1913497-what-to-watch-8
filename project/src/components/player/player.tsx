@@ -1,6 +1,5 @@
 import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
-import Page404 from './../404/page-404';
 import { useRef, useState, useEffect } from 'react';
 import PlayBtn from './play-btn';
 import PauseBtn from './pause-btn';
@@ -9,6 +8,7 @@ import TimeValue from './time-value';
 import FullScreenBtn from './full-screen-btn';
 import ExitBtn from './exit-btn';
 import Loading from '../loading-screen/loading';
+import LoadingScreen from './../loading-screen/loading-screen';
 
 type PlayerProps = {
   films: FilmsDescription[]
@@ -45,7 +45,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
   }, [isLoaded]);
 
   if (!film) {
-    return <Page404 />;
+    return <LoadingScreen />;
   }
 
   function handleClickPlay() {

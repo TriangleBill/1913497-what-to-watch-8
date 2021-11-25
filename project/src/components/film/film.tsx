@@ -1,5 +1,4 @@
 import { useParams } from 'react-router';
-import Page404 from '../404/page-404';
 import AddReviewBtn from '../add-review/add-review-btn';
 import Tabs from './../tabs/tabs';
 import RelatedFilmsList from './related-films-list';
@@ -13,19 +12,19 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilm } from '../../store/films-data/selector';
 import { fetchFilmAction } from '../../store/api-actions';
+import LoadingScreen from './../loading-screen/loading-screen';
 
 export default function Film(): JSX.Element {
   const dispatch = useDispatch();
   const params = useParams<{ id?: string }>();
   const film = useSelector(getFilm);
 
-
   useEffect(() => {
     dispatch(fetchFilmAction(Number(params.id)));
-  }, [params.id, dispatch]);
+  }, [params.id, dispatch, film]);
 
   if (!film) {
-    return <Page404 />;
+    return <LoadingScreen />;
   }
 
 

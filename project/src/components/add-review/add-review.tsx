@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FilmsDescription } from '../../types/films';
 import { useParams } from 'react-router';
-import Page404 from '../404/page-404';
 import FormReview from './form-review';
 import User from '../user/user';
 import Logo from '../logo/logo';
 import FilmPoster from '../film/film-poster';
+import LoadingScreen from './../loading-screen/loading-screen';
 
 type AddReviewProps = {
   films: FilmsDescription[]
@@ -18,7 +18,7 @@ export default function AddReview({ films }: AddReviewProps): JSX.Element {
 
 
   if (!reviewFilm) {
-    return <Page404 />;
+    return <LoadingScreen />;
   }
 
   return (

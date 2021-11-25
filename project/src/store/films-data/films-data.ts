@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { LoadedDataStatus } from '../../const';
 import { FilmsData } from '../../types/state';
 import { setFavoriteFilms, setFilm, setFilmReviews, setFilms } from '../action';
-import { setPromoFilm, setSimilarFilms } from './../action';
+import { setPromoFilm, setSimilarFilms, requireLoaded } from './../action';
 
 const initialState: FilmsData = {
   filmsList: [],
@@ -10,7 +11,7 @@ const initialState: FilmsData = {
   similarFilms: [],
   filmReviews: [],
   promoFilm: [][0],
-  isLoadData: true,
+  loadedStatus: LoadedDataStatus.Unknown,
 };
 
 
@@ -19,31 +20,35 @@ export const filmsData = createReducer(initialState, (builder) => {
     .addCase(setFilms, (state, action) => {
       const { films } = action.payload;
       state.filmsList = films;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
     })
     .addCase(setFilm, (state, action) => {
       const { film } = action.payload;
       state.film = film;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
     })
     .addCase(setFavoriteFilms, (state, action) => {
       const { films } = action.payload;
       state.favoriteFilms = films;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
     })
     .addCase(setPromoFilm, (state, action) => {
       const { film } = action.payload;
       state.promoFilm = film;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
     })
     .addCase(setFilmReviews, (state, action) => {
       const { reviews } = action.payload;
       state.filmReviews = reviews;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
     })
     .addCase(setSimilarFilms, (state, action) => {
       const { films } = action.payload;
       state.similarFilms = films;
-      state.isLoadData = false;
+      state.loadedStatus = LoadedDataStatus.Loaded;
+    })
+    .addCase(requireLoaded, (state, action) => {
+      const { loadedStatus } = action.payload;
+      state.loadedStatus = loadedStatus;
     });
 });

@@ -1,6 +1,6 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, LoadedDataStatus } from '../const';
 import { createAPI } from '../services/api';
-import { requireAuthorization } from './action';
+import { requireAuthorization, requireLoaded } from './action';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import { toast } from 'react-toastify';
@@ -13,7 +13,10 @@ export const api = createAPI(
     store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     toast.warning(AUTHORIZATION_ERROR_MASSAGE);
   },
-  () => toast.error(SERVER_ERROR_MASSAGE),
+  () => {
+    store.dispatch(requireLoaded(LoadedDataStatus.NoLoaded));
+    toast.error(SERVER_ERROR_MASSAGE);
+  },
 );
 
 

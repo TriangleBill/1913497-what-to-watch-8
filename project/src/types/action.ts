@@ -15,6 +15,7 @@ export enum ActionType {
     SetSimilarFilms = 'film/setSimilarFilms',
     RequireAuthorization = 'user/requireAuthorization',
     RequireLogout = 'user/requireLogout',
+    RequireLoaded = 'data/requireLoaded',
 }
 
 

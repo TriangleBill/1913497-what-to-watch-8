@@ -12,6 +12,11 @@ export enum AuthorizationStatus {
    NoAuth = 'NO_AUTH',
    Unknown = 'UNKNOWN',
  }
+export enum LoadedDataStatus {
+   Loaded = 'LOADED',
+   NoLoaded = 'NO_LOADED',
+   Unknown = 'UNKNOWN',
+}
 
 export const SHOWN_FILMS_COUNT = 8;
 

@@ -7,18 +7,22 @@ import AddReview from '../add-review/add-review';
 import Player from './../player/player';
 import Page404 from '../404/page-404';
 import PrivateRoute from '../private-route';
-import { AppRoute } from '../../const';
+import { AppRoute, LoadedDataStatus } from '../../const';
 import { useSelector } from 'react-redux';
-import LoadingScreen from '../loading-screen/loading-screen';
 import { getLoadedDataStatus } from '../../store/films-data/selector';
 import { getFilms } from './../../store/films-data/selector';
+import LoadingScreen from './../loading-screen/loading-screen';
 
 
 function App(): JSX.Element {
   const isLoadData = useSelector(getLoadedDataStatus);
   const filmsList = useSelector(getFilms);
 
-  if (isLoadData) {
+  if (isLoadData === LoadedDataStatus.NoLoaded) {
+    return <Page404 />;
+  }
+
+  if (isLoadData === LoadedDataStatus.Unknown) {
     return <LoadingScreen />;
   }
 

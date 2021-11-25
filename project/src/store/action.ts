@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, LoadedDataStatus } from '../const';
 import { ActionType } from '../types/action';
 import { FilmReviews, FilmsDescription } from '../types/films';
 
@@ -65,6 +65,15 @@ export const setSimilarFilms = createAction(
   (films: FilmsDescription[]) => ({
     payload: {
       films,
+    },
+  }),
+);
+
+export const requireLoaded = createAction(
+  ActionType.RequireLoaded,
+  (loadedStatus: LoadedDataStatus) => ({
+    payload: {
+      loadedStatus,
     },
   }),
 );
