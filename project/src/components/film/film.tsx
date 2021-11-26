@@ -21,7 +21,7 @@ export default function Film(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchFilmAction(Number(params.id)));
-  }, [params.id, dispatch, film]);
+  }, [params.id, dispatch]);
 
   if (!film) {
     return <LoadingScreen />;

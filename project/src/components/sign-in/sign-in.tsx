@@ -2,7 +2,7 @@ import Logo from '../logo/logo';
 import { loginAction } from './../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState, useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import 'react-toastify/dist/ReactToastify.css';
 import { getAuthorizationStatus } from './../../store/user-process/selector';
@@ -16,9 +16,12 @@ function SignIn(): JSX.Element {
 
   const [errorMassage, setErrorMassage] = useState('');
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    history.push(AppRoute.Main);
-  }
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      history.push(AppRoute.Main);
+    }
+  }, [authorizationStatus, history]);
+
 
   const onPost = (authData: AuthData) => { dispatch(loginAction(authData)); };
   const LOGIN_ERROR_MASSAGE = 'Please enter a valid email address';
@@ -33,8 +36,7 @@ function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleSubmit() {
     if (loginRef.current !== null && passwordRef.current !== null) {
       if (MAIL_PRESENCE.test(loginRef.current.value)
         && DOGS_PRESENCE.test(loginRef.current.value)
@@ -47,8 +49,8 @@ function SignIn(): JSX.Element {
             login: loginRef.current.value,
             password: passwordRef.current.value,
           });
-        } else {setErrorMassage(PASSWORD_ERROR_MASSAGE);}
-      } else {setErrorMassage(LOGIN_ERROR_MASSAGE);}
+        } else { setErrorMassage(PASSWORD_ERROR_MASSAGE); }
+      } else { setErrorMassage(LOGIN_ERROR_MASSAGE); }
     }
 
   }
@@ -96,7 +98,7 @@ function SignIn(): JSX.Element {
           <form
             action="#"
             className="sign-in__form"
-            onSubmit={handleSubmit}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => { e.preventDefault(); handleSubmit(); }}
           >
             <div className="sign-in__message">
               <p>{errorMassage}</p>
@@ -132,14 +134,14 @@ function SignIn(): JSX.Element {
                 className="sign-in__btn"
                 type="submit"
               >
-              Sign in
+                Sign in
               </button>
             </div>
           </form>
         </div>
 
         <footer className="page-footer">
-          <Logo isLight/>
+          <Logo isLight />
 
           <div className="copyright">
             <p>© 2021 What to watch Ltd.</p>
